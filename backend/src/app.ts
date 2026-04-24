@@ -10,6 +10,7 @@ import adminRoutes from "./modules/admin/admin.routes";
 import visitRoutes from "./modules/visit/visit.routes";
 import ticketRoutes from "./modules/ticket/ticket.routes";
 import dashboardRoutes from "./modules/dashboard/dashboard.routes";
+import pdfRoutes from "./modules/pdf/pdf.routes";
 
 const app = express();
 
@@ -50,6 +51,7 @@ app.use("/api/admin", adminRoutes);
 app.use("/api/visit", visitRoutes);
 app.use("/api/ticket", ticketRoutes);
 app.use("/api/dashboard", dashboardRoutes);
+app.use("/api/pdf", pdfRoutes);
 
 
 app.get("/health", (req, res) => {

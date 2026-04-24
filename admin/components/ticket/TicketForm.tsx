@@ -11,27 +11,16 @@ import { sendOtp, verifyOtp } from "@/services/auth.service";
 export default function TicketForm({
     visitId,
     visitUserId,
+    formData,
+    setFormData,
 }: {
     visitId: string;
     visitUserId: string;
+    formData: any;
+    setFormData: any;
 }) {
     const router = useRouter();
 
-    const [form, setForm] = useState({
-        department: "",
-        subject: "",
-        description: "",
-        letterBody: "",
-        aadhar: "",
-        voterId: "",
-        name: "",
-        mobile: "",
-        address: "",
-        constituency: "",
-        whatsapp: "",
-        email: "",
-        gender: "",
-    });
 
     const [userFound, setUserFound] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -44,11 +33,11 @@ export default function TicketForm({
     const [verifiedUserId, setVerifiedUserId] = useState<string | null>(null);
 
     const isValid =
-        form.department && form.subject && form.description;
+        formData.department && formData.subject && formData.description;
 
     // 🔍 MOBILE SEARCH
     const handleMobileChange = async (value: string) => {
-        setForm((prev) => ({ ...prev, mobile: value }));
+        setFormData((prev: any) => ({ ...prev, mobile: value }));
 
         if (value.length !== 10) return;
 
@@ -66,7 +55,7 @@ export default function TicketForm({
                     setIsRepresentative(false);
                 }
 
-                setForm((prev) => ({
+                setFormData((prev: any) => ({
                     ...prev,
                     name: res.user.name || "",
                     address: res.user.address || "",
@@ -117,7 +106,7 @@ export default function TicketForm({
                 return;
             }
 
-            if (!form.department || !form.subject || !form.description) {
+            if (!formData.department || !formData.subject || !formData.description) {
                 toast.error("Please fill required fields");
                 return;
             }
@@ -130,12 +119,12 @@ export default function TicketForm({
 
             setLoading(true);
 
-            const formData = new FormData();
+            const fd = new FormData();
 
             // ❌ REMOVE mobile-based identity
             // Only send relevant fields
 
-            formData.append("visitId", visitId);
+            fd.append("visitId", visitId);
 
             // ✅ KEY CHANGE
             const finalUserId = isRepresentative
@@ -147,21 +136,21 @@ export default function TicketForm({
                 return;
             }
 
-            formData.append("userId", finalUserId);
+            fd.append("userId", finalUserId);
 
             // other fields
-            formData.append("department", form.department);
-            formData.append("subject", form.subject);
-            formData.append("description", form.description);
-            formData.append("letterBody", form.letterBody);
-            formData.append("aadhar", form.aadhar);
-            formData.append("voterId", form.voterId);
+            fd.append("department", formData.department);
+            fd.append("subject", formData.subject);
+            fd.append("description", formData.description);
+            fd.append("letterBody", formData.letterBody);
+            fd.append("aadhar", formData.aadhar);
+            fd.append("voterId", formData.voterId);
 
             images.forEach((img) => {
-                formData.append("images", img);
+                fd.append("images", img);
             });
 
-            await createTicket(formData);
+            await createTicket(fd);
 
             toast.success("Ticket Created 🚀");
             router.push("/dashboard/visits");
@@ -174,13 +163,13 @@ export default function TicketForm({
     };
 
     const handleSendOtp = async () => {
-        if (form.mobile.length !== 10) {
+        if (formData.mobile.length !== 10) {
             toast.error("Enter valid mobile");
             return;
         }
 
         try {
-            const res = await sendOtp({ mobile: form.mobile });
+            const res = await sendOtp({ mobile: formData.mobile });
 
             console.log("OTP RESPONSE:", res);
 
@@ -200,12 +189,12 @@ export default function TicketForm({
     const handleVerifyOtp = async () => {
         try {
             const res = await verifyOtp({
-                mobile: form.mobile,
+                mobile: formData.mobile,
                 otp,
-                name: form.name,
-                email: form.email,
-                whatsapp: form.whatsapp,
-                gender: form.gender,
+                name: formData.name,
+                email: formData.email,
+                whatsapp: formData.whatsapp,
+                gender: formData.gender,
             });
 
             setOtpVerified(true);
@@ -225,7 +214,7 @@ export default function TicketForm({
             <input
                 className="w-full border p-2 rounded"
                 placeholder="Enter Mobile (search user)"
-                value={form.mobile}
+                value={formData.mobile}
                 onChange={(e) => handleMobileChange(e.target.value)}
             />
 
@@ -233,9 +222,9 @@ export default function TicketForm({
             <input
                 className="w-full border p-2 rounded"
                 placeholder="Name"
-                value={form.name}
+                value={formData.name}
                 onChange={(e) =>
-                    setForm({ ...form, name: e.target.value })
+                    setFormData((prev: any) => ({ ...prev, name: e.target.value }))
                 }
             />
 
@@ -245,9 +234,9 @@ export default function TicketForm({
                     <input
                         className="w-full border p-2 rounded"
                         placeholder="Address"
-                        value={form.address}
+                        value={formData.address}
                         onChange={(e) =>
-                            setForm({ ...form, address: e.target.value })
+                            setFormData((prev: any) => ({ ...prev, address: e.target.value }))
                         }
                     />
 
@@ -256,35 +245,35 @@ export default function TicketForm({
                     <input
                         className="w-full border p-2 rounded"
                         placeholder="Constituency"
-                        value={form.constituency}
+                        value={formData.constituency}
                         onChange={(e) =>
-                            setForm({ ...form, constituency: e.target.value })
+                            setFormData((prev: any) => ({ ...prev, constituency: e.target.value }))
                         }
                     />
 
                     <input
                         className="w-full border p-2 rounded"
                         placeholder="WhatsApp"
-                        value={form.whatsapp}
+                        value={formData.whatsapp}
                         onChange={(e) =>
-                            setForm({ ...form, whatsapp: e.target.value })
+                            setFormData((prev: any) => ({ ...prev, whatsapp: e.target.value }))
                         }
                     />
 
                     <input
                         className="w-full border p-2 rounded"
                         placeholder="Email"
-                        value={form.email}
+                        value={formData.email}
                         onChange={(e) =>
-                            setForm({ ...form, email: e.target.value })
+                            setFormData((prev: any) => ({ ...prev, email: e.target.value }))
                         }
                     />
 
                     <select
                         className="w-full border p-2 rounded"
-                        value={form.gender}
+                        value={formData.gender}
                         onChange={(e) =>
-                            setForm({ ...form, gender: e.target.value })
+                            setFormData((prev: any) => ({ ...prev, gender: e.target.value }))
                         }
                     >
                         <option value="">Select Gender</option>
@@ -298,9 +287,9 @@ export default function TicketForm({
             {/* DEPARTMENT */}
             <select
                 className="w-full border p-2 rounded"
-                value={form.department}
+                value={formData.department}
                 onChange={(e) =>
-                    setForm({ ...form, department: e.target.value })
+                    setFormData((prev: any) => ({ ...prev, department: e.target.value }))
                 }
             >
                 <option value="">Select Department</option>
@@ -311,21 +300,25 @@ export default function TicketForm({
             </select>
 
             {/* SUBJECT */}
-            <input
+            {/* <input
                 className="w-full border p-2 rounded"
                 placeholder="Subject"
-                value={form.subject}
+                value={formData.subject}
                 onChange={(e) =>
-                    setForm({ ...form, subject: e.target.value })
+                    setFormData((prev: any) => ({ ...prev, subject: e.target.value }))
                 }
-            />
+            /> */}
 
             {/* DESCRIPTION */}
             <textarea
                 className="w-full border p-2 rounded"
                 placeholder="Description"
+                value={formData.description}
                 onChange={(e) =>
-                    setForm({ ...form, description: e.target.value })
+                    setFormData((prev: any) => ({
+                        ...prev,
+                        description: e.target.value,
+                    }))
                 }
             />
 
