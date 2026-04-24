@@ -10,8 +10,8 @@ export const updateUserProfile = async (
     whatsapp?: string;
     email?: string;
     gender?: "male" | "female" | "other";
-       constituency?: string; // ✅
-    address?: string;  
+    constituency?: string; // ✅
+    address?: string;
   }
 ) => {
   return await User.findByIdAndUpdate(userId, data, { new: true });
@@ -29,15 +29,27 @@ export const getFullUserProfileService = async (userId: string) => {
   const tickets = await Ticket.find({ userId })
     .sort({ createdAt: -1 });
 
+  // 🔥 ADD THIS (IMPORTANT)
+  const raisedTickets = await Ticket.find({
+    representativeId: userId,
+  })
+    .populate("userId" , "name") // complaint user
+    .sort({ createdAt: -1 });
+
   // 🔥 timeline combine
   const timeline = [
     ...visits.map((v) => ({
       type: "visit",
- date: v.createdAt || v.visitDate,
+      date: v.createdAt || v.visitDate,
       data: v,
     })),
     ...tickets.map((t) => ({
       type: "ticket",
+      date: t.createdAt,
+      data: t,
+    })),
+    ...raisedTickets.map((t) => ({
+      type: "raised_ticket",
       date: t.createdAt,
       data: t,
     })),
@@ -47,6 +59,7 @@ export const getFullUserProfileService = async (userId: string) => {
     user,
     visits,
     tickets,
+    raisedTickets, // ✅ RETURN THIS
     timeline,
   };
 };

@@ -31,6 +31,10 @@ export default function UserPage() {
       <VisitList visits={data.visits} />
       <TicketList tickets={data.tickets} />
       <Timeline timeline={data.timeline} />
+      <TicketList
+        tickets={data.raisedTickets}
+        title="Raised Tickets"
+      />
     </div>
   );
 }

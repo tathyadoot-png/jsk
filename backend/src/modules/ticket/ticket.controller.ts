@@ -4,6 +4,7 @@ import * as TicketService from "./ticket.service";
 
 interface Params {
     id: string;
+    userId: string;
 }
 
 interface UpdateTicketBody {
@@ -13,29 +14,29 @@ interface UpdateTicketBody {
 
 // ✅ CREATE
 export const createTicket = async (req: Request, res: Response) => {
-  try {
-    const files = req.files as any[];
-    const imageUrls = files?.map((file) => file.path);
+    try {
+        const files = req.files as any[];
+        const imageUrls = files?.map((file) => file.path);
 
-    const ticket = await TicketService.createTicketService(
-      {
-        ...req.body,
-        images: imageUrls,
-      },
-      (req as any).admin._id
-    );
+        const ticket = await TicketService.createTicketService(
+            {
+                ...req.body,
+                images: imageUrls,
+            },
+            (req as any).admin._id
+        );
 
-    res.status(201).json({
-      success: true,
-      message: "Ticket created successfully",
-      data: ticket,
-    });
-  } catch (error: any) {
-    res.status(400).json({
-      success: false,
-      message: error.message,
-    });
-  }
+        res.status(201).json({
+            success: true,
+            message: "Ticket created successfully",
+            data: ticket,
+        });
+    } catch (error: any) {
+        res.status(400).json({
+            success: false,
+            message: error.message,
+        });
+    }
 };
 
 // 📄 LIST
@@ -98,4 +99,26 @@ export const updateTicketStatus = async (
             message: error.message,
         });
     }
+};
+
+
+export const getTicketsByRepresentative = async (
+  req: Request<Params>,
+  res: Response
+) => {
+  try {
+    const userId = req.params.userId;
+
+    const tickets = await TicketService.getTicketsByRepresentativeService(userId);
+
+    res.json({
+      success: true,
+      data: tickets,
+    });
+
+  } catch (error: any) {
+    res.status(500).json({
+      message: error.message,
+    });
+  }
 };

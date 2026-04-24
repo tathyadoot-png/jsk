@@ -15,5 +15,6 @@ router.get("/today", protectAdmin, visitController.getTodayVisits);
 router.get("/active", protectAdmin, visitController.getActiveVisits);
 router.get("/all", protectAdmin, visitController.getAllVisits);
 router.put("/checkout/:id", protectAdmin, visitController.checkOut);
+router.get("/:id", protectAdmin, visitController.getVisitById);
 
 export default router;

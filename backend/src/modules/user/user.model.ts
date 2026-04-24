@@ -10,8 +10,11 @@ export interface IUser extends Document {
   role: string;
   constituency?: string;
   address?: string;
-
+  verifiedAt?: Date | null;
   isVerified: boolean;
+  createdAt: Date;
+  updatedAt: Date;  
+
 }
 
 const UserSchema: Schema = new Schema(
@@ -36,12 +39,16 @@ const UserSchema: Schema = new Schema(
       type: String,
       default: "user",
     },
-       constituency: String,
+    constituency: String,
     address: String,
 
     isVerified: {
       type: Boolean,
       default: false,
+    },
+    verifiedAt: {
+      type: Date,
+      default: null,
     },
   },
   { timestamps: true }

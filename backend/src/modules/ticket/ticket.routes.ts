@@ -4,6 +4,7 @@ import {
   getTickets,
   getTicketById,
   updateTicketStatus,
+  getTicketsByRepresentative
 } from "./ticket.controller";
 import upload from "../../middlewares/upload.middleware";
 import { protectAdmin } from "../../middlewares/adminAuth.middleware";
@@ -16,7 +17,7 @@ router.post(
   "/create",
   protectAdmin,
   allowPermissions("ticket_create"),
-  upload.array("images", 5), 
+  upload.array("images", 5),
   createTicket
 );
 
@@ -43,5 +44,7 @@ router.put(
   allowPermissions("ticket_update"),
   updateTicketStatus
 );
+
+router.get("/representative/:userId", getTicketsByRepresentative);
 
 export default router;

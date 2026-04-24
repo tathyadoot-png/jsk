@@ -6,13 +6,14 @@ import { useRouter } from "next/navigation";
 import imageCompression from "browser-image-compression";
 import { toast } from "sonner";
 import { fetchAPI } from "@/lib/api";
+import { sendOtp, verifyOtp } from "@/services/auth.service";
 
 export default function TicketForm({
-  visitId,
-  visitUserId,
+    visitId,
+    visitUserId,
 }: {
-  visitId: string;
-  visitUserId: string;
+    visitId: string;
+    visitUserId: string;
 }) {
     const router = useRouter();
 
@@ -37,49 +38,55 @@ export default function TicketForm({
     const [images, setImages] = useState<File[]>([]);
     const [preview, setPreview] = useState<string[]>([]);
     const [isRepresentative, setIsRepresentative] = useState(false);
+    const [otp, setOtp] = useState("");
+    const [otpSent, setOtpSent] = useState(false);
+    const [otpVerified, setOtpVerified] = useState(false);
+    const [verifiedUserId, setVerifiedUserId] = useState<string | null>(null);
 
     const isValid =
         form.department && form.subject && form.description;
 
     // 🔍 MOBILE SEARCH
-  const handleMobileChange = async (value: string) => {
-  setForm((prev) => ({ ...prev, mobile: value }));
+    const handleMobileChange = async (value: string) => {
+        setForm((prev) => ({ ...prev, mobile: value }));
 
-  if (value.length !== 10) return;
+        if (value.length !== 10) return;
 
-  try {
-    const res = await fetchAPI(`/user/search?mobile=${value}`);
+        try {
+            const res = await fetchAPI(`/user/search?mobile=${value}`);
 
-    // 🔥 IMPORTANT: compare with visit user mobile
-    if (res.user) {
-      setUserFound(true);
+            // 🔥 IMPORTANT: compare with visit user mobile
+            if (res.user) {
+                setUserFound(true);
 
-      // 👇 representative check
-      if (res.user._id !== visitUserId) {
-        setIsRepresentative(true);
-      } else {
-        setIsRepresentative(false);
-      }
+                // 👇 representative check
+                if (res.user._id.toString() !== visitUserId.toString()) {
+                    setIsRepresentative(true);
+                } else {
+                    setIsRepresentative(false);
+                }
 
-      setForm((prev) => ({
-        ...prev,
-        name: res.user.name || "",
-        address: res.user.address || "",
-        constituency: res.user.constituency || "",
-        whatsapp: res.user.whatsapp || "",
-        email: res.user.email || "",
-        gender: res.user.gender || "",
-      }));
-    } else {
-      setUserFound(false);
+                setForm((prev) => ({
+                    ...prev,
+                    name: res.user.name || "",
+                    address: res.user.address || "",
+                    constituency: res.user.constituency || "",
+                    whatsapp: res.user.whatsapp || "",
+                    email: res.user.email || "",
+                    gender: res.user.gender || "",
+                }));
+            } else {
+                setUserFound(false);
 
-      // 🔥 new user = representative
-      setIsRepresentative(true);
-    }
-  } catch (err) {
-    console.log(err);
-  }
-};
+                // 🔥 new user = representative
+                setIsRepresentative(true);
+            }
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
+
 
     // 📸 IMAGE
     const handleImageChange = async (e: any) => {
@@ -103,7 +110,6 @@ export default function TicketForm({
         setPreview(previewUrls);
     };
 
-    // 🚀 SUBMIT
     const handleSubmit = async () => {
         try {
             if (!visitId) {
@@ -116,15 +122,40 @@ export default function TicketForm({
                 return;
             }
 
+            // 🔴 BLOCK REPRESENTATIVE WITHOUT OTP
+            if (isRepresentative && !otpVerified) {
+                toast.error("Please verify user via OTP");
+                return;
+            }
+
             setLoading(true);
 
             const formData = new FormData();
 
-            Object.entries(form).forEach(([key, value]) => {
-                formData.append(key, value as string);
-            });
+            // ❌ REMOVE mobile-based identity
+            // Only send relevant fields
 
             formData.append("visitId", visitId);
+
+            // ✅ KEY CHANGE
+            const finalUserId = isRepresentative
+                ? verifiedUserId
+                : visitUserId;
+
+            if (!finalUserId) {
+                toast.error("User not verified");
+                return;
+            }
+
+            formData.append("userId", finalUserId);
+
+            // other fields
+            formData.append("department", form.department);
+            formData.append("subject", form.subject);
+            formData.append("description", form.description);
+            formData.append("letterBody", form.letterBody);
+            formData.append("aadhar", form.aadhar);
+            formData.append("voterId", form.voterId);
 
             images.forEach((img) => {
                 formData.append("images", img);
@@ -134,10 +165,55 @@ export default function TicketForm({
 
             toast.success("Ticket Created 🚀");
             router.push("/dashboard/visits");
+
         } catch (err: any) {
             toast.error(err.message);
         } finally {
             setLoading(false);
+        }
+    };
+
+    const handleSendOtp = async () => {
+        if (form.mobile.length !== 10) {
+            toast.error("Enter valid mobile");
+            return;
+        }
+
+        try {
+            const res = await sendOtp({ mobile: form.mobile });
+
+            console.log("OTP RESPONSE:", res);
+
+            if (res?.otp) {
+                alert(`OTP is: ${res.otp}`); // 🔥 testing only
+            }
+
+            setOtpSent(true);
+            toast.success("OTP sent");
+
+        } catch (err: any) {
+            toast.error(err.message);
+        }
+    };
+
+
+    const handleVerifyOtp = async () => {
+        try {
+            const res = await verifyOtp({
+                mobile: form.mobile,
+                otp,
+                name: form.name,
+                email: form.email,
+                whatsapp: form.whatsapp,
+                gender: form.gender,
+            });
+
+            setOtpVerified(true);
+            setVerifiedUserId(res.user._id);
+
+            toast.success("User verified ✅");
+        } catch (err: any) {
+            toast.error(err.message);
         }
     };
 
@@ -164,7 +240,7 @@ export default function TicketForm({
             />
 
             {/* 🆕 SHOW EXTRA IF NEW USER */}
-            {isRepresentative  && (
+            {isRepresentative && (
                 <>
                     <input
                         className="w-full border p-2 rounded"
@@ -174,6 +250,8 @@ export default function TicketForm({
                             setForm({ ...form, address: e.target.value })
                         }
                     />
+
+
 
                     <input
                         className="w-full border p-2 rounded"
@@ -260,6 +338,41 @@ export default function TicketForm({
                     <img key={i} src={img} className="w-20 h-20 rounded" />
                 ))}
             </div>
+
+
+            {isRepresentative && (
+                <div className="space-y-2">
+                    {!otpSent && (
+                        <button
+                            onClick={handleSendOtp}
+                            className="bg-gray-200 px-3 py-1 rounded"
+                        >
+                            Send OTP
+                        </button>
+                    )}
+
+                    {otpSent && !otpVerified && (
+                        <>
+                            <input
+                                className="w-full border p-2 rounded"
+                                placeholder="Enter OTP"
+                                value={otp}
+                                onChange={(e) => setOtp(e.target.value)}
+                            />
+                            <button
+                                onClick={handleVerifyOtp}
+                                className="bg-green-500 text-white px-3 py-1 rounded"
+                            >
+                                Verify OTP
+                            </button>
+                        </>
+                    )}
+
+                    {otpVerified && (
+                        <p className="text-green-600 text-sm">Verified ✅</p>
+                    )}
+                </div>
+            )}
 
             {/* SUBMIT */}
             <button

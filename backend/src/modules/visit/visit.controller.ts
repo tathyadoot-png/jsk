@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import * as visitService from "./visit.service";
+import Visit from "./visit.model";
 
 // 🔥 CHECK-IN
 export const checkIn = async (req: any, res: Response) => {
@@ -99,3 +100,30 @@ export const getAllVisits = async (req: Request, res: Response) => {
   }
 };
 
+// visit.controller.ts
+
+export const getVisitById = async (req: Request, res: Response) => {
+  try {
+    const visit = await Visit.findById(req.params.id).populate("userId");
+
+    if (!visit) {
+      return res.status(404).json({
+        success: false,
+        message: "Visit not found",
+      });
+    }
+
+    return res.json({
+      success: true,
+      visit,
+    });
+
+  } catch (err) {
+    console.error("❌ getVisitById error:", err);
+
+    return res.status(500).json({
+      success: false,
+      message: "Server error",
+    });
+  }
+};

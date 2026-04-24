@@ -8,6 +8,7 @@ import * as userService from "../user/user.service";
 export const createTicketService = async (data: any, adminId: string) => {
   const {
     visitId,
+    userId, // ✅ ONLY THIS
     department,
     subject,
     description,
@@ -15,49 +16,56 @@ export const createTicketService = async (data: any, adminId: string) => {
     voterId,
     letterBody,
     images,
-    name,
-    mobile,
-    address,
-    constituency,
-    whatsapp,
-    email,
-    gender,
   } = data;
+
+  if (!visitId || !userId || !department || !subject || !description) {
+    throw new Error("Required fields missing");
+  }
 
   const visit = await Visit.findById(visitId).populate("userId");
   if (!visit) throw new Error("Visit not found");
 
   const visitUser: any = visit.userId;
 
-  let targetUser;
-
-  if (mobile) {
-    targetUser = await userService.createOrUpdateUser({
-      mobile,
-      name,
-      address,
-      constituency,
-      whatsapp,
-      email,
-      gender,
-    });
-  } else {
-    targetUser = visitUser;
-  }
-
+  const targetUser = await User.findById(userId);
   if (!targetUser) throw new Error("User not found");
 
-  const isRepresentative =
-    mobile && visitUser.mobile !== mobile;
+  // 🔥 DETERMINE TYPE
+const isRepresentative =
+  visitUser._id.toString() !== String(userId);
+
+const entryType: "DIRECT" | "REPRESENTATIVE" =
+  isRepresentative ? "REPRESENTATIVE" : "DIRECT";
+
+// 🔐 OTP CHECK ONLY FOR REPRESENTATIVE
+if (isRepresentative) {
+  const now = Date.now();
+
+  const verifiedAt = targetUser.verifiedAt
+    ? new Date(targetUser.verifiedAt).getTime()
+    : 0;
+
+  const OTP_VALID_WINDOW = 5 * 60 * 1000;
+
+  if (!targetUser.isVerified || now - verifiedAt > OTP_VALID_WINDOW) {
+    throw new Error("User not verified via OTP or session expired");
+  }
+
+  // 🔁 STRICT MODE (recommended)
+  targetUser.isVerified = false;
+  targetUser.verifiedAt = null;
+  await targetUser.save();
+}
 
   const ticketNumber = await generateTicketNumber(department);
 
   const ticket = await Ticket.create({
-    userId: targetUser._id,
+    userId,
     visitId,
+    createdBy: adminId,
 
-    createdByUserId: visitUser._id,
-    isRepresentative,
+    entryType,
+    representativeId: isRepresentative ? visitUser._id : null,
 
     ticketNumber,
     department,
@@ -67,13 +75,10 @@ export const createTicketService = async (data: any, adminId: string) => {
     voterId,
     letterBody,
     images,
-
-    createdBy: adminId,
   });
 
   return ticket;
 };
-
 
 // 📄 GET ALL
 export const getAllTicketsService = async () => {
@@ -116,4 +121,11 @@ export const updateTicketStatusService = async (
     await ticket.save();
 
     return ticket;
+};
+
+
+export const getTicketsByRepresentativeService = async (userId: string) => {
+  return await Ticket.find({ representativeId: userId })
+    .populate("userId") // complaint user
+    .sort({ createdAt: -1 });
 };

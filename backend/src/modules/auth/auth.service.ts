@@ -23,6 +23,7 @@ export const sendOtpService = async (mobile: string) => {
   return {
     success: true,
     message: "OTP sent",
+    otp
   };
 };
 
@@ -44,13 +45,18 @@ export const verifyOtpService = async (
   let user = await User.findOne({ mobile });
 
   // ✅ LOGIN CASE
-  if (user) {
-    await Otp.deleteMany({ mobile });
+if (user) {
+  await Otp.deleteMany({ mobile });
 
-    const token = generateToken(user._id.toString(), "user");
+  // 🔥 ADD THIS
+  user.isVerified = true;
+  user.verifiedAt = new Date();
+  await user.save();
 
-    return { user, token, isNew: false };
-  }
+  const token = generateToken(user._id.toString(), "user");
+
+  return { user, token, isNew: false };
+}
 
   // 🔥 REGISTER CASE
   const uniqueId = await generateSequenceId("user");
@@ -63,7 +69,9 @@ user = await User.create({
   gender: userData?.gender || undefined, 
   uniqueId,
   role: "user",
+
   isVerified: true,
+  verifiedAt: new Date(),   // 🔥 ADD THIS
 });
 
   await Otp.deleteMany({ mobile });
