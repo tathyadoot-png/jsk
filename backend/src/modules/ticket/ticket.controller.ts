@@ -122,3 +122,23 @@ export const getTicketsByRepresentative = async (
     });
   }
 };
+
+export const getTicketsByUser = async (
+  req: Request<Params>,
+  res: Response
+) => {
+  try {
+    const userId = req.params.userId;
+
+    const tickets = await TicketService.getTicketsByUserService(userId);
+
+    res.json({
+      success: true,
+      data: tickets,
+    });
+  } catch (error: any) {
+    res.status(500).json({
+      message: error.message,
+    });
+  }
+};

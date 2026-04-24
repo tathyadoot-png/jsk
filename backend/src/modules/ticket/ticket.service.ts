@@ -129,3 +129,9 @@ export const getTicketsByRepresentativeService = async (userId: string) => {
     .populate("userId") // complaint user
     .sort({ createdAt: -1 });
 };
+
+export const getTicketsByUserService = async (userId: string) => {
+  return await Ticket.find({ userId })
+    .populate("userId")
+    .sort({ createdAt: -1 });
+};
