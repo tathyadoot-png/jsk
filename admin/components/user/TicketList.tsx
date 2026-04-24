@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import React from "react";
 
 export default function TicketList({ tickets, title = "Tickets" }: any) {
   const [openId, setOpenId] = useState<string | null>(null);
@@ -41,14 +42,15 @@ export default function TicketList({ tickets, title = "Tickets" }: any) {
             <th>Type</th>
             <th>Status</th>
             <th>Date</th>
-            <th>Action</th> {/* 🔥 NEW */}
+            <th>Action</th>
           </tr>
         </thead>
 
         <tbody>
           {tickets.map((t: any) => (
-            <>
-              <tr key={t._id} className="border-t">
+            <React.Fragment key={t._id}>
+
+              <tr className="border-t">
                 <td>{t.ticketNumber}</td>
                 <td>{t.userId?.name || "N/A"}</td>
                 <td>{t.userId?.mobile || "N/A"}</td>
@@ -57,7 +59,6 @@ export default function TicketList({ tickets, title = "Tickets" }: any) {
                 <td>{t.status}</td>
                 <td>{new Date(t.createdAt).toLocaleString("en-IN")}</td>
 
-                {/* 🔥 ACTIONS */}
                 <td>
                   <button
                     onClick={() =>
@@ -77,7 +78,6 @@ export default function TicketList({ tickets, title = "Tickets" }: any) {
                 </td>
               </tr>
 
-              {/* 🔥 EXPANDED LETTER VIEW */}
               {openId === t._id && (
                 <tr className="bg-gray-50">
                   <td colSpan={8} className="p-4">
@@ -89,7 +89,8 @@ export default function TicketList({ tickets, title = "Tickets" }: any) {
                   </td>
                 </tr>
               )}
-            </>
+
+            </React.Fragment>
           ))}
         </tbody>
       </table>

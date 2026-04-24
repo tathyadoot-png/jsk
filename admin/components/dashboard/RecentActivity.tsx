@@ -10,7 +10,7 @@ export default function RecentActivity({ data }: any) {
 
         return (
           <div key={i} className="border-b py-2 text-sm">
-            {item.type === "visit" ? "🚶 Visit" : "🎫 Ticket"} -{" "}
+            {item.type === "visit" ? "🚶 Visit" : "🎫 Ticket"} -
             
             {date && !isNaN(date.getTime())
               ? date.toLocaleString("en-IN")

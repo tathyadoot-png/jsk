@@ -22,7 +22,7 @@ export default function UserProfile({ user }: any) {
         <p><b>Role:</b> {user.role}</p>
 
         <p>
-          <b>Created:</b>{" "}
+          <b>Created:</b> 
           {new Date(user.createdAt).toLocaleString("en-IN")}
         </p>
 
