@@ -1,6 +1,6 @@
 // app/dashboard/visitor/page.tsx
 
-import VisitorEntryForm from "@/components/visitor/VisitorEntryForm";
+import VisitorEntryForm from "@/components/visit/VisitorEntryForm";
 
 export default function VisitorPage() {
   return (
