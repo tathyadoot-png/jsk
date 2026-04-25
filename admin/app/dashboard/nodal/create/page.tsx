@@ -36,7 +36,7 @@ export default function CreatePage() {
       await adminService.create(formData);
     }
 
-    router.push("/dashbaoard/nodal");
+    router.push("/dashboard/nodal");
   };
 
   if (isEdit && loading) return <p>Loading...</p>;

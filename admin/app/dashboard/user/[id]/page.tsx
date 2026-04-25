@@ -33,7 +33,7 @@ export default function UserPage() {
       <Timeline timeline={data.timeline} />
       <TicketList
         tickets={data.raisedTickets}
-        title="Raised Tickets"
+        title="Raised Tickets for other Users"
       />
     </div>
   );

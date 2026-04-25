@@ -84,12 +84,10 @@ const TicketSchema = new Schema(
 
     subject: {
       type: String,
-      required: true,
     },
 
     description: {
       type: String,
-      required: true,
     },
 
     letterBody: String,
