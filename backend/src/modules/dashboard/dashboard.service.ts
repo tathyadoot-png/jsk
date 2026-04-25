@@ -55,11 +55,14 @@ export const getTicketStats = async () => {
 export const getRepresentativeAnalytics = async () => {
   const data = await Ticket.aggregate([
     {
-      $match: { isRepresentative: true },
+      $match: {
+        entryType: "REPRESENTATIVE", // ✅ FIXED
+        representativeId: { $ne: null }, // optional safety
+      },
     },
     {
       $group: {
-        _id: "$createdByUserId",
+        _id: "$representativeId", // 🔥 correct field
         totalTickets: { $sum: 1 },
       },
     },

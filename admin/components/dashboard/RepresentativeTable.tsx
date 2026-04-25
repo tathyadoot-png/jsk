@@ -32,7 +32,7 @@ export default function RepresentativeTable({ data = [] }: any) {
           </thead>
 
           <tbody className="divide-y divide-gray-50">
-            {data.map((r: any, i: number) => (
+            {(data || []).map((r: any, i: number) => (
               <tr 
                 key={i} 
                 className="group hover:bg-gray-50/80 transition-colors duration-200"

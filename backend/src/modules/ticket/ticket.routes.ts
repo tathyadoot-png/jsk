@@ -5,7 +5,8 @@ import {
   getTicketById,
   updateTicketStatus,
   getTicketsByRepresentative,
-  getTicketsByUser
+  getTicketsByUser,
+  getTopRepresentatives
 } from "./ticket.controller";
 import upload from "../../middlewares/upload.middleware";
 import { protectAdmin } from "../../middlewares/adminAuth.middleware";
@@ -48,5 +49,6 @@ router.put(
 
 router.get("/representative/:userId", getTicketsByRepresentative);
 router.get("/user/:userId", getTicketsByUser);
+router.get("/representatives/top", protectAdmin, getTopRepresentatives);
 
 export default router;

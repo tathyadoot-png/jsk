@@ -19,13 +19,29 @@ import { LayoutDashboard, RefreshCcw, ShieldCheck } from "lucide-react";
 export default function DashboardPage() {
   const [data, setData] = useState<any>(null);
   const [isRefreshing, setIsRefreshing] = useState(false);
+  const [visitors, setVisitors] = useState([]);
 
+  useEffect(() => {
+    const loadData = async () => {
+      const res = await fetchAPI("/visit/active");
+      setVisitors(res.visits  || []);
+    };
+
+    loadData();
+  }, []);
+
+
+
+  
   const loadData = async () => {
     setIsRefreshing(true);
     const res = await fetchAPI("/dashboard/advanced");
     setData(res.data);
     setTimeout(() => setIsRefreshing(false), 600);
   };
+
+
+
 
   useEffect(() => {
     loadData();
@@ -42,7 +58,7 @@ export default function DashboardPage() {
 
   return (
     <div className="max-w-[1600px] mx-auto p-4 md:p-8 space-y-10 animate-in fade-in duration-700">
-      
+
       {/* --- HEADER SECTION --- */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-gray-100 pb-8">
         <div>
@@ -53,7 +69,7 @@ export default function DashboardPage() {
           <h1 className="text-3xl font-black text-gray-900 tracking-tight">Main Dashboard</h1>
         </div>
 
-        <button 
+        <button
           onClick={loadData}
           disabled={isRefreshing}
           className="flex items-center justify-center gap-2 bg-white border border-gray-200 px-5 py-2.5 rounded-2xl text-sm font-bold text-gray-700 hover:bg-gray-50 hover:border-gray-300 transition-all active:scale-95 shadow-sm"
@@ -96,7 +112,7 @@ export default function DashboardPage() {
           </div>
           <DepartmentChart data={data.department} />
         </div>
-        
+
         <div className="bg-white p-8 rounded-[32px] border border-gray-100 shadow-sm">
           <ConstituencyChart data={data.constituency} />
         </div>
@@ -115,35 +131,35 @@ export default function DashboardPage() {
 
       {/* --- 05. GROUP VISITS & ACTIVITY --- */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-        
+
         <div className="lg:col-span-8 flex flex-col gap-8">
-            <GroupVisitCard data={data.groupVisits} />
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="bg-white rounded-[32px] p-6 border border-gray-100 shadow-sm">
-                   <ActiveVisitors />
-                </div>
-                <div className="bg-white rounded-[32px] p-6 border border-gray-100 shadow-sm">
-                   <RecentActivity data={data.ticketTrend} />
-                </div>
+          <GroupVisitCard data={data.groupVisits} />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="bg-white rounded-[32px] p-6 border border-gray-100 shadow-sm">
+              <ActiveVisitors  data={visitors} />
             </div>
+            <div className="bg-white rounded-[32px] p-6 border border-gray-100 shadow-sm">
+              <RecentActivity data={data.ticketTrend} />
+            </div>
+          </div>
         </div>
 
         {/* Small Sticky Insight or Decoration */}
         <div className="lg:col-span-4 space-y-6">
-           <div className="bg-black text-white p-8 rounded-[40px] shadow-2xl relative overflow-hidden h-full min-h-[300px]">
-              <div className="relative z-10">
-                <h4 className="text-xl font-bold mb-4">System Integrity</h4>
-                <p className="text-gray-400 text-sm leading-relaxed mb-6">
-                  All data streams are currently optimized. No anomalies detected in constituency patterns.
-                </p>
-                <div className="flex -space-x-2">
-                   {[1,2,3,4].map(i => (
-                     <div key={i} className="w-8 h-8 rounded-full bg-gray-800 border-2 border-black" />
-                   ))}
-                </div>
+          <div className="bg-black text-white p-8 rounded-[40px] shadow-2xl relative overflow-hidden h-full min-h-[300px]">
+            <div className="relative z-10">
+              <h4 className="text-xl font-bold mb-4">System Integrity</h4>
+              <p className="text-gray-400 text-sm leading-relaxed mb-6">
+                All data streams are currently optimized. No anomalies detected in constituency patterns.
+              </p>
+              <div className="flex -space-x-2">
+                {[1, 2, 3, 4].map(i => (
+                  <div key={i} className="w-8 h-8 rounded-full bg-gray-800 border-2 border-black" />
+                ))}
               </div>
-              <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-orange-500 rounded-full blur-[80px] opacity-20" />
-           </div>
+            </div>
+            <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-orange-500 rounded-full blur-[80px] opacity-20" />
+          </div>
         </div>
 
       </div>

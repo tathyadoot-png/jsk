@@ -142,3 +142,19 @@ export const getTicketsByUser = async (
     });
   }
 };
+
+
+export const getTopRepresentatives = async (req: Request, res: Response) => {
+  try {
+    const data = await TicketService.getTopRepresentativesService();
+
+    res.json({
+      success: true,
+      data,
+    });
+  } catch (error: any) {
+    res.status(500).json({
+      message: error.message,
+    });
+  }
+};

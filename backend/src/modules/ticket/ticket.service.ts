@@ -151,3 +151,50 @@ export const getTicketsByUserService = async (userId: string) => {
     .populate("userId")
     .sort({ createdAt: -1 });
 };
+
+
+
+export const getTopRepresentativesService = async () => {
+  const data = await Ticket.aggregate([
+    {
+      $match: {
+        entryType: "REPRESENTATIVE",
+        representativeId: { $ne: null },
+      },
+    },
+    {
+      $group: {
+        _id: "$representativeId",
+        totalTickets: { $sum: 1 },
+      },
+    },
+    {
+      $sort: { totalTickets: -1 },
+    },
+    {
+      $limit: 10,
+    },
+    {
+      $lookup: {
+        from: "users",
+        localField: "_id",
+        foreignField: "_id",
+        as: "user",
+      },
+    },
+    {
+      $unwind: "$user",
+    },
+    {
+      $project: {
+        _id: 0,
+        userId: "$_id",
+        name: "$user.name",
+        mobile: "$user.mobile",
+        totalTickets: 1,
+      },
+    },
+  ]);
+
+  return data;
+};

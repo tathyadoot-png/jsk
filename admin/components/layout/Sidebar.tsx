@@ -1,12 +1,12 @@
 "use client";
 
 import { useRouter, usePathname } from "next/navigation";
-import { 
-  LayoutDashboard, 
-  Users, 
-  Ticket, 
-  UserCog, 
-  ShieldAlert, 
+import {
+  LayoutDashboard,
+  Users,
+  Ticket,
+  UserCog,
+  ShieldAlert,
   LogOut,
   ChevronRight,
   ClipboardList
@@ -15,6 +15,18 @@ import {
 export default function Sidebar({ admin }: any) {
   const router = useRouter();
   const path = usePathname();
+
+  const handleLogout = () => {
+    // 1. Clear Auth Data (Local Storage / Cookies)
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+
+    // 2. Redirect to Login Page
+    router.push("/login");
+
+    // 3. Optional: Refresh to clear state
+    router.refresh();
+  };
 
   const menu = [
     {
@@ -57,7 +69,7 @@ export default function Sidebar({ admin }: any) {
 
   return (
     <div className="flex flex-col h-full bg-[#0a0a0a] text-white overflow-hidden border-r border-white/5">
-      
+
       {/* --- SIDEBAR HEADER --- */}
       <div className="p-8">
         <div className="flex items-center gap-3">
@@ -74,7 +86,7 @@ export default function Sidebar({ admin }: any) {
       {/* --- MENU SECTION --- */}
       <nav className="flex-1 px-4 space-y-1.5">
         <p className="text-[10px] font-bold text-gray-600 uppercase tracking-[0.2em] mb-4 ml-4">Main Menu</p>
-        
+
         <ul className="space-y-1.5">
           {filteredMenu.map((item) => {
             // Check if current path matches item path
@@ -86,8 +98,8 @@ export default function Sidebar({ admin }: any) {
                 onClick={() => router.push(item.path)}
                 className={`
                   relative group flex items-center justify-between px-4 py-3.5 rounded-2xl cursor-pointer transition-all duration-300
-                  ${isActive 
-                    ? "bg-white/10 text-white shadow-xl shadow-black/20" 
+                  ${isActive
+                    ? "bg-white/10 text-white shadow-xl shadow-black/20"
                     : "text-gray-500 hover:bg-white/5 hover:text-gray-300"
                   }
                 `}
@@ -103,7 +115,7 @@ export default function Sidebar({ admin }: any) {
 
                 {/* Right Arrow / Indicator */}
                 {isActive ? (
-                   <div className="w-1.5 h-1.5 rounded-full bg-orange-500 shadow-[0_0_10px_#f97316]" />
+                  <div className="w-1.5 h-1.5 rounded-full bg-orange-500 shadow-[0_0_10px_#f97316]" />
                 ) : (
                   <ChevronRight size={14} className="opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all duration-300" />
                 )}
@@ -131,9 +143,9 @@ export default function Sidebar({ admin }: any) {
             </p>
           </div>
         </div>
-        
-        <button 
-          onClick={() => {/* handle logout logic if needed */}}
+
+        <button
+          onClick={handleLogout}
           className="w-full mt-4 flex items-center justify-center gap-2 py-3 rounded-xl border border-white/5 text-gray-500 hover:text-red-400 hover:bg-red-500/5 hover:border-red-500/20 transition-all text-xs font-bold uppercase tracking-widest"
         >
           <LogOut size={14} />
