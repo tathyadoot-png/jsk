@@ -139,7 +139,7 @@ export default function DashboardPage() {
               <ActiveVisitors  data={visitors} />
             </div>
             <div className="bg-white rounded-[32px] p-6 border border-gray-100 shadow-sm">
-              <RecentActivity data={data.ticketTrend} />
+              <RecentActivity data={data.recentActivity} />
             </div>
           </div>
         </div>

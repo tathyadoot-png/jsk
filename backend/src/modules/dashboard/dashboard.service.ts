@@ -170,3 +170,32 @@ export const getActiveVisits = async () => {
   return await Visit.find({ status: "IN" })
     .populate("userId");
 };
+
+
+export const getRecentActivity = async () => {
+  const visits = await Visit.find()
+    .sort({ createdAt: -1 })
+    .limit(10)
+    .select("createdAt")
+    .lean();
+
+  const tickets = await Ticket.find()
+    .sort({ createdAt: -1 })
+    .limit(10)
+    .select("createdAt")
+    .lean();
+
+  const visitData = visits.map(v => ({
+    type: "visit",
+    date: v.createdAt,
+  }));
+
+  const ticketData = tickets.map(t => ({
+    type: "ticket",
+    date: t.createdAt,
+  }));
+
+  return [...visitData, ...ticketData]
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+    .slice(0, 15);
+};

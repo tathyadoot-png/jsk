@@ -29,6 +29,7 @@ export const getVisitAnalytics = async (req: Request, res: Response) => {
     });
   } catch (err: any) {
     res.status(500).json({
+      success: false,
       message: err.message,
     });
   }
@@ -62,7 +63,8 @@ export const getAdvancedDashboard = async (_req: any, res: any) => {
       constituency,
       ticketTrend,
       groupVisits,
-        activeVisits,
+      activeVisits,
+      recentActivity,
     ] = await Promise.all([
       dashboardService.getDashboardSummary(),
       dashboardService.getVisitAnalytics(),
@@ -73,6 +75,7 @@ export const getAdvancedDashboard = async (_req: any, res: any) => {
       dashboardService.getTicketAnalytics(),
       dashboardService.getGroupVisitAnalytics(),
       dashboardService.getActiveVisits(),
+       dashboardService.getRecentActivity(),
     ]);
 
     res.json({
@@ -86,7 +89,8 @@ export const getAdvancedDashboard = async (_req: any, res: any) => {
         constituency,
         ticketTrend,
         groupVisits,
-         activeVisits, 
+        activeVisits,
+        recentActivity,
       },
     });
   } catch (err: any) {

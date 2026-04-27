@@ -5,7 +5,7 @@ import { MapPin, Ticket, Clock, History, ChevronRight } from "lucide-react";
 export default function RecentActivity({ data = [] }: any) {
   return (
     <div className="bg-white rounded-[32px] border border-gray-100 shadow-sm overflow-hidden h-full flex flex-col transition-all hover:shadow-md">
-      
+
       {/* Header Section */}
       <div className="p-6 border-b border-gray-50 flex items-center justify-between bg-gray-50/30">
         <div className="flex items-center gap-3">
@@ -32,17 +32,18 @@ export default function RecentActivity({ data = [] }: any) {
             <div className="absolute left-[19px] top-2 bottom-2 w-[2px] bg-gray-100" />
 
             {data.map((item: any, i: number) => {
-              const date = item.date ? new Date(item.date) : null;
+              const date = item?.date ? new Date(item.date) : null;
+              console.log(data);
               const isVisit = item.type === "visit";
-              
+
               const formattedDate = date && !isNaN(date.getTime())
                 ? date.toLocaleString("en-IN", {
-                    day: "2-digit",
-                    month: "short",
-                    hour: "2-digit",
-                    minute: "2-digit",
-                    hour12: true
-                  })
+                  day: "2-digit",
+                  month: "short",
+                  hour: "2-digit",
+                  minute: "2-digit",
+                  hour12: true
+                })
                 : "Invalid Date";
 
               return (
@@ -63,7 +64,7 @@ export default function RecentActivity({ data = [] }: any) {
                       </span>
                       <ChevronRight size={14} className="text-gray-300 group-hover:text-gray-900 group-hover:translate-x-1 transition-all" />
                     </div>
-                    
+
                     <p className="text-xs font-bold text-gray-400 font-mono tracking-tighter uppercase">
                       {formattedDate}
                     </p>
