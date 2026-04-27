@@ -46,12 +46,13 @@ export default function TicketCreatePage() {
 
   return (
     <div className="p-6 grid grid-cols-1 lg:grid-cols-2 gap-6">
-      
+
       {/* LEFT → FORM */}
       <div className="bg-white p-4 rounded shadow">
         <TicketForm
           visitId={visitId}
           visitUserId={visit.userId._id}
+          visitUserMobile={visit.userId.mobile || ""}  
           formData={formData}
           setFormData={setFormData}
         />

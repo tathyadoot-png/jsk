@@ -25,13 +25,16 @@ export const sendOtp = async (req: Request, res: Response) => {
       });
     }
 
+
     await authService.sendOtpService(mobile);
+    const result = await authService.sendOtpService(mobile);
 
     return res.json({
       success: true,
       isLogin: !!existingUser,
       isNewUser: !existingUser,
       message: "OTP भेजा गया",
+      otp: result.otp
     });
 
   } catch (err: any) {

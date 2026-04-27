@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { createTicket } from "@/services/ticket.service";
 import { useRouter } from "next/navigation";
 import imageCompression from "browser-image-compression";
@@ -28,11 +28,13 @@ export default function TicketForm({
     visitUserId,
     formData,
     setFormData,
+    visitUserMobile
 }: {
     visitId: string;
     visitUserId: string;
     formData: any;
     setFormData: any;
+    visitUserMobile: string;
 }) {
     const router = useRouter();
 
@@ -47,6 +49,7 @@ export default function TicketForm({
     const [ticketFor, setTicketFor] = useState<"SELF" | "OTHER">("SELF");
     const isRepresentative = ticketFor === "OTHER";
     const [selectedUserId, setSelectedUserId] = useState<string | null>(null);
+    const [resendLoading, setResendLoading] = useState(false);
 
     const isValid =
         formData.department;
@@ -89,6 +92,19 @@ export default function TicketForm({
         }
     };
 
+    useEffect(() => {
+        if (
+            ticketFor === "SELF" &&
+            visitUserMobile?.length === 10 &&
+            !otpSent
+        ) {
+            setFormData((prev: any) => ({
+                ...prev,
+                mobile: visitUserMobile,
+            }));
+        }
+    }, [ticketFor, visitUserMobile]);
+
 
 
     // 📸 IMAGE
@@ -125,18 +141,28 @@ export default function TicketForm({
                 return;
             }
 
-            // 🔴 BLOCK REPRESENTATIVE WITHOUT OTP
-            const needOtp = ticketFor === "OTHER" && !userFound;
-
-            if (needOtp && !otpVerified) {
-                toast.error("Please verify user via OTP");
+            if (!formData.mobile || formData.mobile.length !== 10) {
+                toast.error("Enter valid mobile");
                 return;
             }
 
+            // 🔥 STEP 1: अगर OTP नहीं भेजा गया → भेजो और रोक दो
+            if (!otpSent) {
+                await handleSendOtp();
+                toast.info("OTP sent, please verify");
+                return; // 🚨 STOP यहाँ
+            }
+
+            // 🔥 STEP 2: अगर verify नहीं हुआ → रोक दो
+            if (!otpVerified) {
+                toast.error("Please verify OTP first");
+                return;
+            }
+
+            // 🔥 STEP 3: अब ticket create
             setLoading(true);
 
             const fd = new FormData();
-
 
             fd.append("visitId", visitId);
 
@@ -144,18 +170,14 @@ export default function TicketForm({
                 ticketFor === "SELF"
                     ? visitUserId
                     : selectedUserId;
+
             if (!finalUserId) {
-                toast.error(
-                    ticketFor === "OTHER"
-                        ? "Please select or verify user"
-                        : "Invalid user"
-                );
+                toast.error("Invalid user");
                 return;
             }
 
             fd.append("userId", finalUserId);
 
-            // other fields
             fd.append("department", formData.department);
             fd.append("subject", formData.subject);
             fd.append("description", formData.description);
@@ -178,9 +200,8 @@ export default function TicketForm({
             setLoading(false);
         }
     };
-
     const handleSendOtp = async () => {
-        if (formData.mobile.length !== 10) {
+        if (!formData.mobile || formData.mobile.length !== 10) {
             toast.error("Enter valid mobile");
             return;
         }
@@ -190,8 +211,9 @@ export default function TicketForm({
 
             console.log("OTP RESPONSE:", res);
 
-            if (res?.otp) {
-                alert(`OTP is: ${res.otp}`); // 🔥 testing only
+            // 🔥 DEV MODE SHOW OTP
+            if (res?.otp && process.env.NODE_ENV === "development") {
+                alert(`Your OTP is: ${res.otp}`); // ✅ THIS
             }
 
             setOtpSent(true);
@@ -215,7 +237,9 @@ export default function TicketForm({
             });
 
             setOtpVerified(true);
-            setSelectedUserId(res.user._id);
+            if (ticketFor === "OTHER") {
+                setSelectedUserId(res.user._id);
+            }
             toast.success("User verified ✅");
         } catch (err: any) {
             toast.error(err.message);
@@ -281,8 +305,8 @@ export default function TicketForm({
             <div className="bg-gray-100/50 p-1.5 rounded-2xl flex gap-2 border border-gray-200">
                 <button
                     className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-xl font-black text-xs uppercase tracking-wider transition-all ${ticketFor === "SELF"
-                            ? "bg-white text-blue-600 shadow-sm scale-[1.02]"
-                            : "text-gray-500 hover:text-gray-700"
+                        ? "bg-white text-blue-600 shadow-sm scale-[1.02]"
+                        : "text-gray-500 hover:text-gray-700"
                         }`}
                     onClick={() => handleTypeChange("SELF")}
                 >
@@ -290,8 +314,8 @@ export default function TicketForm({
                 </button>
                 <button
                     className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-xl font-black text-xs uppercase tracking-wider transition-all ${ticketFor === "OTHER"
-                            ? "bg-white text-blue-600 shadow-sm scale-[1.02]"
-                            : "text-gray-500 hover:text-gray-700"
+                        ? "bg-white text-blue-600 shadow-sm scale-[1.02]"
+                        : "text-gray-500 hover:text-gray-700"
                         }`}
                     onClick={() => handleTypeChange("OTHER")}
                 >
@@ -439,42 +463,62 @@ export default function TicketForm({
             </div>
 
             {/* --- OTP VERIFICATION CARD --- */}
-            {ticketFor === "OTHER" && !userFound && (
-                <div className="bg-amber-50 p-6 rounded-[2rem] border border-amber-100 space-y-4 shadow-sm animate-in zoom-in-95 duration-300">
-                    <div className="flex items-center gap-2 text-amber-700">
-                        <ShieldCheck size={20} />
-                        <h4 className="font-black text-xs uppercase tracking-wider">Verification Required</h4>
-                    </div>
+            {formData.mobile?.length === 10 &&
+                !otpVerified &&
+                otpSent && (
+                    <div className="bg-amber-50 p-6 rounded-[2rem] border border-amber-100 space-y-4 shadow-sm animate-in zoom-in-95 duration-300">
+                        <div className="flex items-center gap-2 text-amber-700">
+                            <ShieldCheck size={20} />
+                            <h4 className="font-black text-xs uppercase tracking-wider">Verification Required</h4>
+                        </div>
 
-                    {!otpSent ? (
-                        <button
-                            onClick={handleSendOtp}
-                            className="w-full bg-amber-500 text-white py-3 rounded-xl font-black text-[10px] uppercase tracking-widest shadow-lg shadow-amber-200 hover:bg-amber-600 transition-all"
-                        >
-                            Send Verification Code
-                        </button>
-                    ) : !otpVerified ? (
-                        <div className="flex gap-2">
-                            <input
-                                className="flex-1 bg-white border-none rounded-xl py-3 px-4 font-black text-center tracking-[0.5em] text-lg text-amber-700 outline-none ring-2 ring-amber-200 focus:ring-amber-400"
-                                placeholder="000000"
-                                value={otp}
-                                onChange={(e) => setOtp(e.target.value)}
-                            />
+
+                        {otpSent && !otpVerified && (
                             <button
-                                onClick={handleVerifyOtp}
-                                className="bg-emerald-500 text-white px-6 rounded-xl font-black text-[10px] uppercase tracking-widest hover:bg-emerald-600 transition-all shadow-lg shadow-emerald-200"
+                                disabled={resendLoading}
+                                onClick={async () => {
+                                    setResendLoading(true);
+                                    await handleSendOtp();
+                                    setTimeout(() => setResendLoading(false), 30000);
+                                }}
                             >
-                                Verify
+                                Resend OTP
                             </button>
-                        </div>
-                    ) : (
-                        <div className="flex items-center justify-center gap-2 py-2 text-emerald-600 font-black text-xs uppercase tracking-widest italic bg-white/50 rounded-xl">
-                            <CheckCircle2 size={16} /> Identity Verified Securely
-                        </div>
-                    )}
-                </div>
-            )}
+                        )}
+
+
+                        {!otpSent ? (
+                            <button
+                                onClick={handleSendOtp}
+                                className="w-full bg-amber-500 text-white py-3 rounded-xl font-black text-[10px] uppercase tracking-widest shadow-lg shadow-amber-200 hover:bg-amber-600 transition-all"
+                            >
+                                Send Verification Code
+                            </button>
+                        ) : !otpVerified ? (
+                            <div className="flex gap-2">
+                                <input
+                                    className="flex-1 bg-white border-none rounded-xl py-3 px-4 font-black text-center tracking-[0.5em] text-lg text-amber-700 outline-none ring-2 ring-amber-200 focus:ring-amber-400"
+                                    placeholder="000000"
+                                    value={otp}
+                                    onChange={(e) => {
+                                        setOtp(e.target.value);
+                                        setOtpVerified(false); // 🔥 important
+                                    }}
+                                />
+                                <button
+                                    onClick={handleVerifyOtp}
+                                    className="bg-emerald-500 text-white px-6 rounded-xl font-black text-[10px] uppercase tracking-widest hover:bg-emerald-600 transition-all shadow-lg shadow-emerald-200"
+                                >
+                                    Verify
+                                </button>
+                            </div>
+                        ) : (
+                            <div className="flex items-center justify-center gap-2 py-2 text-emerald-600 font-black text-xs uppercase tracking-widest italic bg-white/50 rounded-xl">
+                                <CheckCircle2 size={16} /> Identity Verified Securely
+                            </div>
+                        )}
+                    </div>
+                )}
 
             {/* --- SUBMIT BUTTON --- */}
             <div className="px-4">
@@ -488,8 +532,12 @@ export default function TicketForm({
                             <Loader2 size={18} className="animate-spin" />
                             Processing...
                         </>
+                    ) : !otpSent ? (
+                        "Send OTP"
+                    ) : !otpVerified ? (
+                        "Verify & Submit"
                     ) : (
-                        "Generate Ticket & Reference"
+                        "Generate Ticket"
                     )}
                 </button>
             </div>

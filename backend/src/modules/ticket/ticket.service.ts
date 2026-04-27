@@ -53,27 +53,45 @@ export const createTicketService = async (data: any, adminId: string) => {
   }
 
   // 🔐 OTP CHECK (ONLY FOR REPRESENTATIVE)
-  if (isRepresentative) {
-    const now = Date.now();
+  // if (isRepresentative) {
+  //   const now = Date.now();
 
-    // strict validation
-    if (!targetUser.isVerified || !targetUser.verifiedAt) {
-      throw new Error("OTP not verified");
-    }
+  //   // strict validation
+  //   if (!targetUser.isVerified || !targetUser.verifiedAt) {
+  //     throw new Error("OTP not verified");
+  //   }
 
-    const verifiedAt = new Date(targetUser.verifiedAt).getTime();
-    const OTP_VALID_WINDOW = 5 * 60 * 1000; // 5 min
+  //   const verifiedAt = new Date(targetUser.verifiedAt).getTime();
+  //   const OTP_VALID_WINDOW = 5 * 60 * 1000; // 5 min
 
-    if (now - verifiedAt > OTP_VALID_WINDOW) {
-      throw new Error("OTP expired");
-    }
+  //   if (now - verifiedAt > OTP_VALID_WINDOW) {
+  //     throw new Error("OTP expired");
+  //   }
 
-    // 🔁 consume OTP (prevent reuse)
-    targetUser.isVerified = false;
-    targetUser.verifiedAt = null;
-    await targetUser.save();
+  //   // 🔁 consume OTP (prevent reuse)
+  //   targetUser.isVerified = false;
+  //   targetUser.verifiedAt = null;
+  //   await targetUser.save();
+  // }
+  const now = Date.now();
+
+  if (!targetUser.isVerified || !targetUser.verifiedAt) {
+    throw new Error("OTP not verified for ticket creation");
   }
 
+  const verifiedAt = new Date(targetUser.verifiedAt).getTime();
+  const OTP_VALID_WINDOW = 5 * 60 * 1000;
+
+  if (now - verifiedAt > OTP_VALID_WINDOW) {
+    throw new Error("OTP expired");
+  }
+
+  // 🔥 consume OTP हर बार
+  targetUser.isVerified = false;
+  targetUser.verifiedAt = null;
+  await targetUser.save();
+
+  
   const ticketNumber = await generateTicketNumber(department);
 
   const ticket = await Ticket.create({
