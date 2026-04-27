@@ -17,6 +17,7 @@ import {
 export default function LetterPreview({ formData, setFormData }: any) {
     const [isGenerating, setIsGenerating] = useState(false);
     const textareaRef = useRef<HTMLTextAreaElement>(null);
+const printRef = useRef<HTMLDivElement>(null);
 
     // Auto-resize textarea logic
     useEffect(() => {
@@ -32,28 +33,96 @@ export default function LetterPreview({ formData, setFormData }: any) {
         });
     };
 
-    useEffect(() => {
-        if (!formData.department || formData.isEdited) return;
+  useEffect(() => {
+    if (!formData.department) return;
 
-        const template = LETTER_TEMPLATES[formData.department as keyof typeof LETTER_TEMPLATES];
-        if (!template) return;
+    const template = LETTER_TEMPLATES[formData.department as keyof typeof LETTER_TEMPLATES];
+    if (!template) return;
 
-        const generated = generateLetter(template, formData);
-        if (generated === formData.letterBody) return;
+    const generated = generateLetter(template, formData);
 
+  
+    if (!formData.isEdited) {
         setFormData((prev: any) => ({
             ...prev,
             letterBody: generated,
-            isEdited: false,
         }));
-    }, [
-        formData.department,
-        formData.description,
-        formData.name,
-        formData.address,
-        formData.mobile,
-    ]);
+    }
+}, [
+    formData.department,
+    formData.description,
+    formData.name,
+    formData.address,
+    formData.mobile,
+]);
 
+const headerHTML = `
+    <div style="text-align:center; margin-bottom:20px;">
+        <h1 style="font-size:20px; margin-bottom:4px;">
+            कार्यालय जन शिकायत प्रकोष्ठ
+        </h1>
+        <p style="font-size:10px;">
+            Government of Madhya Pradesh
+        </p>
+    </div>
+`;
+
+const handlePrint = () => {
+    if (!printRef.current) return;
+
+    const letterText = formData.letterBody || "";
+
+    const printWindow = window.open("", "", "width=900,height=1000");
+    if (!printWindow) return;
+
+    printWindow.document.write(`
+        <html>
+        <head>
+            <title>Print Letter</title>
+            <style>
+                @page {
+                    size: A4;
+                    margin: 20mm;
+                }
+
+                body {
+                    font-family: "Noto Serif Devanagari", serif;
+                    line-height: 1.8;
+                    color: #000;
+                    background: #fff;
+                }
+
+                * {
+                    background: none !important;
+                    box-shadow: none !important;
+                }
+
+                .content {
+                    white-space: pre-wrap;
+                    font-size: 16px;
+                }
+            </style>
+        </head>
+        <body>
+
+            ${headerHTML}
+
+            <div class="content">
+                ${letterText}
+            </div>
+
+        </body>
+        </html>
+    `);
+
+    printWindow.document.close();
+    printWindow.focus();
+
+    setTimeout(() => {
+        printWindow.print();
+        printWindow.close();
+    }, 300);
+};
     const downloadPDF = async () => {
         try {
             setIsGenerating(true);
@@ -110,6 +179,15 @@ export default function LetterPreview({ formData, setFormData }: any) {
                         )}
                         {isGenerating ? "Exporting..." : "Download PDF"}
                     </button>
+
+                    <button
+                        onClick={handlePrint}
+                        disabled={!formData.letterBody}
+                        className="flex-1 md:flex-none flex items-center justify-center gap-3 bg-gray-900 hover:bg-black text-white px-8 py-4 rounded-[1.5rem] text-[11px] font-black uppercase tracking-[0.2em] transition-all disabled:opacity-30 shadow-xl shadow-gray-200 active:scale-95"
+                    >
+                        <Printer size={16} />
+                        Print
+                    </button>
                 </div>
             </div>
 
@@ -117,9 +195,9 @@ export default function LetterPreview({ formData, setFormData }: any) {
             <div className="relative group max-w-4xl mx-auto">
                 {/* Visual Stack Decoration */}
                 <div className="absolute inset-0 bg-white border border-gray-100 rounded-[3rem] -rotate-1 translate-y-2 opacity-50" />
-                
-                <div className="relative bg-white border border-gray-100 rounded-[3rem] shadow-2xl shadow-gray-200/40 overflow-hidden min-h-[700px] flex flex-col">
-                    
+
+                <div   ref={printRef} className="relative bg-white border border-gray-100 rounded-[3rem] shadow-2xl shadow-gray-200/40 overflow-hidden min-h-[700px] flex flex-col">
+
                     {/* Header Mockup */}
                     <div className="bg-gray-50/50 border-b border-dashed border-gray-200 p-10 text-center space-y-3">
                         <div className="inline-flex items-center justify-center p-3 bg-white rounded-2xl shadow-sm border border-gray-100 mb-2">
