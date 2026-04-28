@@ -16,7 +16,7 @@ const JantaSuvidhaKendra = ({ lang = "hi" }: Props) => {
             {/* --- HERO SECTION --- */}
             {/* pt-20 ya pt-24 add kiya hai mobile ke liye taki navbar ke niche se image start ho */}
             <section className="w-full bg-[#fdf2d8] pt-[65px] md:pt-0"> 
-                <div className="w-full mx-auto max-w-[1920px]">
+                <div className="w-full">
                     
                     {/* 📱 Mobile Image */}
                     <img

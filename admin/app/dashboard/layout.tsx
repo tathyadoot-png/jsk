@@ -3,15 +3,18 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { getMe } from "@/lib/auth";
-import Sidebar from "@/components/layout/Sidebar";
+import Sidebar from "@/modules/dashboard/sidebar/Sidebar";
 import { Toaster } from "sonner";
 import { Menu, X, ShieldCheck } from "lucide-react";
+import Header from "@/modules/dashboard/layout/Header";
+import { Lang } from "@/modules/dashboard/layout/types";
 
 export default function DashboardLayout({ children }: any) {
   const router = useRouter();
   const [loading, setLoading] = useState(true);
   const [admin, setAdmin] = useState<any>(null);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [lang, setLang] = useState<Lang>("en");
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -68,7 +71,7 @@ export default function DashboardLayout({ children }: any) {
           ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"}
         `}
       >
-        <Sidebar admin={admin} />
+        <Sidebar admin={admin} lang={lang} />
       </aside>
 
       {/* Overlay for Mobile Sidebar */}
@@ -81,6 +84,10 @@ export default function DashboardLayout({ children }: any) {
 
       {/* Main Content Area */}
       <main className="flex-1 flex flex-col min-w-0">
+          {/* 🔴 NEW HEADER (desktop only) */}
+  <div className="hidden md:block">
+    <Header lang={lang} setLang={setLang} admin={admin} />
+  </div>
         {/* Decorative Header Strip */}
         <div className="hidden md:block h-1.5 w-full bg-gradient-to-r from-orange-500 via-white to-green-600" />
         
