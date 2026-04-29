@@ -1,4 +1,4 @@
-import TicketTable from "@/components/ticket/TicketTable";
+import TicketTable from "@/modules/pages/ticket/TicketTable";
 
 export default function TicketPage() {
   return (

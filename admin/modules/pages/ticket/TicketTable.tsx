@@ -396,3 +396,270 @@
 
 
 
+"use client";
+
+import React, { useEffect, useState, useMemo } from "react";
+import { useLang } from "@/context/LanguageContext"; // Tera context
+import { ticketContent } from "./ticket.content"; // Tera content file
+import { getTickets, updateTicketStatus } from "@/services/ticket.service";
+import {
+  Search, Ticket, Calendar, ChevronDown, ChevronUp,
+  Loader2, Image as ImageIcon, FileText, ChevronLeft, ChevronRight
+} from "lucide-react";
+
+export default function TicketTable() {
+  const { lang } = useLang();
+  const t = ticketContent[lang]; // Language base content select ho gaya
+
+  const [tickets, setTickets] = useState<any[]>([]);
+  const [search, setSearch] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [openRow, setOpenRow] = useState<string | null>(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [statusFilter, setStatusFilter] = useState("all");
+  const itemsPerPage = 8;
+
+  const fetchTickets = async () => {
+    try {
+      setLoading(true);
+      const res = await getTickets();
+      setTickets(res.data || []);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => { fetchTickets(); }, []);
+
+  const filteredTickets = useMemo(() => {
+    return tickets.filter((ticket) => {
+      const matchesSearch = `${ticket.ticketNumber} ${ticket.userId?.mobile || ""} ${ticket.userId?.name || ""}`
+        .toLowerCase()
+        .includes(search.toLowerCase());
+      const matchesStatus = statusFilter === "all" ? true : ticket.status === statusFilter;
+      return matchesSearch && matchesStatus;
+    });
+  }, [search, tickets, statusFilter]);
+
+  const totalPages = Math.ceil(filteredTickets.length / itemsPerPage);
+  const paginatedData = filteredTickets.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+
+  const handleStatusChange = async (id: string, status: any) => {
+    await updateTicketStatus(id, status);
+    fetchTickets();
+  };
+
+  if (loading && tickets.length === 0) {
+    return (
+      <div className="flex flex-col items-center justify-center py-24 text-gray-400">
+        <Loader2 className="animate-spin mb-4" size={40} />
+        <p className="text-sm font-black uppercase italic">{t.syncing}</p>
+      </div>
+    );
+  }
+
+  const filterKeys = ["all", "pending", "in_progress", "resolved"] as const;
+
+  return (
+    <div className="w-full space-y-5">
+      {/* --- CONTROLS --- */}
+      <div className="flex flex-col lg:flex-row gap-4 justify-between items-center bg-white p-4 rounded-[1.5rem] lg:rounded-[2rem] border border-gray-100 shadow-sm">
+        <div className="relative w-full lg:w-96">
+          <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-300" size={18} />
+          <input
+            type="text"
+            placeholder={t.searchPlaceholder}
+            className="w-full pl-12 pr-4 py-3 bg-gray-50/50 border border-transparent focus:border-blue-500/20 focus:bg-white rounded-2xl outline-none transition-all text-sm font-medium"
+            value={search}
+            onChange={(e) => { setSearch(e.target.value); setCurrentPage(1); }}
+          />
+        </div>
+
+        <div className="flex items-center gap-2 overflow-x-auto w-full lg:w-auto pb-2 lg:pb-0 scrollbar-hide">
+          {filterKeys.map((f) => (
+            <button
+              key={f}
+              onClick={() => { setStatusFilter(f); setCurrentPage(1); }}
+              className={`px-4 py-2 rounded-xl text-[10px] font-black uppercase transition-all border whitespace-nowrap ${statusFilter === f
+                  ? "bg-gray-900 text-white border-gray-900"
+                  : "bg-white text-gray-400 border-gray-100 hover:bg-gray-50"
+                }`}
+            >
+              {t.filters[f]}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* --- TABLE --- */}
+      <div className="overflow-hidden rounded-[1.5rem] lg:rounded-[2.5rem] border border-gray-100 bg-white shadow-sm">
+        <table className="w-full text-left hidden md:table">
+          <thead>
+            <tr className="bg-gray-50/50 border-b border-gray-100">
+              <th className="p-5 text-[10px] font-black uppercase text-gray-400 w-16 text-center italic">{t.table.sNo}</th>
+              <th className="p-5 text-[10px] font-black uppercase text-gray-500 italic">{t.table.info}</th>
+              <th className="p-5 text-[10px] font-black uppercase text-gray-500 italic">{t.table.user}</th>
+              <th className="p-5 text-[10px] font-black uppercase text-gray-500 italic">{t.table.dept}</th>
+              <th className="p-5 text-[10px] font-black uppercase text-gray-500 italic text-center">{t.table.status}</th>
+              <th className="p-5 text-[10px] font-black uppercase text-gray-500 italic text-right">{t.table.details}</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-gray-50">
+            {paginatedData.map((ticket, index) => (
+              <React.Fragment key={ticket._id}>
+                <tr className={`hover:bg-gray-50/30 transition-all ${openRow === ticket._id ? 'bg-blue-50/20' : ''}`}>
+                  <td className="p-5 text-center font-black text-xs text-gray-300">{(currentPage - 1) * itemsPerPage + index + 1}</td>
+                  <td className="p-5">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-2xl bg-gray-900 text-white flex items-center justify-center shadow-lg"><Ticket size={18} /></div>
+                      <div>
+                        <span className="font-black text-gray-900 text-sm block leading-tight">{ticket.ticketNumber}</span>
+                        <span className="text-[10px] font-bold text-gray-400">{new Date(ticket.createdAt).toLocaleDateString(lang === "hi" ? "hi-IN" : "en-IN")}</span>
+                      </div>
+                    </div>
+                  </td>
+                  <td className="p-5">
+                    <span className="font-black text-gray-900 text-sm block leading-tight">{ticket.userId?.name}</span>
+                    <span className="text-[10px] font-bold text-gray-400">{ticket.userId?.mobile || "N/A"}</span>
+                  </td>
+                  <td className="p-5">
+                    <span className="text-[9px] font-black uppercase text-blue-600 bg-blue-50 px-2 py-0.5 rounded-md border border-blue-100 mb-1 inline-block">{ticket.department}</span>
+                    <p className="text-[10px] font-bold text-gray-400 uppercase">{ticket.entryType}</p>
+                  </td>
+                  <td className="p-5 text-center">
+                    <select
+                      value={ticket.status}
+                      onChange={(e) => handleStatusChange(ticket._id, e.target.value)}
+                      className={`text-[10px] font-black uppercase px-3 py-1.5 rounded-xl border-2 outline-none transition-all ${ticket.status === 'resolved' ? 'bg-green-50 text-green-600 border-green-100' : ticket.status === 'in_progress' ? 'bg-blue-50 text-blue-600 border-blue-100' : 'bg-orange-50 text-orange-600 border-orange-100'}`}
+                    >
+                      <option value="pending">{t.filters.pending}</option>
+                      <option value="in_progress">{t.filters.in_progress}</option>
+                      <option value="resolved">{t.filters.resolved}</option>
+                    </select>
+                  </td>
+                  <td className="p-5 text-right">
+                    <button onClick={() => setOpenRow(openRow === ticket._id ? null : ticket._id)} className={`p-2 rounded-xl transition-all ${openRow === ticket._id ? 'bg-gray-900 text-white' : 'bg-gray-50 text-gray-400'}`}>
+                      {openRow === ticket._id ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
+                    </button>
+                  </td>
+                </tr>
+                {/* Desktop Expanded Row */}
+                {openRow === ticket._id && (
+                  <tr className="bg-gray-50/50">
+                    <td colSpan={6} className="p-8">
+                      <div className="grid grid-cols-1 xl:grid-cols-5 gap-6">
+                        <div className="xl:col-span-2 space-y-4">
+                          <div className="bg-white p-6 rounded-[2rem] border border-gray-100 shadow-sm">
+                            <h4 className="text-[10px] font-black uppercase text-gray-400 flex items-center gap-2 mb-4"><FileText size={16} className="text-blue-600" /> {t.expanded.subject}</h4>
+                            <p className="text-sm text-gray-700 leading-relaxed font-medium">{ticket.description || t.expanded.noDesc}</p>
+                          </div>
+                          <div className="bg-white p-6 rounded-[2rem] border border-gray-100 shadow-sm">
+                            <h4 className="text-[10px] font-black uppercase text-gray-400 flex items-center gap-2 mb-4"><ImageIcon size={16} className="text-orange-600" /> {t.expanded.attachments}</h4>
+                            <div className="flex flex-wrap gap-3">
+                              {ticket.images?.length > 0 ? ticket.images.map((img: any, i: number) => (
+                                <img key={i} src={img} className="w-20 h-20 rounded-2xl object-cover border border-gray-100" />
+                              )) : <p className="text-[10px] font-bold text-gray-300 uppercase">{t.expanded.noAttach}</p>}
+                            </div>
+                          </div>
+                        </div>
+                        <div className="xl:col-span-3">
+                          <div className="bg-white rounded-[2rem] border border-gray-100 shadow-xl overflow-hidden min-h-[400px]">
+                            <div className="bg-gray-900 px-8 py-4 flex justify-between items-center text-white">
+                              <span className="text-[10px] font-black uppercase">{t.expanded.officialLetter}</span>
+                              <span className="text-[9px] font-bold opacity-50">ID: {ticket.ticketNumber}</span>
+                            </div>
+                            <div className="p-8">
+                              <div className="text-[10px] font-bold text-gray-400 uppercase text-right mb-8">
+                                {t.expanded.dated}: {new Date(ticket.createdAt).toLocaleDateString(lang === "hi" ? "hi-IN" : "en-IN")}
+                              </div>
+                              <p className="text-gray-800 text-base leading-[2] font-serif whitespace-pre-wrap">{ticket.letterBody || t.expanded.missingLetter}</p>
+                              <div className="mt-12 pt-8 border-t border-gray-50 flex justify-end">
+                                <div className="text-right italic font-black text-gray-900 text-xs">
+                                  <p className="text-[10px] text-gray-400 uppercase not-italic mb-1">{t.expanded.verified}</p>
+                                  SNHC India Foundation
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                )}
+              </React.Fragment>
+            ))}
+          </tbody>
+        </table>
+
+        {/* Mobile View */}
+        <div className="md:hidden divide-y divide-gray-50">
+          {paginatedData.map((ticket) => (
+            <div key={ticket._id} className="p-4 space-y-4">
+              <div className="flex justify-between items-start">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-2xl bg-gray-900 text-white flex items-center justify-center shadow-lg"><Ticket size={18} /></div>
+                  <div>
+                    <span className="font-black text-gray-900 text-sm block">{ticket.ticketNumber}</span>
+                    <span className="text-[10px] font-bold text-gray-400 uppercase">{ticket.userId?.name}</span>
+                  </div>
+                </div>
+                <div className="text-[10px] font-bold text-gray-400">{new Date(ticket.createdAt).toLocaleDateString(lang === "hi" ? "hi-IN" : "en-IN")}</div>
+              </div>
+              <div className="grid grid-cols-2 gap-2">
+                <div className="bg-gray-50/50 p-3 rounded-2xl border border-gray-100">
+                  <p className="text-[8px] font-black text-gray-400 uppercase mb-1">{t.mobile.dept}</p>
+                  <p className="text-[10px] font-black text-blue-600 uppercase truncate">{ticket.department}</p>
+                </div>
+                <div className="bg-gray-50/50 p-3 rounded-2xl border border-gray-100">
+                  <p className="text-[8px] font-black text-gray-400 uppercase mb-1">{t.mobile.mobile}</p>
+                  <p className="text-[10px] font-black text-gray-900">{ticket.userId?.mobile || "N/A"}</p>
+                </div>
+              </div>
+              <div className="flex gap-3">
+                <select value={ticket.status} onChange={(e) => handleStatusChange(ticket._id, e.target.value)} className="flex-1 text-[10px] font-black uppercase px-3 py-2.5 rounded-xl border-2 bg-white">
+                  <option value="pending">{t.filters.pending}</option>
+                  <option value="in_progress">{t.filters.in_progress}</option>
+                  <option value="resolved">{t.filters.resolved}</option>
+                </select>
+                <button onClick={() => setOpenRow(openRow === ticket._id ? null : ticket._id)} className="px-4 py-2.5 bg-gray-50 rounded-xl text-[10px] font-black uppercase border border-gray-100">
+                  {openRow === ticket._id ? t.mobile.hide : t.mobile.viewDetails}
+                </button>
+              </div>
+              {openRow === ticket._id && (
+                <div className="bg-gray-50/50 p-4 rounded-2xl border border-gray-100 space-y-4">
+                  <div>
+                    <h5 className="text-[8px] font-black text-gray-400 uppercase mb-1">{t.expanded.subject}</h5>
+                    <p className="text-xs text-gray-600 italic">{ticket.description}</p>
+                  </div>
+                  <div>
+                    <h5 className="text-[8px] font-black text-gray-400 uppercase mb-1">{t.mobile.fullLetter}</h5>
+                    <div className="bg-white p-3 rounded-xl text-[10px] text-gray-500 border border-gray-100 max-h-40 overflow-y-auto">
+                      {ticket.letterBody || t.mobile.noLetter}
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* --- PAGINATION --- */}
+      {totalPages > 1 && (
+        <div className="flex items-center justify-between bg-white p-4 rounded-2xl border border-gray-100 shadow-sm">
+          <p className="text-[10px] font-black text-gray-400 uppercase">{t.pagination.page} {currentPage} {t.pagination.of} {totalPages}</p>
+          <div className="flex gap-2">
+            <button disabled={currentPage === 1} onClick={() => setCurrentPage(prev => prev - 1)} className="p-2 border rounded-xl disabled:opacity-30"><ChevronLeft size={18} /></button>
+            <button disabled={currentPage === totalPages} onClick={() => setCurrentPage(prev => prev + 1)} className="p-2 border rounded-xl disabled:opacity-30"><ChevronRight size={18} /></button>
+          </div>
+        </div>
+      )}
+
+      {!loading && filteredTickets.length === 0 && (
+        <div className="text-center py-20 bg-gray-50/50 rounded-[2rem] border-2 border-dashed border-gray-100 font-black text-gray-300 uppercase italic text-xs">
+          {t.noRecords}
+        </div>
+      )}
+    </div>
+  );
+}

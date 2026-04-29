@@ -2,9 +2,9 @@
 
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import TicketForm from "@/components/ticket/TicketForm";
+import TicketForm from "@/modules/pages/ticket/TicketForm";
 import { fetchAPI } from "@/lib/api";
-import LetterPreview from "@/components/ticket/LetterPreview";
+import LetterPreview from "@/modules/pages/letterPreview/LetterPreview";
 
 export default function TicketCreatePage() {
   const params = useSearchParams();
