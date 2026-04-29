@@ -41,7 +41,7 @@ export default function VisitList({ visits = [] }: any) {
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between px-2">
-        <h2 className="text-xl font-black uppercase tracking-tighter text-gray-900 italic">Recent Visits</h2>
+        <h2 className="text-xl font-black uppercase  er text-gray-900 italic">Recent Visits</h2>
         <span className="text-[10px] font-black bg-emerald-100 text-emerald-600 px-3 py-1 rounded-full uppercase italic">
           {visits.length} Total
         </span>
@@ -63,7 +63,7 @@ export default function VisitList({ visits = [] }: any) {
                 </div>
                 <div className="text-right">
                   <p className="text-[10px] font-black text-gray-400 uppercase italic">Status</p>
-                  <p className="text-xs font-black text-emerald-500 uppercase italic tracking-widest">{v.status}</p>
+                  <p className="text-xs font-black text-emerald-500 uppercase italic  ">{v.status}</p>
                 </div>
               </div>
 

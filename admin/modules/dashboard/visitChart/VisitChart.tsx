@@ -27,10 +27,10 @@ export default function VisitChart({ data = [] }: any) {
             <TrendingUp size={20} />
           </div>
           <div>
-            <h2 className="font-bold text-gray-900 tracking-tight leading-none">
+            <h2 className="font-bold text-gray-900   leading-none">
               {content.title}
             </h2>
-            <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mt-1.5">
+            <p className="text-[10px] font-bold text-gray-400 uppercase   mt-1.5">
               {content.subtitle}
             </p>
           </div>
@@ -110,11 +110,11 @@ export default function VisitChart({ data = [] }: any) {
       <div className="mt-6 pt-4 border-t border-gray-50 flex items-center justify-between">
         <div className="flex items-center gap-1.5">
           <div className="w-2 h-2 rounded-full bg-orange-500 animate-pulse" />
-          <span className="text-[9px] font-bold text-gray-400 uppercase tracking-[0.2em]">
+          <span className="text-[9px] font-bold text-gray-400 uppercase  ">
             {content.footerLeft}
           </span>
         </div>
-        <span className="text-[9px] font-bold text-gray-300 uppercase tracking-tighter">
+        <span className="text-[9px] font-bold text-gray-300 uppercase  er">
           {content.footerRight}
         </span>
       </div>

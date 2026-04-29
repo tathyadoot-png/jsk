@@ -58,18 +58,18 @@ export default function StatsCards({ data }: any) {
               </div>
               <div className={`flex items-center gap-0.5 px-2 py-1 rounded-lg bg-gray-50 border border-gray-100`}>
                 {stat.isLive && <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-ping mr-1" />}
-                <span className="text-[9px] font-black uppercase tracking-tighter text-gray-500">
+                <span className="text-[9px] font-black uppercase  er text-gray-500">
                   {stat.trend}
                 </span>
               </div>
             </div>
 
             <div>
-              <p className="text-[11px] font-bold text-gray-400 uppercase tracking-[0.15em] mb-1">
+              <p className="text-[11px] font-bold text-gray-400 uppercase   mb-1">
                 {stat.label}
               </p>
               <div className="flex items-baseline gap-1">
-                <h2 className="text-2xl md:text-3xl font-black text-gray-900 tracking-tight">
+                <h2 className="text-2xl md:text-3xl font-black text-gray-900  ">
                   {stat.value || 0}
                 </h2>
                 {stat.isLive && (

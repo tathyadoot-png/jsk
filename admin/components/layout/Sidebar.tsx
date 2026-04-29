@@ -77,15 +77,15 @@
 //             <ShieldAlert className="text-white w-6 h-6" />
 //           </div>
 //           <div>
-//             <h2 className="text-lg font-black tracking-tight uppercase leading-none">Control</h2>
-//             <span className="text-[10px] font-bold text-gray-500 tracking-[0.3em] uppercase">Panel v4.0</span>
+//             <h2 className="text-lg font-black   uppercase leading-none">Control</h2>
+//             <span className="text-[10px] font-bold text-gray-500   uppercase">Panel v4.0</span>
 //           </div>
 //         </div>
 //       </div>
 
 //       {/* --- MENU SECTION --- */}
 //       <nav className="flex-1 px-4 space-y-1.5">
-//         <p className="text-[10px] font-bold text-gray-600 uppercase tracking-[0.2em] mb-4 ml-4">Main Menu</p>
+//         <p className="text-[10px] font-bold text-gray-600 uppercase   mb-4 ml-4">Main Menu</p>
 
 //         <ul className="space-y-1.5">
 //           {filteredMenu.map((item) => {
@@ -138,7 +138,7 @@
 //           </div>
 //           <div className="flex-1 min-w-0">
 //             <p className="text-sm font-bold truncate">{admin?.name || "Administrator"}</p>
-//             <p className="text-[10px] font-bold text-green-500 uppercase tracking-tighter">
+//             <p className="text-[10px] font-bold text-green-500 uppercase  er">
 //               {admin?.role || "System User"}
 //             </p>
 //           </div>
@@ -146,7 +146,7 @@
 
 //         <button
 //           onClick={handleLogout}
-//           className="w-full mt-4 flex items-center justify-center gap-2 py-3 rounded-xl border border-white/5 text-gray-500 hover:text-red-400 hover:bg-red-500/5 hover:border-red-500/20 transition-all text-xs font-bold uppercase tracking-widest"
+//           className="w-full mt-4 flex items-center justify-center gap-2 py-3 rounded-xl border border-white/5 text-gray-500 hover:text-red-400 hover:bg-red-500/5 hover:border-red-500/20 transition-all text-xs font-bold uppercase  "
 //         >
 //           <LogOut size={14} />
 //           Sign Out

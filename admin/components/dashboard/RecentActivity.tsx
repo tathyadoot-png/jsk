@@ -13,8 +13,8 @@ export default function RecentActivity({ data = [] }: any) {
             <History size={18} />
           </div>
           <div>
-            <h2 className="font-bold text-gray-800 tracking-tight leading-none">Recent Activity</h2>
-            <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mt-1.5">Live Feed</p>
+            <h2 className="font-bold text-gray-800   leading-none">Recent Activity</h2>
+            <p className="text-[10px] font-bold text-gray-400 uppercase   mt-1.5">Live Feed</p>
           </div>
         </div>
       </div>
@@ -24,7 +24,7 @@ export default function RecentActivity({ data = [] }: any) {
         {data.length === 0 ? (
           <div className="h-full flex flex-col items-center justify-center py-10 opacity-30">
             <Clock size={40} className="text-gray-300 mb-2" />
-            <p className="text-[10px] font-bold uppercase tracking-widest text-gray-500">Log Empty</p>
+            <p className="text-[10px] font-bold uppercase   text-gray-500">Log Empty</p>
           </div>
         ) : (
           <div className="relative space-y-6">
@@ -59,13 +59,13 @@ export default function RecentActivity({ data = [] }: any) {
                   {/* Activity Card */}
                   <div className="p-4 rounded-2xl bg-gray-50/50 border border-transparent group-hover:border-gray-200 group-hover:bg-white transition-all duration-300">
                     <div className="flex items-center justify-between gap-2 mb-1">
-                      <span className={`text-[10px] font-black uppercase tracking-widest ${isVisit ? "text-orange-600" : "text-green-700"}`}>
+                      <span className={`text-[10px] font-black uppercase   ${isVisit ? "text-orange-600" : "text-green-700"}`}>
                         {isVisit ? "Visit Logged" : "Ticket Generated"}
                       </span>
                       <ChevronRight size={14} className="text-gray-300 group-hover:text-gray-900 group-hover:translate-x-1 transition-all" />
                     </div>
 
-                    <p className="text-xs font-bold text-gray-400 font-mono tracking-tighter uppercase">
+                    <p className="text-xs font-bold text-gray-400 font-mono  er uppercase">
                       {formattedDate}
                     </p>
                   </div>
@@ -80,7 +80,7 @@ export default function RecentActivity({ data = [] }: any) {
       <div className="px-8 py-4 bg-gray-50/30 border-t border-gray-50">
         <div className="flex items-center gap-2">
           <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-          <span className="text-[9px] font-bold text-gray-400 uppercase tracking-[0.2em]">System Logs Verified</span>
+          <span className="text-[9px] font-bold text-gray-400 uppercase  ">System Logs Verified</span>
         </div>
       </div>
     </div>

@@ -22,8 +22,8 @@ export default function VisitChart({ data = [] }: any) {
             <TrendingUp size={20} />
           </div>
           <div>
-            <h2 className="font-bold text-gray-900 tracking-tight leading-none">Daily Visits Trend</h2>
-            <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mt-1.5">Traffic Analysis</p>
+            <h2 className="font-bold text-gray-900   leading-none">Daily Visits Trend</h2>
+            <p className="text-[10px] font-bold text-gray-400 uppercase   mt-1.5">Traffic Analysis</p>
           </div>
         </div>
         
@@ -100,9 +100,9 @@ export default function VisitChart({ data = [] }: any) {
       <div className="mt-6 pt-4 border-t border-gray-50 flex items-center justify-between">
          <div className="flex items-center gap-1.5">
             <div className="w-2 h-2 rounded-full bg-orange-500 animate-pulse" />
-            <span className="text-[9px] font-bold text-gray-400 uppercase tracking-[0.2em]">Real-time Data Stream</span>
+            <span className="text-[9px] font-bold text-gray-400 uppercase  ">Real-time Data Stream</span>
          </div>
-         <span className="text-[9px] font-bold text-gray-300 uppercase tracking-tighter">Node: VIS_ALPHA_01</span>
+         <span className="text-[9px] font-bold text-gray-300 uppercase  er">Node: VIS_ALPHA_01</span>
       </div>
     </div>
   );

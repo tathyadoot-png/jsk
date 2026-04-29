@@ -41,7 +41,7 @@ export default function DashboardLayout({ children }: Props) {
           <div className="w-16 h-16 border-4 border-orange-500/20 border-t-orange-500 rounded-full animate-spin" />
           <ShieldCheck className="absolute w-6 h-6 text-orange-500" />
         </div>
-        <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.3em] text-gray-400 animate-pulse">
+        <p className="mt-4 font-mono text-[10px] uppercase   text-gray-400 animate-pulse">
           Authenticating Secure Session
         </p>
       </div>
@@ -58,7 +58,7 @@ export default function DashboardLayout({ children }: Props) {
           <div className="w-8 h-8 bg-black rounded-lg flex items-center justify-center">
             <ShieldCheck className="text-white w-5 h-5" />
           </div>
-          <span className="font-bold text-sm tracking-tight text-gray-900 uppercase">
+          <span className="font-bold text-sm   text-gray-900 uppercase">
             Admin Portal
           </span>
         </div>
@@ -110,7 +110,7 @@ export default function DashboardLayout({ children }: Props) {
 
         {/* FOOTER */}
         <footer className="mt-auto p-6 flex flex-col md:flex-row justify-between items-center gap-4 opacity-40">
-          <span className="text-[10px] font-bold uppercase tracking-widest text-gray-500">
+          <span className="text-[10px] font-bold uppercase   text-gray-500">
             © 2026 NIC Infrastructure • Secure Terminal
           </span>
 

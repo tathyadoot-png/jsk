@@ -31,10 +31,10 @@ export default function ConstituencyChart({ data = [] }: any) {
             <MapPin size={22} />
           </div>
           <div>
-            <h2 className="font-black text-gray-900 tracking-tight text-xl">
+            <h2 className="font-black text-gray-900   text-xl">
               {content.title}
             </h2>
-            <p className="text-[11px] font-bold text-gray-400 uppercase tracking-[0.15em] mt-1">
+            <p className="text-[11px] font-bold text-gray-400 uppercase   mt-1">
               {content.subtitle}
             </p>
           </div>
@@ -75,7 +75,7 @@ export default function ConstituencyChart({ data = [] }: any) {
                   if (active && payload && payload.length) {
                     return (
                       <div className="bg-white/90 backdrop-blur-md p-4 rounded-2xl shadow-2xl border border-gray-100 flex flex-col gap-1">
-                        <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest">{payload[0].name}</span>
+                        <span className="text-[10px] font-black text-gray-400 uppercase  ">{payload[0].name}</span>
                         <span className="text-lg font-black text-gray-900">{payload[0].value} <span className="text-xs font-medium text-gray-500">Visitors</span></span>
                       </div>
                     );
@@ -91,7 +91,7 @@ export default function ConstituencyChart({ data = [] }: any) {
             <span className="text-4xl font-black text-gray-900 leading-none">
               {totalCount}
             </span>
-            <span className="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] mt-1">
+            <span className="text-[10px] font-black text-gray-400 uppercase   mt-1">
               {lang === "hi" ? "कुल डेटा" : "TOTAL DATA"}
             </span>
           </div>
@@ -106,7 +106,7 @@ export default function ConstituencyChart({ data = [] }: any) {
                   className="w-2.5 h-2.5 rounded-full shadow-sm" 
                   style={{ backgroundColor: COLORS[index % COLORS.length] }} 
                 />
-                <span className="text-xs font-bold text-gray-500 uppercase tracking-tighter truncate w-24 group-hover/item:text-gray-900 transition-colors">
+                <span className="text-xs font-bold text-gray-500 uppercase  er truncate w-24 group-hover/item:text-gray-900 transition-colors">
                   {entry._id}
                 </span>
               </div>
@@ -122,7 +122,7 @@ export default function ConstituencyChart({ data = [] }: any) {
       <div className="mt-6 pt-6 border-t border-gray-50 flex items-center justify-between">
         <div className="flex items-center gap-2">
            <div className="w-2 h-2 rounded-full bg-[#138808] animate-pulse" />
-           <span className="text-[9px] font-black text-gray-400 uppercase tracking-[0.2em]">
+           <span className="text-[9px] font-black text-gray-400 uppercase  ">
              {content.footer}
            </span>
         </div>

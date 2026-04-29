@@ -158,10 +158,10 @@ const handlePrint = () => {
                         <FileText size={22} />
                     </div>
                     <div>
-                        <h2 className="text-sm font-black uppercase tracking-widest text-gray-900 italic leading-tight">Draft Editor</h2>
+                        <h2 className="text-sm font-black uppercase   text-gray-900 italic leading-tight">Draft Editor</h2>
                         <div className="flex items-center gap-2">
                             <span className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" />
-                            <p className="text-[10px] font-bold text-gray-400 uppercase tracking-tighter">Live Preview Ready</p>
+                            <p className="text-[10px] font-bold text-gray-400 uppercase  er">Live Preview Ready</p>
                         </div>
                     </div>
                 </div>
@@ -170,7 +170,7 @@ const handlePrint = () => {
                     <button
                         onClick={downloadPDF}
                         disabled={isGenerating || !formData.letterBody}
-                        className="flex-1 md:flex-none flex items-center justify-center gap-3 bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-[1.5rem] text-[11px] font-black uppercase tracking-[0.2em] transition-all disabled:opacity-30 shadow-xl shadow-blue-100 active:scale-95"
+                        className="flex-1 md:flex-none flex items-center justify-center gap-3 bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-[1.5rem] text-[11px] font-black uppercase   transition-all disabled:opacity-30 shadow-xl shadow-blue-100 active:scale-95"
                     >
                         {isGenerating ? (
                             <RefreshCw size={16} className="animate-spin" />
@@ -183,7 +183,7 @@ const handlePrint = () => {
                     <button
                         onClick={handlePrint}
                         disabled={!formData.letterBody}
-                        className="flex-1 md:flex-none flex items-center justify-center gap-3 bg-gray-900 hover:bg-black text-white px-8 py-4 rounded-[1.5rem] text-[11px] font-black uppercase tracking-[0.2em] transition-all disabled:opacity-30 shadow-xl shadow-gray-200 active:scale-95"
+                        className="flex-1 md:flex-none flex items-center justify-center gap-3 bg-gray-900 hover:bg-black text-white px-8 py-4 rounded-[1.5rem] text-[11px] font-black uppercase   transition-all disabled:opacity-30 shadow-xl shadow-gray-200 active:scale-95"
                     >
                         <Printer size={16} />
                         Print
@@ -203,8 +203,8 @@ const handlePrint = () => {
                         <div className="inline-flex items-center justify-center p-3 bg-white rounded-2xl shadow-sm border border-gray-100 mb-2">
                             <Printer size={24} className="text-gray-400" />
                         </div>
-                        <h1 className="text-3xl font-black text-gray-800 tracking-tighter italic">कार्यालय जन शिकायत प्रकोष्ठ</h1>
-                        <p className="text-[10px] font-black text-blue-500 uppercase tracking-[0.4em]">Government of Madhya Pradesh</p>
+                        <h1 className="text-3xl font-black text-gray-800  er italic">कार्यालय जन शिकायत प्रकोष्ठ</h1>
+                        <p className="text-[10px] font-black text-blue-500 uppercase ">Government of Madhya Pradesh</p>
                     </div>
 
                     {/* Editor Area */}
@@ -212,7 +212,7 @@ const handlePrint = () => {
                         {!formData.department ? (
                             <div className="h-full flex flex-col items-center justify-center py-20 text-gray-300 space-y-4">
                                 <AlertCircle size={60} strokeWidth={1} className="text-gray-200" />
-                                <p className="text-xs font-black uppercase tracking-widest italic text-gray-400">Select department to load template</p>
+                                <p className="text-xs font-black uppercase   italic text-gray-400">Select department to load template</p>
                             </div>
                         ) : (
                             <div className="relative group/editor">
@@ -244,18 +244,18 @@ const handlePrint = () => {
                         <div className="flex items-center gap-6">
                             <div className="flex items-center gap-2">
                                 <Type size={14} className="text-gray-400" />
-                                <span className="text-[10px] font-black text-gray-500 uppercase tracking-widest">
+                                <span className="text-[10px] font-black text-gray-500 uppercase  ">
                                     {formData.letterBody?.length || 0} Characters
                                 </span>
                             </div>
                             <div className="flex items-center gap-2">
                                 <CheckCircle2 size={14} className="text-emerald-500" />
-                                <span className="text-[10px] font-black text-gray-500 uppercase tracking-widest italic">
+                                <span className="text-[10px] font-black text-gray-500 uppercase   italic">
                                     {formData.isEdited ? "Manual Edit" : "Auto-Draft"}
                                 </span>
                             </div>
                         </div>
-                        <p className="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] bg-white px-4 py-2 rounded-full border border-gray-100">
+                        <p className="text-[10px] font-black text-gray-400 uppercase   bg-white px-4 py-2 rounded-full border border-gray-100">
                             Ref: MP-GRIEVANCE-2024
                         </p>
                     </div>
@@ -266,7 +266,7 @@ const handlePrint = () => {
             <div className="flex items-center justify-center gap-3 py-4 md:hidden">
                 <div className="px-4 py-2 bg-gray-100 rounded-full flex items-center gap-2">
                     <Eye size={12} className="text-gray-500" />
-                    <p className="text-[9px] font-black text-gray-500 uppercase tracking-widest">Scroll to check bottom alignment</p>
+                    <p className="text-[9px] font-black text-gray-500 uppercase  ">Scroll to check bottom alignment</p>
                 </div>
             </div>
         </div>

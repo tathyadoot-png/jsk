@@ -30,18 +30,18 @@ export default function GroupVisitCard({ data }: any) {
 
               <div className="flex items-center gap-1.5 text-[#FF9933] bg-[#FF9933]/5 border border-[#FF9933]/10 px-3 py-1.5 rounded-xl">
                 <ArrowUpRight size={14} className="group-hover:rotate-45 transition-transform" />
-                <span className="text-[10px] font-black uppercase tracking-wider">
+                <span className="text-[10px] font-black uppercase  ">
                   {content.bulk}
                 </span>
               </div>
             </div>
 
             <div className="space-y-1">
-              <p className="text-[11px] font-black text-gray-400 uppercase tracking-[0.25em]">
+              <p className="text-[11px] font-black text-gray-400 uppercase  ">
                 {content.groupTitle}
               </p>
               <div className="flex items-baseline gap-2">
-                <h2 className="text-5xl font-black text-gray-900 tracking-tighter">
+                <h2 className="text-5xl font-black text-gray-900  er">
                   {data?.totalGroupVisits || 0}
                 </h2>
                 <span className="text-sm font-bold text-gray-300 italic">
@@ -53,7 +53,7 @@ export default function GroupVisitCard({ data }: any) {
             {/* Progress Section */}
             <div className="mt-10">
               <div className="flex justify-between items-center mb-2">
-                <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Efficiency Rate</span>
+                <span className="text-[10px] font-bold text-gray-400 uppercase  ">Efficiency Rate</span>
                 <span className="text-[10px] font-black text-[#FF9933]">{groupPercentage}%</span>
               </div>
               <div className="h-2 w-full bg-gray-50 rounded-full overflow-hidden p-[2px] border border-gray-100">
@@ -79,18 +79,18 @@ export default function GroupVisitCard({ data }: any) {
 
               <div className="flex items-center gap-1.5 text-[#138808] bg-[#138808]/5 border border-[#138808]/10 px-3 py-1.5 rounded-xl">
                 <Layers size={14} />
-                <span className="text-[10px] font-black uppercase tracking-wider">
+                <span className="text-[10px] font-black uppercase  ">
                   {content.single}
                 </span>
               </div>
             </div>
 
             <div className="space-y-1">
-              <p className="text-[11px] font-black text-gray-400 uppercase tracking-[0.25em]">
+              <p className="text-[11px] font-black text-gray-400 uppercase  ">
                 {content.normalTitle}
               </p>
               <div className="flex items-baseline gap-2">
-                <h2 className="text-5xl font-black text-gray-900 tracking-tighter">
+                <h2 className="text-5xl font-black text-gray-900  er">
                   {data?.normalVisits || 0}
                 </h2>
                 <span className="text-sm font-bold text-gray-300 italic">
@@ -102,7 +102,7 @@ export default function GroupVisitCard({ data }: any) {
             {/* Progress Section */}
             <div className="mt-10">
               <div className="flex justify-between items-center mb-2">
-                <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Fulfillment Rate</span>
+                <span className="text-[10px] font-bold text-gray-400 uppercase  ">Fulfillment Rate</span>
                 <span className="text-[10px] font-black text-[#138808]">{normalPercentage}%</span>
               </div>
               <div className="h-2 w-full bg-gray-50 rounded-full overflow-hidden p-[2px] border border-gray-100">

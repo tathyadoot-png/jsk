@@ -27,14 +27,14 @@ export default function UserProfile({ user }: any) {
         <div className="flex-1 w-full">
           <div className="flex flex-col md:flex-row md:items-end justify-between border-b border-gray-50 pb-3 mb-3 gap-2">
             <div>
-              <h1 className="text-xl font-black text-[#000080] uppercase italic tracking-tighter leading-none">
+              <h1 className="text-xl font-black text-[#000080] uppercase italic  er leading-none">
                 {user.name}
               </h1>
               <div className="flex gap-2 mt-1">
-                <span className="text-[9px] font-black text-[#FF9933] uppercase tracking-widest bg-[#FF9933]/5 px-2 py-0.5 rounded border border-[#FF9933]/10">
+                <span className="text-[9px] font-black text-[#FF9933] uppercase   bg-[#FF9933]/5 px-2 py-0.5 rounded border border-[#FF9933]/10">
                   {user.role || "USER"}
                 </span>
-                <span className="text-[9px] font-black text-gray-400 uppercase tracking-widest bg-gray-50 px-2 py-0.5 rounded border border-gray-100">
+                <span className="text-[9px] font-black text-gray-400 uppercase   bg-gray-50 px-2 py-0.5 rounded border border-gray-100">
                   REF: {user.uniqueId || "N/A"}
                 </span>
               </div>
@@ -59,7 +59,7 @@ function MiniBox({ icon, label, value }: any) {
         {cloneElement(icon, { size: 14 })}
       </div>
       <div className="min-w-0">
-        <p className="text-[8px] font-black text-gray-400 uppercase tracking-widest leading-none mb-0.5">{label}</p>
+        <p className="text-[8px] font-black text-gray-400 uppercase   leading-none mb-0.5">{label}</p>
         <p className="text-[10px] font-bold text-gray-700 uppercase truncate leading-none">{value || "TEST"}</p>
       </div>
     </div>

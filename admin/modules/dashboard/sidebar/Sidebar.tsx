@@ -45,10 +45,10 @@ export default function Sidebar({ admin }: SidebarProps) {
       <div className="p-8 flex items-center gap-3">
         <ShieldAlert className="w-6 h-6 text-orange-500" />
         <div>
-          <h2 className="text-lg font-bold uppercase tracking-tight">
+          <h2 className="text-lg font-bold uppercase  ">
             {content.header}
           </h2>
-          <span className="text-xs text-gray-500 uppercase tracking-widest">
+          <span className="text-xs text-gray-500 uppercase  ">
             {content.subHeader}
           </span>
         </div>
@@ -56,7 +56,7 @@ export default function Sidebar({ admin }: SidebarProps) {
 
       {/* MENU */}
       <nav className="flex-1 px-4 space-y-2">
-        <p className="text-xs text-gray-500 uppercase tracking-widest ml-2 mb-3">
+        <p className="text-xs text-gray-500 uppercase   ml-2 mb-3">
           {content.menuTitle}
         </p>
 
@@ -100,7 +100,7 @@ export default function Sidebar({ admin }: SidebarProps) {
       <div className="p-4 border-t border-white/5">
         <button
           onClick={handleLogout}
-          className="w-full flex items-center justify-center gap-2 py-3 rounded-xl text-xs font-bold uppercase tracking-widest text-gray-500 hover:text-red-400 hover:bg-red-500/5 transition-all"
+          className="w-full flex items-center justify-center gap-2 py-3 rounded-xl text-xs font-bold uppercase   text-gray-500 hover:text-red-400 hover:bg-red-500/5 transition-all"
         >
           <LogOut size={14} />
           {content.logout}

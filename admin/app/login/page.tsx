@@ -49,7 +49,7 @@
 //             </div>
             
 //             <div className="text-center">
-//               <h1 className="text-3xl font-bold text-white tracking-tight uppercase">Admin <span className="text-orange-500">Portal</span></h1>
+//               <h1 className="text-3xl font-bold text-white   uppercase">Admin <span className="text-orange-500">Portal</span></h1>
 //               <div className="flex items-center justify-center gap-2 mt-3">
 //                 <div className="h-[1px] w-8 bg-orange-500/50" />
 //                 <span className="text-[10px] font-bold text-gray-500 uppercase tracking-[0.4em]">Management System</span>
@@ -61,7 +61,7 @@
 //           {/* Subtle Bottom Badge */}
 //           <div className="absolute bottom-10 flex items-center gap-2 opacity-30">
 //             <LayoutGrid size={14} className="text-white" />
-//             <span className="text-[10px] font-mono text-white tracking-widest uppercase text-center">Authorized Control Interface</span>
+//             <span className="text-[10px] font-mono text-white   uppercase text-center">Authorized Control Interface</span>
 //           </div>
 //         </div>
 
@@ -75,7 +75,7 @@
 //           <div className="space-y-6">
 //             {/* Email Field */}
 //             <div className="space-y-2">
-//               <label className="text-[11px] font-bold uppercase tracking-widest text-gray-400 ml-1">Account Identifier</label>
+//               <label className="text-[11px] font-bold uppercase   text-gray-400 ml-1">Account Identifier</label>
 //               <div className="relative">
 //                 <input
 //                   type="email"
@@ -89,7 +89,7 @@
 
 //             {/* Password Field */}
 //             <div className="space-y-2">
-//               <label className="text-[11px] font-bold uppercase tracking-widest text-gray-400 ml-1">Security Key</label>
+//               <label className="text-[11px] font-bold uppercase   text-gray-400 ml-1">Security Key</label>
 //               <div className="relative">
 //                 <input
 //                   type={showPassword ? "text" : "password"}
@@ -128,7 +128,7 @@
 //             <div className="pt-6 flex justify-center">
 //                <div className="flex items-center gap-2">
 //                   <div className="w-1.5 h-1.5 rounded-full bg-green-500" />
-//                   <span className="text-[10px] font-bold text-gray-300 tracking-[0.3em] uppercase">Encrypted Connection</span>
+//                   <span className="text-[10px] font-bold text-gray-300   uppercase">Encrypted Connection</span>
 //                </div>
 //             </div>
 //           </div>

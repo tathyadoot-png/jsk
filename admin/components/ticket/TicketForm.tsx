@@ -296,15 +296,15 @@ export default function TicketForm({
                     <FileText className="text-white" size={24} />
                 </div>
                 <div>
-                    <h2 className="text-xl font-black tracking-tight text-gray-800">Create Ticket</h2>
-                    <p className="text-xs font-bold text-gray-400 uppercase tracking-widest">New Grievance Entry</p>
+                    <h2 className="text-xl font-black   text-gray-800">Create Ticket</h2>
+                    <p className="text-xs font-bold text-gray-400 uppercase  ">New Grievance Entry</p>
                 </div>
             </div>
 
             {/* --- SELECTION TOGGLE --- */}
             <div className="bg-gray-100/50 p-1.5 rounded-2xl flex gap-2 border border-gray-200">
                 <button
-                    className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-xl font-black text-xs uppercase tracking-wider transition-all ${ticketFor === "SELF"
+                    className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-xl font-black text-xs uppercase   transition-all ${ticketFor === "SELF"
                         ? "bg-white text-blue-600 shadow-sm scale-[1.02]"
                         : "text-gray-500 hover:text-gray-700"
                         }`}
@@ -313,7 +313,7 @@ export default function TicketForm({
                     <User size={16} /> Self
                 </button>
                 <button
-                    className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-xl font-black text-xs uppercase tracking-wider transition-all ${ticketFor === "OTHER"
+                    className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-xl font-black text-xs uppercase   transition-all ${ticketFor === "OTHER"
                         ? "bg-white text-blue-600 shadow-sm scale-[1.02]"
                         : "text-gray-500 hover:text-gray-700"
                         }`}
@@ -329,7 +329,7 @@ export default function TicketForm({
                 {/* Mobile & User Status Section */}
                 {ticketFor === "OTHER" && (
                     <div className="space-y-3">
-                        <label className="text-[10px] font-black uppercase ml-2 text-gray-400 tracking-widest">Beneficiary Identity</label>
+                        <label className="text-[10px] font-black uppercase ml-2 text-gray-400  ">Beneficiary Identity</label>
                         <div className="relative group">
                             <Phone className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-blue-500 transition-colors" size={18} />
                             <input
@@ -356,7 +356,7 @@ export default function TicketForm({
 
                 {/* Name Field */}
                 <div className="space-y-2">
-                    <label className="text-[10px] font-black uppercase ml-2 text-gray-400 tracking-widest">Full Name</label>
+                    <label className="text-[10px] font-black uppercase ml-2 text-gray-400  ">Full Name</label>
                     <div className="relative group">
                         <User className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
                         <input
@@ -413,7 +413,7 @@ export default function TicketForm({
 
                 {/* Department Selection */}
                 <div className="space-y-2">
-                    <label className="text-[10px] font-black uppercase ml-2 text-gray-400 tracking-widest">Department</label>
+                    <label className="text-[10px] font-black uppercase ml-2 text-gray-400  ">Department</label>
                     <div className="relative">
                         <select
                             className="w-full bg-blue-50/50 border-none rounded-2xl py-4 px-6 font-black text-blue-700 appearance-none cursor-pointer focus:ring-2 focus:ring-blue-200 transition-all"
@@ -432,7 +432,7 @@ export default function TicketForm({
 
                 {/* Description */}
                 <div className="space-y-2">
-                    <label className="text-[10px] font-black uppercase ml-2 text-gray-400 tracking-widest">Grievance Description</label>
+                    <label className="text-[10px] font-black uppercase ml-2 text-gray-400  ">Grievance Description</label>
                     <textarea
                         className="w-full bg-gray-50 border-2 border-transparent focus:border-blue-500/20 focus:bg-white rounded-[2rem] py-4 px-6 font-bold text-gray-900 min-h-[120px] outline-none transition-all"
                         placeholder="Please describe the issue in detail..."
@@ -443,7 +443,7 @@ export default function TicketForm({
 
                 {/* Image Upload Area */}
                 <div className="space-y-4">
-                    <label className="text-[10px] font-black uppercase ml-2 text-gray-400 tracking-widest">Evidence / Attachments</label>
+                    <label className="text-[10px] font-black uppercase ml-2 text-gray-400  ">Evidence / Attachments</label>
                     <div className="flex gap-3 flex-wrap">
                         {preview.map((img: string, i: number) => (
                             <div key={i} className="relative group w-20 h-20">
@@ -469,7 +469,7 @@ export default function TicketForm({
                     <div className="bg-amber-50 p-6 rounded-[2rem] border border-amber-100 space-y-4 shadow-sm animate-in zoom-in-95 duration-300">
                         <div className="flex items-center gap-2 text-amber-700">
                             <ShieldCheck size={20} />
-                            <h4 className="font-black text-xs uppercase tracking-wider">Verification Required</h4>
+                            <h4 className="font-black text-xs uppercase  ">Verification Required</h4>
                         </div>
 
 
@@ -490,14 +490,14 @@ export default function TicketForm({
                         {!otpSent ? (
                             <button
                                 onClick={handleSendOtp}
-                                className="w-full bg-amber-500 text-white py-3 rounded-xl font-black text-[10px] uppercase tracking-widest shadow-lg shadow-amber-200 hover:bg-amber-600 transition-all"
+                                className="w-full bg-amber-500 text-white py-3 rounded-xl font-black text-[10px] uppercase   shadow-lg shadow-amber-200 hover:bg-amber-600 transition-all"
                             >
                                 Send Verification Code
                             </button>
                         ) : !otpVerified ? (
                             <div className="flex gap-2">
                                 <input
-                                    className="flex-1 bg-white border-none rounded-xl py-3 px-4 font-black text-center tracking-[0.5em] text-lg text-amber-700 outline-none ring-2 ring-amber-200 focus:ring-amber-400"
+                                    className="flex-1 bg-white border-none rounded-xl py-3 px-4 font-black text-center text-lg text-amber-700 outline-none ring-2 ring-amber-200 focus:ring-amber-400"
                                     placeholder="000000"
                                     value={otp}
                                     onChange={(e) => {
@@ -507,13 +507,13 @@ export default function TicketForm({
                                 />
                                 <button
                                     onClick={handleVerifyOtp}
-                                    className="bg-emerald-500 text-white px-6 rounded-xl font-black text-[10px] uppercase tracking-widest hover:bg-emerald-600 transition-all shadow-lg shadow-emerald-200"
+                                    className="bg-emerald-500 text-white px-6 rounded-xl font-black text-[10px] uppercase   hover:bg-emerald-600 transition-all shadow-lg shadow-emerald-200"
                                 >
                                     Verify
                                 </button>
                             </div>
                         ) : (
-                            <div className="flex items-center justify-center gap-2 py-2 text-emerald-600 font-black text-xs uppercase tracking-widest italic bg-white/50 rounded-xl">
+                            <div className="flex items-center justify-center gap-2 py-2 text-emerald-600 font-black text-xs uppercase   italic bg-white/50 rounded-xl">
                                 <CheckCircle2 size={16} /> Identity Verified Securely
                             </div>
                         )}
@@ -525,7 +525,7 @@ export default function TicketForm({
                 <button
                     onClick={handleSubmit}
                     disabled={!isValid || loading}
-                    className="w-full bg-gray-900 text-white py-5 rounded-[2rem] font-black text-xs uppercase tracking-[0.3em] shadow-2xl shadow-gray-300 hover:scale-[1.02] active:scale-[0.98] transition-all disabled:opacity-20 flex items-center justify-center gap-3"
+                    className="w-full bg-gray-900 text-white py-5 rounded-[2rem] font-black text-xs uppercase   shadow-2xl shadow-gray-300 hover:scale-[1.02] active:scale-[0.98] transition-all disabled:opacity-20 flex items-center justify-center gap-3"
                 >
                     {loading ? (
                         <>

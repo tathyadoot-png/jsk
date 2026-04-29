@@ -172,10 +172,10 @@ export default function NodalForm({ initialData, onSubmit }: any) {
           {initialData ? <UserCog className="text-white" size={24} /> : <UserPlus className="text-white" size={24} />}
         </div>
         <div>
-          <h2 className="text-xl font-black tracking-tight text-gray-800">
+          <h2 className="text-xl font-black   text-gray-800">
             {initialData ? "Edit Nodal Officer" : "Create Nodal Officer"}
           </h2>
-          <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest italic">
+          <p className="text-[10px] font-black text-gray-400 uppercase   italic">
             Administration Control Panel
           </p>
         </div>
@@ -188,7 +188,7 @@ export default function NodalForm({ initialData, onSubmit }: any) {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Name */}
           <div className="space-y-2">
-            <label className="text-[10px] font-black uppercase ml-2 text-gray-400 tracking-widest">Official Name</label>
+            <label className="text-[10px] font-black uppercase ml-2 text-gray-400  ">Official Name</label>
             <div className="relative group">
               <User className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-indigo-500 transition-colors" size={18} />
               <input
@@ -202,7 +202,7 @@ export default function NodalForm({ initialData, onSubmit }: any) {
 
           {/* Email */}
           <div className="space-y-2">
-            <label className="text-[10px] font-black uppercase ml-2 text-gray-400 tracking-widest">Email Address</label>
+            <label className="text-[10px] font-black uppercase ml-2 text-gray-400  ">Email Address</label>
             <div className="relative group">
               <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-indigo-500 transition-colors" size={18} />
               <input
@@ -217,7 +217,7 @@ export default function NodalForm({ initialData, onSubmit }: any) {
 
         {/* Password Section */}
         <div className="space-y-2">
-          <label className="text-[10px] font-black uppercase ml-2 text-gray-400 tracking-widest">Security credentials</label>
+          <label className="text-[10px] font-black uppercase ml-2 text-gray-400  ">Security credentials</label>
           <div className="relative group">
             <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-indigo-500 transition-colors" size={18} />
             <input
@@ -234,7 +234,7 @@ export default function NodalForm({ initialData, onSubmit }: any) {
           <div className="flex items-center justify-between px-2">
             <div className="flex items-center gap-2">
               <ShieldCheck size={18} className="text-indigo-600" />
-              <h3 className="text-xs font-black uppercase tracking-widest text-gray-700">Access Permissions</h3>
+              <h3 className="text-xs font-black uppercase   text-gray-700">Access Permissions</h3>
             </div>
             <span className="text-[10px] font-black text-indigo-400 italic">
               {permissions.length} Selected
@@ -266,7 +266,7 @@ export default function NodalForm({ initialData, onSubmit }: any) {
                     onChange={() => togglePermission(perm)}
                   />
                   
-                  <span className={`text-[11px] font-black uppercase tracking-tight transition-colors ${
+                  <span className={`text-[11px] font-black uppercase   transition-colors ${
                     isSelected ? "text-indigo-900" : "text-gray-500"
                   }`}>
                     {perm.replace(/_/g, ' ')}
@@ -282,7 +282,7 @@ export default function NodalForm({ initialData, onSubmit }: any) {
       <div className="px-4">
         <button
           onClick={handleSubmit}
-          className="w-full bg-gray-900 text-white py-5 rounded-[2rem] font-black text-xs uppercase tracking-[0.3em] shadow-2xl shadow-gray-300 hover:bg-indigo-600 hover:scale-[1.01] active:scale-[0.99] transition-all flex items-center justify-center gap-3 group"
+          className="w-full bg-gray-900 text-white py-5 rounded-[2rem] font-black text-xs uppercase   shadow-2xl shadow-gray-300 hover:bg-indigo-600 hover:scale-[1.01] active:scale-[0.99] transition-all flex items-center justify-center gap-3 group"
         >
           {initialData ? (
             <>
@@ -299,7 +299,7 @@ export default function NodalForm({ initialData, onSubmit }: any) {
       </div>
       
       {/* --- FOOTER HINT --- */}
-      <p className="text-center text-[10px] font-black text-gray-300 uppercase tracking-widest italic">
+      <p className="text-center text-[10px] font-black text-gray-300 uppercase   italic">
         All actions are logged for security auditing
       </p>
     </div>

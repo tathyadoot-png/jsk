@@ -22,19 +22,19 @@ export default function ActiveVisitors({ data = [] }: any) {
             <span className="absolute inset-0 rounded-xl bg-[#138808]/20 animate-ping" />
           </div>
           <div>
-            <h2 className="font-black text-gray-900 tracking-tight text-lg">
+            <h2 className="font-black text-gray-900   text-lg">
               {content.title}
             </h2>
             <div className="flex items-center gap-1">
               <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-              <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">System Live</p>
+              <p className="text-[10px] font-bold text-gray-400 uppercase  ">System Live</p>
             </div>
           </div>
         </div>
 
         <div className="flex items-center gap-2 px-4 py-2 bg-[#080808] rounded-2xl shadow-lg shadow-black/10">
           <Radio size={12} className="text-[#FF9933] animate-pulse" />
-          <span className="text-white text-xs font-black tracking-tighter">
+          <span className="text-white text-xs font-black  er">
             {data.length} <span className="text-gray-400 font-medium ml-0.5">{content.live}</span>
           </span>
         </div>
@@ -47,7 +47,7 @@ export default function ActiveVisitors({ data = [] }: any) {
             <div className="w-20 h-20 bg-gray-50 rounded-full flex items-center justify-center mb-4 border border-dashed border-gray-200">
               <User size={32} className="text-gray-200" />
             </div>
-            <p className="text-gray-400 text-[10px] font-black uppercase tracking-[0.2em] text-center">
+            <p className="text-gray-400 text-[10px] font-black uppercase   text-center">
               {content.empty}
             </p>
           </div>
@@ -72,7 +72,7 @@ export default function ActiveVisitors({ data = [] }: any) {
                     </div>
 
                     <div className="min-w-0">
-                      <p className="text-sm font-black text-gray-900 truncate tracking-tight group-hover:text-[#FF9933] transition-colors">
+                      <p className="text-sm font-black text-gray-900 truncate   group-hover:text-[#FF9933] transition-colors">
                         {name}
                       </p>
                       <div className="flex items-center gap-1.5 mt-0.5">
@@ -96,7 +96,7 @@ export default function ActiveVisitors({ data = [] }: any) {
                         <div className="absolute inset-0 rounded-full bg-[#138808] animate-ping opacity-40" />
                         <div className="relative w-2.5 h-2.5 rounded-full bg-[#138808] border-2 border-white shadow-sm" />
                       </div>
-                      <span className="text-[8px] font-black text-gray-300 uppercase tracking-widest group-hover:text-[#138808] transition-colors">
+                      <span className="text-[8px] font-black text-gray-300 uppercase   group-hover:text-[#138808] transition-colors">
                         {content.verified}
                       </span>
                     </div>
@@ -110,7 +110,7 @@ export default function ActiveVisitors({ data = [] }: any) {
 
       {/* Footer with Branding Colors */}
       <div className="px-6 py-4 bg-gray-50/50 border-t border-gray-50 flex items-center justify-between">
-        <span className="text-[9px] font-black text-gray-400 uppercase tracking-[0.25em]">
+        <span className="text-[9px] font-black text-gray-400 uppercase  ">
           {content.footer}
         </span>
         <div className="flex gap-1.5">

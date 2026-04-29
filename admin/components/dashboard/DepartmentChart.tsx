@@ -23,8 +23,8 @@ export default function DepartmentChart({ data = [] }: any) {
             <Building2 size={20} />
           </div>
           <div>
-            <h2 className="font-bold text-gray-900 tracking-tight leading-none">Department Analytics</h2>
-            <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mt-1.5">Issue Distribution</p>
+            <h2 className="font-bold text-gray-900   leading-none">Department Analytics</h2>
+            <p className="text-[10px] font-bold text-gray-400 uppercase   mt-1.5">Issue Distribution</p>
           </div>
         </div>
         
@@ -97,7 +97,7 @@ export default function DepartmentChart({ data = [] }: any) {
 
       {/* Footer Branding */}
       <div className="mt-4 pt-4 border-t border-gray-50 flex items-center justify-between">
-         <span className="text-[9px] font-bold text-gray-300 uppercase tracking-[0.2em]">Data Node: Dept_Primary</span>
+         <span className="text-[9px] font-bold text-gray-300 uppercase  ">Data Node: Dept_Primary</span>
          <div className="flex gap-1">
             <div className="w-1 h-1 rounded-full bg-green-500" />
             <div className="w-1 h-1 rounded-full bg-green-300" />

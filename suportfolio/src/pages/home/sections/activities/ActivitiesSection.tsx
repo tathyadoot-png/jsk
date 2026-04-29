@@ -81,12 +81,12 @@ const ActivitiesSection = ({ lang }: { lang: "hi" | "en" }) => {
                     className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#12574c]/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6">
-                    <span className="text-white text-sm font-medium tracking-wide uppercase">View Images</span>
+                    <span className="text-white text-sm font-medium  uppercase">View Images</span>
                   </div>
                 </div>
 
                 <div className="p-6 space-y-3">
-                  <div className="flex items-center gap-3 text-[10px] font-bold tracking-widest uppercase text-orange-600">
+                  <div className="flex items-center gap-3 text-[10px] font-bold   uppercase text-orange-600">
                     <span className="px-2 py-1 bg-orange-50 rounded-md">{item.location}</span>
                     <span className="px-2 py-1 bg-orange-50 rounded-md">{item.date}</span>
                   </div>
@@ -166,7 +166,7 @@ const ActivitiesSection = ({ lang }: { lang: "hi" | "en" }) => {
                 <div className="w-full lg:w-[400px] p-8 lg:p-12 bg-white flex flex-col justify-center border-l border-slate-100">
                   <div className="space-y-6">
                     <div className="space-y-2">
-                      <div className="flex items-center gap-2 text-orange-600 font-bold text-xs tracking-tighter uppercase">
+                      <div className="flex items-center gap-2 text-orange-600 font-bold text-xs  er uppercase">
                         <Calendar size={14} /> {activeItem.date}
                       </div>
                       <h2 className="text-3xl font-black text-[#12574c] leading-[1.1]">

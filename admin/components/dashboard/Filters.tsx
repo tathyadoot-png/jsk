@@ -20,7 +20,7 @@ export default function Filters({ filter, setFilter }: any) {
               key={option.id}
               onClick={() => setFilter(option.id)}
               className={`
-                flex-1 md:flex-none flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-300
+                flex-1 md:flex-none flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold uppercase   transition-all duration-300
                 ${isActive 
                   ? "bg-white text-orange-600 shadow-sm border border-gray-200/50 scale-100" 
                   : "text-gray-500 hover:text-gray-700 hover:bg-gray-200/50 scale-95"

@@ -44,8 +44,7 @@
   /* 🔶 Kesariya CTA */
   .btn-saffron {
     @apply bg-primary text-white px-6 py-2 rounded-md
-           font-semibold tracking-wide
-           hover:brightness-110 active:scale-95
+           font-semibold            hover:brightness-110 active:scale-95
            transition-all shadow-soft;
   }
 

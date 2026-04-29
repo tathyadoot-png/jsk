@@ -32,8 +32,8 @@ export default function TicketChart({ data = [] }: any) {
             <TicketCheck size={20} />
           </div>
           <div>
-            <h2 className="font-bold text-gray-900 tracking-tight leading-none">Ticket Status</h2>
-            <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mt-1.5">Lifecycle Overview</p>
+            <h2 className="font-bold text-gray-900   leading-none">Ticket Status</h2>
+            <p className="text-[10px] font-bold text-gray-400 uppercase   mt-1.5">Lifecycle Overview</p>
           </div>
         </div>
       </div>
@@ -42,7 +42,7 @@ export default function TicketChart({ data = [] }: any) {
       <div className="flex-1 w-full relative">
         <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
           <span className="text-3xl font-black text-gray-900 leading-none">{totalTickets}</span>
-          <span className="text-[10px] font-bold text-gray-400 uppercase tracking-tighter mt-1">Total</span>
+          <span className="text-[10px] font-bold text-gray-400 uppercase  er mt-1">Total</span>
         </div>
 
         <ResponsiveContainer width="100%" height="100%">
@@ -92,7 +92,7 @@ export default function TicketChart({ data = [] }: any) {
               iconSize={8}
               wrapperStyle={{ paddingTop: '20px' }}
               formatter={(value) => (
-                <span className="text-[11px] font-bold text-gray-500 uppercase tracking-tighter ml-1">
+                <span className="text-[11px] font-bold text-gray-500 uppercase  er ml-1">
                   {value.replace('_', ' ')}
                 </span>
               )}
@@ -103,7 +103,7 @@ export default function TicketChart({ data = [] }: any) {
 
       {/* Bottom Status Info */}
       <div className="mt-4 pt-4 border-t border-gray-50 flex items-center justify-between">
-        <span className="text-[9px] font-bold text-gray-300 uppercase tracking-[0.2em]">Priority Queue: High</span>
+        <span className="text-[9px] font-bold text-gray-300 uppercase  ">Priority Queue: High</span>
         <div className="flex gap-1.5">
           <div className="w-1.5 h-1.5 rounded-full bg-blue-500" />
           <div className="w-1.5 h-1.5 rounded-full bg-blue-200" />

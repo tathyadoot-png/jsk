@@ -11,9 +11,9 @@ export default function ActiveVisitors({ data = [] }: any) {
           <div className="p-2 bg-green-50 rounded-lg text-green-600">
             <Activity size={18} className="animate-pulse" />
           </div>
-          <h2 className="font-bold text-gray-800 tracking-tight">Active Visitors</h2>
+          <h2 className="font-bold text-gray-800  ">Active Visitors</h2>
         </div>
-        <span className="px-3 py-1 bg-green-100 text-green-700 rounded-full text-[10px] font-bold uppercase tracking-widest">
+        <span className="px-3 py-1 bg-green-100 text-green-700 rounded-full text-[10px] font-bold uppercase  ">
           {data.length} Live
         </span>
       </div>
@@ -23,7 +23,7 @@ export default function ActiveVisitors({ data = [] }: any) {
         {data.length === 0 ? (
           <div className="h-full flex flex-col items-center justify-center py-10 opacity-40">
             <User size={40} className="text-gray-300 mb-2" />
-            <p className="text-gray-500 text-xs font-bold uppercase tracking-widest">No Active Sessions</p>
+            <p className="text-gray-500 text-xs font-bold uppercase  ">No Active Sessions</p>
           </div>
         ) : (
           <div className="space-y-3">
@@ -43,7 +43,7 @@ export default function ActiveVisitors({ data = [] }: any) {
                     </div>
 
                     <div className="min-w-0">
-                      <p className="text-sm font-bold text-gray-900 truncate tracking-tight leading-none mb-1">
+                      <p className="text-sm font-bold text-gray-900 truncate   leading-none mb-1">
                         {name}
                       </p>
                       <div className="flex items-center gap-1.5 text-gray-400">
@@ -56,7 +56,7 @@ export default function ActiveVisitors({ data = [] }: any) {
                   {/* Status Indicator */}
                   <div className="flex flex-col items-end gap-1">
                      <div className="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.5)]" />
-                     <span className="text-[9px] font-bold text-gray-300 uppercase tracking-tighter">Verified</span>
+                     <span className="text-[9px] font-bold text-gray-300 uppercase  er">Verified</span>
                   </div>
                 </div>
               );
@@ -67,7 +67,7 @@ export default function ActiveVisitors({ data = [] }: any) {
 
       {/* Footer Branding */}
       <div className="px-6 py-4 bg-gray-50/30 border-t border-gray-50 flex justify-center">
-         <span className="text-[9px] font-bold text-gray-400 uppercase tracking-[0.2em]">Real-time Session Monitoring</span>
+         <span className="text-[9px] font-bold text-gray-400 uppercase  ">Real-time Session Monitoring</span>
       </div>
     </div>
   );

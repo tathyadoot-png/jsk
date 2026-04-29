@@ -185,7 +185,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }: any) => {
   if (totalPages <= 1) return null;
   return (
     <div className="flex flex-col sm:flex-row items-center justify-between bg-white p-4 rounded-2xl border border-gray-100 shadow-sm mt-4 gap-4">
-      <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">
+      <p className="text-[10px] font-black text-gray-400 uppercase  ">
         Page {currentPage} of {totalPages}
       </p>
       <div className="flex gap-2">
@@ -256,7 +256,7 @@ export default function TicketTable() {
     return (
       <div className="flex flex-col items-center justify-center py-24 text-gray-400">
         <Loader2 className="animate-spin mb-4" size={40} />
-        <p className="text-sm font-black uppercase tracking-widest italic">Syncing Tickets...</p>
+        <p className="text-sm font-black uppercase   italic">Syncing Tickets...</p>
       </div>
     );
   }
@@ -281,7 +281,7 @@ export default function TicketTable() {
             <button
               key={f}
               onClick={() => { setStatusFilter(f); setCurrentPage(1); }}
-              className={`px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all border whitespace-nowrap ${statusFilter === f
+              className={`px-4 py-2 rounded-xl text-[10px] font-black uppercase   transition-all border whitespace-nowrap ${statusFilter === f
                   ? "bg-gray-900 text-white border-gray-900 shadow-md"
                   : "bg-white text-gray-400 border-gray-100 hover:bg-gray-50"
                 }`}
@@ -300,11 +300,11 @@ export default function TicketTable() {
           <thead>
             <tr className="bg-gray-50/50 border-b border-gray-100">
               <th className="p-5 text-[10px] font-black uppercase text-gray-400 w-16 text-center italic">S.No</th>
-              <th className="p-5 text-[10px] font-black uppercase tracking-widest text-gray-500 italic">Ticket Info</th>
-              <th className="p-5 text-[10px] font-black uppercase tracking-widest text-gray-500 italic">User & Mobile</th>
-              <th className="p-5 text-[10px] font-black uppercase tracking-widest text-gray-500 italic">Dept / Type</th>
-              <th className="p-5 text-[10px] font-black uppercase tracking-widest text-gray-500 italic text-center">Status</th>
-              <th className="p-5 text-[10px] font-black uppercase tracking-widest text-gray-500 italic text-right">Details</th>
+              <th className="p-5 text-[10px] font-black uppercase   text-gray-500 italic">Ticket Info</th>
+              <th className="p-5 text-[10px] font-black uppercase   text-gray-500 italic">User & Mobile</th>
+              <th className="p-5 text-[10px] font-black uppercase   text-gray-500 italic">Dept / Type</th>
+              <th className="p-5 text-[10px] font-black uppercase   text-gray-500 italic text-center">Status</th>
+              <th className="p-5 text-[10px] font-black uppercase   text-gray-500 italic text-right">Details</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-50">
@@ -320,7 +320,7 @@ export default function TicketTable() {
                         <Ticket size={18} />
                       </div>
                       <div>
-                        <span className="font-black text-gray-900 text-sm block leading-tight tracking-tight">{t.ticketNumber}</span>
+                        <span className="font-black text-gray-900 text-sm block leading-tight  ">{t.ticketNumber}</span>
                         <span className="text-[10px] font-bold text-gray-400">{new Date(t.createdAt).toLocaleDateString("en-IN")}</span>
                       </div>
                     </div>
@@ -333,7 +333,7 @@ export default function TicketTable() {
                     <span className="text-[9px] font-black uppercase text-blue-600 bg-blue-50 px-2 py-0.5 rounded-md border border-blue-100 mb-1 inline-block">
                       {t.department}
                     </span>
-                    <p className="text-[10px] font-bold text-gray-400 uppercase tracking-tighter">
+                    <p className="text-[10px] font-bold text-gray-400 uppercase  er">
                       {t.entryType === "REPRESENTATIVE" ? "Representative" : "Direct"}
                     </p>
                   </td>
@@ -341,7 +341,7 @@ export default function TicketTable() {
                     <select
                       value={t.status}
                       onChange={(e) => handleStatusChange(t._id, e.target.value)}
-                      className={`text-[10px] font-black uppercase tracking-widest px-3 py-1.5 rounded-xl border-2 outline-none transition-all cursor-pointer ${t.status === 'resolved' ? 'bg-green-50 border-green-100 text-green-600' :
+                      className={`text-[10px] font-black uppercase   px-3 py-1.5 rounded-xl border-2 outline-none transition-all cursor-pointer ${t.status === 'resolved' ? 'bg-green-50 border-green-100 text-green-600' :
                           t.status === 'in_progress' ? 'bg-blue-50 border-blue-100 text-blue-600' :
                             'bg-orange-50 border-orange-100 text-orange-600'
                         }`}
@@ -374,7 +374,7 @@ export default function TicketTable() {
                               <div className="p-2 bg-blue-50 rounded-lg text-blue-600">
                                 <FileText size={16} />
                               </div>
-                              <h4 className="text-[10px] font-black uppercase tracking-widest text-gray-400">Subject / Description</h4>
+                              <h4 className="text-[10px] font-black uppercase   text-gray-400">Subject / Description</h4>
                             </div>
                             <p className="text-sm text-gray-700 leading-relaxed font-medium">
                               {t.description || "No description provided."}
@@ -387,7 +387,7 @@ export default function TicketTable() {
                               <div className="p-2 bg-orange-50 rounded-lg text-orange-600">
                                 <ImageIcon size={16} />
                               </div>
-                              <h4 className="text-[10px] font-black uppercase tracking-widest text-gray-400">Supporting Documents</h4>
+                              <h4 className="text-[10px] font-black uppercase   text-gray-400">Supporting Documents</h4>
                             </div>
                             {t.images?.length > 0 ? (
                               <div className="flex flex-wrap gap-3">
@@ -401,7 +401,7 @@ export default function TicketTable() {
                                 ))}
                               </div>
                             ) : (
-                              <div className="py-6 border-2 border-dashed border-gray-50 rounded-2xl text-center text-[10px] font-bold text-gray-300 uppercase tracking-tighter">
+                              <div className="py-6 border-2 border-dashed border-gray-50 rounded-2xl text-center text-[10px] font-bold text-gray-300 uppercase  er">
                                 No Attachments Found
                               </div>
                             )}
@@ -415,7 +415,7 @@ export default function TicketTable() {
                             <div className="bg-gray-900 px-8 py-4 flex justify-between items-center">
                               <div className="flex items-center gap-2">
                                 <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                                <span className="text-[10px] font-black text-white/70 uppercase tracking-[0.3em]">Official Letter</span>
+                                <span className="text-[10px] font-black text-white/70 uppercase  ">Official Letter</span>
                               </div>
                               <div className="px-3 py-1 bg-white/10 rounded-md text-[9px] font-bold text-white/50 uppercase">
                                 ID: {t.ticketNumber}
@@ -446,7 +446,7 @@ export default function TicketTable() {
                                         </div>
                                         <div className="text-right">
                                           <p className="text-[10px] font-black uppercase text-gray-400 mb-1">Status Verified</p>
-                                          <p className="text-xs font-black text-gray-900 italic tracking-tighter">SNHC India Foundation</p>
+                                          <p className="text-xs font-black text-gray-900 italic  er">SNHC India Foundation</p>
                                         </div>
                                       </div>
                                     </div>
@@ -454,7 +454,7 @@ export default function TicketTable() {
                                 ) : (
                                   <div className="flex flex-col items-center justify-center py-20 text-gray-300">
                                     <FileText size={48} strokeWidth={1} className="mb-4" />
-                                    <p className="text-[10px] font-black uppercase tracking-widest">Formal content body is missing</p>
+                                    <p className="text-[10px] font-black uppercase  ">Formal content body is missing</p>
                                   </div>
                                 )}
                               </div>
@@ -503,7 +503,7 @@ export default function TicketTable() {
                 <select
                   value={t.status}
                   onChange={(e) => handleStatusChange(t._id, e.target.value)}
-                  className={`flex-1 text-[10px] font-black uppercase tracking-widest px-3 py-2.5 rounded-xl border-2 outline-none ${t.status === 'resolved' ? 'bg-green-50 border-green-100 text-green-600' :
+                  className={`flex-1 text-[10px] font-black uppercase   px-3 py-2.5 rounded-xl border-2 outline-none ${t.status === 'resolved' ? 'bg-green-50 border-green-100 text-green-600' :
                       t.status === 'in_progress' ? 'bg-blue-50 border-blue-100 text-blue-600' :
                         'bg-orange-50 border-orange-100 text-orange-600'
                     }`}
@@ -556,7 +556,7 @@ export default function TicketTable() {
       />
 
       {!loading && filteredTickets.length === 0 && (
-        <div className="text-center py-20 bg-gray-50/50 rounded-[2rem] border-2 border-dashed border-gray-100 font-black text-gray-300 uppercase tracking-widest italic text-xs px-4">
+        <div className="text-center py-20 bg-gray-50/50 rounded-[2rem] border-2 border-dashed border-gray-100 font-black text-gray-300 uppercase   italic text-xs px-4">
           No records matching your search
         </div>
       )}

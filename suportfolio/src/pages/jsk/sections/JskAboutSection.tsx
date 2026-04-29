@@ -11,7 +11,7 @@ const JskAboutSection: React.FC<Props> = ({ lang }) => {
         
         {/* Header Section */}
         <div className="text-center mb-20">
-          <h2 className="text-3xl md:text-5xl font-black tracking-tight text-[#12574c] mb-6">
+          <h2 className="text-3xl md:text-5xl font-black   text-[#12574c] mb-6">
             {lang === "hi" ? "जनता सुविधा केंद्र" : "Janta Suvidha Kendra"}
           </h2>
           <div className="flex justify-center gap-1 mb-8">

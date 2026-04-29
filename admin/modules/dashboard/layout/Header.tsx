@@ -14,13 +14,13 @@ export default function Header({ admin }: any) {
       {/* Left Section: Title & Welcome */}
       <div className="flex items-center gap-8">
         <div className="space-y-0.5">
-          <h1 className="text-lg font-black text-white tracking-tight flex items-center gap-2">
+          <h1 className="text-lg font-black text-white   flex items-center gap-2">
             {content.title}
-            <span className="px-2 py-0.5 bg-[#138808]/20 text-[#138808] text-[10px] rounded-md border border-[#138808]/30 uppercase tracking-tighter">
+            <span className="px-2 py-0.5 bg-[#138808]/20 text-[#138808] text-[10px] rounded-md border border-[#138808]/30 uppercase  er">
               Live
             </span>
           </h1>
-          <p className="text-[11px] font-bold text-gray-500 uppercase tracking-[0.15em]">
+          <p className="text-[11px] font-bold text-gray-500 uppercase  ">
             {content.subtitle}
           </p>
         </div>
@@ -41,7 +41,7 @@ export default function Header({ admin }: any) {
         {/* Language Switcher */}
         <button
           onClick={() => setLang(lang === "en" ? "hi" : "en")}
-          className="relative flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-white/5 border border-white/5 hover:border-[#FF9933]/30 hover:bg-white/10 text-[11px] font-black uppercase tracking-widest transition-all group overflow-hidden"
+          className="relative flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-white/5 border border-white/5 hover:border-[#FF9933]/30 hover:bg-white/10 text-[11px] font-black uppercase   transition-all group overflow-hidden"
         >
           <div className="absolute inset-0 bg-gradient-to-r from-[#FF9933]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
           <Globe size={14} className="text-[#FF9933]" />
@@ -76,12 +76,12 @@ export default function Header({ admin }: any) {
           
           <div className="hidden sm:block">
             <div className="flex items-center gap-1.5">
-              <span className="text-sm font-black text-white tracking-tight">
+              <span className="text-sm font-black text-white  ">
                 {admin?.name || "Administrator"}
               </span>
               <ChevronDown size={14} className="text-gray-500 group-hover:text-white transition-colors" />
             </div>
-            <p className="text-[10px] font-bold text-[#138808] uppercase tracking-widest leading-none mt-0.5">
+            <p className="text-[10px] font-bold text-[#138808] uppercase   leading-none mt-0.5">
               Verified Official
             </p>
           </div>

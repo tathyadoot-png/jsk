@@ -114,8 +114,8 @@ export default function NodalListPage() {
       {/* --- TOP ACTION BAR --- */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white/80 backdrop-blur-md p-6 rounded-[2rem] border border-gray-100 shadow-sm">
         <div>
-          <h1 className="text-2xl font-black tracking-tight text-gray-800 italic">Nodal Directory</h1>
-          <p className="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em]">Authorized Personnel Management</p>
+          <h1 className="text-2xl font-black   text-gray-800 italic">Nodal Directory</h1>
+          <p className="text-[10px] font-black text-gray-400 uppercase  ">Authorized Personnel Management</p>
         </div>
 
         <div className="flex items-center gap-3">
@@ -132,7 +132,7 @@ export default function NodalListPage() {
           
           <button
             onClick={() => router.push("/dashboard/nodal/create")}
-            className="flex items-center justify-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-2xl text-[10px] font-black uppercase tracking-widest shadow-xl shadow-indigo-100 transition-all active:scale-95"
+            className="flex items-center justify-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-2xl text-[10px] font-black uppercase   shadow-xl shadow-indigo-100 transition-all active:scale-95"
           >
             <Plus size={16} />
             <span className="hidden sm:inline">Create Nodal</span>
@@ -148,11 +148,11 @@ export default function NodalListPage() {
       <thead>
         <tr className="bg-gray-50/50 border-b border-gray-100">
           {/* S.No Column Head */}
-          <th className="px-6 py-5 text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] w-16">S.No</th>
-          <th className="px-6 py-5 text-[10px] font-black text-gray-400 uppercase tracking-[0.2em]">Officer Details</th>
-          <th className="px-6 py-5 text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] hidden md:table-cell">Authorization</th>
-          <th className="px-6 py-5 text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] hidden lg:table-cell">Status</th>
-          <th className="px-6 py-5 text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] text-right">Actions</th>
+          <th className="px-6 py-5 text-[10px] font-black text-gray-400 uppercase   w-16">S.No</th>
+          <th className="px-6 py-5 text-[10px] font-black text-gray-400 uppercase  ">Officer Details</th>
+          <th className="px-6 py-5 text-[10px] font-black text-gray-400 uppercase   hidden md:table-cell">Authorization</th>
+          <th className="px-6 py-5 text-[10px] font-black text-gray-400 uppercase   hidden lg:table-cell">Status</th>
+          <th className="px-6 py-5 text-[10px] font-black text-gray-400 uppercase   text-right">Actions</th>
         </tr>
       </thead>
 
@@ -177,7 +177,7 @@ export default function NodalListPage() {
                   <h3 className="font-black text-gray-800 text-sm italic">{item.name}</h3>
                   <div className="flex items-center gap-1.5 text-gray-400 mt-0.5">
                     <Mail size={10} />
-                    <span className="text-[10px] font-bold tracking-tight">{item.email}</span>
+                    <span className="text-[10px] font-bold  ">{item.email}</span>
                   </div>
                 </div>
               </div>
@@ -187,7 +187,7 @@ export default function NodalListPage() {
             <td className="px-6 py-5 hidden md:table-cell">
               <div className="inline-flex items-center gap-2 bg-white border border-gray-200 px-3 py-1 rounded-lg">
                 <Shield size={12} className="text-indigo-500" />
-                <span className="text-[9px] font-black text-gray-600 uppercase tracking-wider">{item.role}</span>
+                <span className="text-[9px] font-black text-gray-600 uppercase  ">{item.role}</span>
               </div>
             </td>
 
@@ -195,7 +195,7 @@ export default function NodalListPage() {
             <td className="px-6 py-5 hidden lg:table-cell">
               <div className="flex items-center gap-2 text-emerald-600">
                 <UserCheck size={14} />
-                <span className="text-[9px] font-black uppercase tracking-widest italic">Active</span>
+                <span className="text-[9px] font-black uppercase   italic">Active</span>
               </div>
             </td>
 
@@ -228,7 +228,7 @@ export default function NodalListPage() {
       {/* --- MOBILE STATS HINT --- */}
       <div className="flex items-center justify-center gap-2 py-2 md:hidden">
         <MoreHorizontal className="text-gray-300" size={16} />
-        <p className="text-[9px] font-black text-gray-300 uppercase tracking-widest italic text-center">
+        <p className="text-[9px] font-black text-gray-300 uppercase   italic text-center">
           Slide table rows to view full details
         </p>
       </div>

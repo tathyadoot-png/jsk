@@ -39,10 +39,10 @@ export default function TicketChart({ data = [] }: any) {
             <TicketCheck size={22} />
           </div>
           <div>
-            <h2 className="text-lg font-black text-gray-900 tracking-tight leading-none">
+            <h2 className="text-lg font-black text-gray-900   leading-none">
               {content.title}
             </h2>
-            <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mt-1.5">
+            <p className="text-[10px] font-bold text-gray-400 uppercase   mt-1.5">
               {content.subtitle}
             </p>
           </div>
@@ -60,7 +60,7 @@ export default function TicketChart({ data = [] }: any) {
           <span className="text-3xl font-black text-gray-900 leading-none">
             {totalTickets}
           </span>
-          <span className="text-[9px] font-black text-gray-400 uppercase tracking-tighter mt-1">
+          <span className="text-[9px] font-black text-gray-400 uppercase  er mt-1">
             {content.total}
           </span>
         </div>
@@ -103,7 +103,7 @@ export default function TicketChart({ data = [] }: any) {
                   
                   return (
                     <div className="bg-white p-3 rounded-xl shadow-xl border border-gray-100 flex flex-col gap-1">
-                      <p className="text-[9px] font-black text-gray-400 uppercase tracking-widest">
+                      <p className="text-[9px] font-black text-gray-400 uppercase  ">
                         {typeof rawName === 'string' ? rawName.replace("_", " ") : rawName}
                       </p>
                       <div className="flex items-center justify-between gap-4">
@@ -126,7 +126,7 @@ export default function TicketChart({ data = [] }: any) {
               iconSize={8}
               wrapperStyle={{ bottom: 0 }}
               formatter={(value) => (
-                <span className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">
+                <span className="text-[10px] font-black text-gray-500 uppercase   ml-1">
                   {typeof value === 'string' ? value.replace("_", " ") : value}
                 </span>
               )}
@@ -139,7 +139,7 @@ export default function TicketChart({ data = [] }: any) {
       <div className="mt-4 pt-4 border-t border-gray-50 flex items-center justify-between">
         <div className="flex items-center gap-2">
           <div className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse" />
-          <span className="text-[9px] font-black text-gray-400 uppercase tracking-widest">
+          <span className="text-[9px] font-black text-gray-400 uppercase  ">
             {content.footer}
           </span>
         </div>

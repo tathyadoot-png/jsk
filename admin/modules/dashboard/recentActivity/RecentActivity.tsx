@@ -25,10 +25,10 @@ export default function RecentActivity({ data = [] }: any) {
             <History size={22} className="animate-[spin_10s_linear_infinite]" />
           </div>
           <div>
-            <h2 className="font-black text-gray-900 tracking-tight text-xl leading-none">
+            <h2 className="font-black text-gray-900   text-xl leading-none">
               {content.title}
             </h2>
-            <p className="text-[11px] font-bold text-gray-400 uppercase tracking-[0.2em] mt-2">
+            <p className="text-[11px] font-bold text-gray-400 uppercase   mt-2">
               {content.subtitle}
             </p>
           </div>
@@ -45,7 +45,7 @@ export default function RecentActivity({ data = [] }: any) {
             <div className="w-16 h-16 bg-gray-50 rounded-full flex items-center justify-center mb-4 border border-dashed border-gray-200">
               <Clock size={28} className="text-gray-200" />
             </div>
-            <p className="text-[10px] font-black uppercase tracking-[0.3em] text-gray-300">
+            <p className="text-[10px] font-black uppercase   text-gray-300">
               {content.empty}
             </p>
           </div>
@@ -92,13 +92,13 @@ export default function RecentActivity({ data = [] }: any) {
                     <div className="flex items-center justify-between gap-4 mb-3">
                       <div className="flex flex-col">
                         <span
-                          className={`text-[10px] font-black uppercase tracking-[0.2em] mb-1 ${
+                          className={`text-[10px] font-black uppercase   mb-1 ${
                             isVisit ? "text-[#FF9933]" : "text-[#138808]"
                           }`}
                         >
                           {isVisit ? content.visit : content.ticket}
                         </span>
-                        <h3 className="text-sm font-black text-gray-900 tracking-tight">
+                        <h3 className="text-sm font-black text-gray-900  ">
                           {isVisit ? "New Locality Visit" : "Support Ticket Generated"}
                         </h3>
                       </div>
@@ -110,7 +110,7 @@ export default function RecentActivity({ data = [] }: any) {
 
                     <div className="flex items-center gap-2">
                       <Clock size={12} className="text-gray-300" />
-                      <p className="text-[11px] font-bold text-gray-400 font-mono tracking-tight uppercase">
+                      <p className="text-[11px] font-bold text-gray-400 font-mono   uppercase">
                         {formattedDate}
                       </p>
                     </div>
@@ -129,7 +129,7 @@ export default function RecentActivity({ data = [] }: any) {
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
             <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
           </div>
-          <span className="text-[10px] font-black text-gray-400 uppercase tracking-[0.25em]">
+          <span className="text-[10px] font-black text-gray-400 uppercase  ">
             {content.footer}
           </span>
         </div>

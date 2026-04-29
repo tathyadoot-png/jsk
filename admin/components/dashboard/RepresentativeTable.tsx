@@ -13,8 +13,8 @@ export default function RepresentativeTable({ data = [] }: any) {
             <Trophy size={18} />
           </div>
           <div>
-            <h2 className="font-bold text-gray-800 tracking-tight leading-none">Top Representatives</h2>
-            <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mt-1.5">Performance Metrics</p>
+            <h2 className="font-bold text-gray-800   leading-none">Top Representatives</h2>
+            <p className="text-[10px] font-bold text-gray-400 uppercase   mt-1.5">Performance Metrics</p>
           </div>
         </div>
       </div>
@@ -24,10 +24,10 @@ export default function RepresentativeTable({ data = [] }: any) {
         <table className="w-full min-w-[600px] text-left border-collapse">
           <thead>
             <tr className="bg-gray-50/50">
-              <th className="px-6 py-4 text-[11px] font-black text-gray-400 uppercase tracking-widest">Representative</th>
-              <th className="px-6 py-4 text-[11px] font-black text-gray-400 uppercase tracking-widest">Contact Details</th>
-              <th className="px-6 py-4 text-[11px] font-black text-gray-400 uppercase tracking-widest text-center">Ticket Volume</th>
-              <th className="px-6 py-4 text-[11px] font-black text-gray-400 uppercase tracking-widest text-right">Action</th>
+              <th className="px-6 py-4 text-[11px] font-black text-gray-400 uppercase  ">Representative</th>
+              <th className="px-6 py-4 text-[11px] font-black text-gray-400 uppercase  ">Contact Details</th>
+              <th className="px-6 py-4 text-[11px] font-black text-gray-400 uppercase   text-center">Ticket Volume</th>
+              <th className="px-6 py-4 text-[11px] font-black text-gray-400 uppercase   text-right">Action</th>
             </tr>
           </thead>
 
@@ -43,7 +43,7 @@ export default function RepresentativeTable({ data = [] }: any) {
                     <div className="w-9 h-9 rounded-full bg-orange-50 flex items-center justify-center text-orange-600 font-bold text-xs border border-orange-100 group-hover:bg-orange-500 group-hover:text-white transition-all duration-300">
                       {r.name?.charAt(0) || <User size={14} />}
                     </div>
-                    <span className="text-sm font-bold text-gray-800 tracking-tight">{r.name}</span>
+                    <span className="text-sm font-bold text-gray-800  ">{r.name}</span>
                   </div>
                 </td>
 
@@ -53,7 +53,7 @@ export default function RepresentativeTable({ data = [] }: any) {
                     <div className="p-1.5 bg-gray-100 rounded-lg group-hover:bg-white transition-colors">
                       <Phone size={12} />
                     </div>
-                    <span className="text-xs font-mono font-medium tracking-tight">{r.mobile}</span>
+                    <span className="text-xs font-mono font-medium  ">{r.mobile}</span>
                   </div>
                 </td>
 
@@ -81,7 +81,7 @@ export default function RepresentativeTable({ data = [] }: any) {
 
       {/* Footer / Pagination Space */}
       <div className="p-4 bg-gray-50/30 border-t border-gray-50 flex justify-between items-center px-8">
-         <span className="text-[9px] font-bold text-gray-400 uppercase tracking-[0.2em]">Ranked by total issues resolved</span>
+         <span className="text-[9px] font-bold text-gray-400 uppercase  ">Ranked by total issues resolved</span>
          <div className="flex gap-1">
             <div className="w-1.5 h-1.5 rounded-full bg-orange-500" />
             <div className="w-1.5 h-1.5 rounded-full bg-orange-200" />

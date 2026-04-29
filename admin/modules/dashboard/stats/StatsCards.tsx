@@ -64,7 +64,7 @@ export default function StatsCards({ data }: any) {
               </div>
 
               <div className="flex items-center gap-1 px-2.5 py-1 rounded-full bg-gray-50 border border-gray-100 group-hover:bg-white transition-colors">
-                <span className="text-[10px] font-black text-gray-500 uppercase tracking-tighter">
+                <span className="text-[10px] font-black text-gray-500 uppercase  er">
                   {item.trend || "+12%"}
                 </span>
                 <ArrowUpRight size={10} className="text-green-500" />
@@ -72,12 +72,12 @@ export default function StatsCards({ data }: any) {
             </div>
 
             <div className="relative z-10 space-y-1">
-              <p className="text-[11px] font-black text-gray-400 uppercase tracking-[0.2em]">
+              <p className="text-[11px] font-black text-gray-400 uppercase  ">
                 {item.label}
               </p>
               
               <div className="flex items-baseline gap-2">
-                <h2 className="text-4xl font-black text-gray-900 tracking-tighter">
+                <h2 className="text-4xl font-black text-gray-900  er">
                   {stat.value || 0}
                 </h2>
                 {stat.isLive && (
@@ -86,7 +86,7 @@ export default function StatsCards({ data }: any) {
                         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                         <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
                       </span>
-                      <span className="text-[10px] font-black text-green-600 uppercase tracking-widest">
+                      <span className="text-[10px] font-black text-green-600 uppercase  ">
                         {item.live}
                       </span>
                    </div>

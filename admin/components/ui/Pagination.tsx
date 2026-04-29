@@ -12,7 +12,7 @@ export const Pagination = ({ currentPage, totalPages, onPageChange }: Pagination
 
   return (
     <div className="flex items-center justify-between bg-white p-4 rounded-2xl border border-gray-100 shadow-sm mt-4">
-      <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">
+      <p className="text-[10px] font-black text-gray-400 uppercase  ">
         Page {currentPage} of {totalPages}
       </p>
       <div className="flex gap-2">

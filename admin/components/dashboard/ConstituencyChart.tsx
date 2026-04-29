@@ -29,8 +29,8 @@ export default function ConstituencyChart({ data = [] }: any) {
             <MapPin size={20} />
           </div>
           <div>
-            <h2 className="font-bold text-gray-900 tracking-tight leading-none">Area-wise Distribution</h2>
-            <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mt-1.5">Constituency Analytics</p>
+            <h2 className="font-bold text-gray-900   leading-none">Area-wise Distribution</h2>
+            <p className="text-[10px] font-bold text-gray-400 uppercase   mt-1.5">Constituency Analytics</p>
           </div>
         </div>
       </div>
@@ -73,7 +73,7 @@ export default function ConstituencyChart({ data = [] }: any) {
               iconType="circle"
               iconSize={8}
               formatter={(value) => (
-                <span className="text-[11px] font-bold text-gray-500 uppercase tracking-tighter ml-1">
+                <span className="text-[11px] font-bold text-gray-500 uppercase  er ml-1">
                   {value}
                 </span>
               )}
@@ -86,7 +86,7 @@ export default function ConstituencyChart({ data = [] }: any) {
       <div className="mt-4 pt-4 border-t border-gray-50 flex items-center justify-center">
          <div className="flex items-center gap-1.5">
             <div className="w-1.5 h-1.5 rounded-full bg-orange-500" />
-            <span className="text-[10px] font-bold text-gray-400 uppercase tracking-[0.2em]">Geographic Data Active</span>
+            <span className="text-[10px] font-bold text-gray-400 uppercase  ">Geographic Data Active</span>
          </div>
       </div>
     </div>

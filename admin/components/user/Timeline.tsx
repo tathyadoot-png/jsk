@@ -19,8 +19,8 @@ export default function Timeline({ timeline = [] }: any) {
           <Activity size={24} />
         </div>
         <div>
-          <h2 className="text-xl font-black uppercase tracking-tight text-gray-900 italic">User Timeline</h2>
-          <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest italic">Chronological Activity Log</p>
+          <h2 className="text-xl font-black uppercase   text-gray-900 italic">User Timeline</h2>
+          <p className="text-[10px] font-black text-gray-400 uppercase   italic">Chronological Activity Log</p>
         </div>
       </div>
 
@@ -41,7 +41,7 @@ export default function Timeline({ timeline = [] }: any) {
               {/* Content Card */}
               <div className="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-white p-5 rounded-3xl border border-gray-100 shadow-sm group-hover:shadow-md transition-all group-hover:-translate-y-1">
                 <div className="flex items-center justify-between mb-2">
-                  <div className={`px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest ${
+                  <div className={`px-3 py-1 rounded-full text-[9px] font-black uppercase   ${
                     isVisit ? "bg-emerald-50 text-emerald-600 border border-emerald-100" : "bg-blue-50 text-blue-600 border border-blue-100"
                   }`}>
                     {item.type}
@@ -57,7 +57,7 @@ export default function Timeline({ timeline = [] }: any) {
                 </h3>
 
                 <div className="mt-3 flex items-center justify-between border-t border-gray-50 pt-3">
-                   <div className="flex items-center gap-1.5 text-[10px] font-black text-gray-400 uppercase tracking-tighter">
+                   <div className="flex items-center gap-1.5 text-[10px] font-black text-gray-400 uppercase  er">
                       Status: <span className={isVisit ? "text-emerald-500" : "text-blue-500"}>{item.data.status}</span>
                    </div>
                    <ChevronRight size={14} className="text-gray-300 group-hover:text-indigo-500 transition-all" />
@@ -70,7 +70,7 @@ export default function Timeline({ timeline = [] }: any) {
         {/* --- EMPTY STATE --- */}
         {timeline.length === 0 && (
           <div className="text-center py-10">
-            <p className="text-[10px] font-black text-gray-300 uppercase tracking-[0.3em] italic">No timeline entries found</p>
+            <p className="text-[10px] font-black text-gray-300 uppercase   italic">No timeline entries found</p>
           </div>
         )}
       </div>

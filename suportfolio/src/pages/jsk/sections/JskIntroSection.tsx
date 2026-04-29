@@ -16,7 +16,7 @@ const JskIntroSection: React.FC<Props> = ({ lang }) => {
           
           {/* Left Content (Main Info) */}
           <div className="lg:col-span-3 space-y-8">
-            <div className="inline-block px-4 py-1.5 rounded-full bg-[#12574c]/10 text-[#12574c] text-sm font-bold tracking-wide uppercase">
+            <div className="inline-block px-4 py-1.5 rounded-full bg-[#12574c]/10 text-[#12574c] text-sm font-bold  uppercase">
               {lang === "hi" ? "नया शुभारंभ" : "New Initiative"}
             </div>
 

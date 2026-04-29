@@ -14,12 +14,12 @@ const JskContactPage: React.FC<Props> = ({ lang }) => {
                 <div className="mb-16 md:mb-24">
                     <div className="flex items-center gap-3 mb-6">
                         <div className="h-1 w-12 bg-[#E46B2E] rounded-full"></div>
-                        <span className="text-[#12574c] font-black uppercase tracking-[0.3em] text-xs md:text-sm">
+                        <span className="text-[#12574c] font-black uppercase   text-xs md:text-sm">
                             {lang === "hi" ? "संपर्क करें" : "Get In Touch"}
                         </span>
                     </div>
 
-                    <h2 className="text-4xl md:text-7xl font-black text-[#12574c] leading-[1.1] tracking-tight">
+                    <h2 className="text-4xl md:text-7xl font-black text-[#12574c] leading-[1.1]  ">
                         {lang === "hi" ? (
                             <>आपकी समस्या, <br /><span className="text-[#E46B2E]">हमारा समाधान।</span></>
                         ) : (
@@ -39,7 +39,7 @@ const JskContactPage: React.FC<Props> = ({ lang }) => {
                         <div className="relative z-10">
                             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/20 mb-8">
                                 <span className="w-2 h-2 bg-[#E46B2E] rounded-full animate-pulse"></span>
-                                <span className="text-[10px] font-black tracking-widest uppercase opacity-80">
+                                <span className="text-[10px] font-black   uppercase opacity-80">
                                     {lang === "hi" ? "सहायता केंद्र" : "Support Center"}
                                 </span>
                             </div>
@@ -73,7 +73,7 @@ const JskContactPage: React.FC<Props> = ({ lang }) => {
                     {/* --- RIGHT SIDE: Form Card (Col-span 7) --- */}
                     <div className="lg:col-span-7 bg-white rounded-[2.5rem] p-8 md:p-12 border border-slate-100 shadow-xl shadow-slate-200/50">
                         <div className="mb-10">
-                            <h3 className="text-2xl font-black text-[#12574c] mb-2 uppercase tracking-tight">
+                            <h3 className="text-2xl font-black text-[#12574c] mb-2 uppercase  ">
                                 {lang === "hi" ? "शिकायत फॉर्म" : "Grievance Form"}
                             </h3>
                             <p className="text-slate-400 text-sm font-medium">
@@ -84,7 +84,7 @@ const JskContactPage: React.FC<Props> = ({ lang }) => {
                         <form className="space-y-8" onSubmit={(e) => e.preventDefault()}>
                             <div className="grid md:grid-cols-2 gap-8">
                                 <div className="group space-y-2">
-                                    <label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 group-focus-within:text-[#12574c] transition-colors">
+                                    <label className="text-[10px] font-black uppercase   text-slate-400 group-focus-within:text-[#12574c] transition-colors">
                                         {lang === "hi" ? "पूरा नाम" : "Full Name"}
                                     </label>
                                     <input
@@ -94,7 +94,7 @@ const JskContactPage: React.FC<Props> = ({ lang }) => {
                                     />
                                 </div>
                                 <div className="group space-y-2">
-                                    <label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 group-focus-within:text-[#12574c] transition-colors">
+                                    <label className="text-[10px] font-black uppercase   text-slate-400 group-focus-within:text-[#12574c] transition-colors">
                                         {lang === "hi" ? "मोबाइल नंबर" : "Mobile Number"}
                                     </label>
                                     <input
@@ -107,7 +107,7 @@ const JskContactPage: React.FC<Props> = ({ lang }) => {
 
                             <div className="grid md:grid-cols-2 gap-8">
                                 <div className="group space-y-2">
-                                    <label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 group-focus-within:text-[#12574c] transition-colors">
+                                    <label className="text-[10px] font-black uppercase   text-slate-400 group-focus-within:text-[#12574c] transition-colors">
                                         {lang === "hi" ? "क्षेत्र / वार्ड" : "Area / Ward"}
                                     </label>
                                     <input
@@ -117,7 +117,7 @@ const JskContactPage: React.FC<Props> = ({ lang }) => {
                                     />
                                 </div>
                                 <div className="group space-y-2">
-                                    <label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 group-focus-within:text-[#12574c] transition-colors">
+                                    <label className="text-[10px] font-black uppercase   text-slate-400 group-focus-within:text-[#12574c] transition-colors">
                                         {lang === "hi" ? "पहचान पत्र संख्या" : "Identity Number"}
                                     </label>
                                     <input
@@ -129,7 +129,7 @@ const JskContactPage: React.FC<Props> = ({ lang }) => {
                             </div>
 
                             <div className="group space-y-2">
-                                <label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 group-focus-within:text-[#12574c] transition-colors">
+                                <label className="text-[10px] font-black uppercase   text-slate-400 group-focus-within:text-[#12574c] transition-colors">
                                     {lang === "hi" ? "समस्या का विवरण" : "Grievance Details"}
                                 </label>
                                 <textarea
@@ -140,12 +140,12 @@ const JskContactPage: React.FC<Props> = ({ lang }) => {
                             </div>
 
                             <div className="pt-6 flex flex-col md:flex-row items-center justify-between gap-6">
-                                <p className="text-[10px] text-slate-400 font-bold max-w-xs text-center md:text-left uppercase tracking-tight">
+                                <p className="text-[10px] text-slate-400 font-bold max-w-xs text-center md:text-left uppercase  ">
                                     {lang === "hi"
                                         ? "सबमिट करने से पहले सुनिश्चित करें कि दी गई जानकारी सही है।"
                                         : "Ensure all information is correct before submitting."}
                                 </p>
-                                <button className="w-full md:w-auto bg-[#12574c] hover:bg-[#E46B2E] text-white px-14 py-5 rounded-2xl font-black tracking-widest uppercase text-sm transition-all duration-300 shadow-xl shadow-[#12574c]/20 hover:shadow-[#E46B2E]/40 hover:-translate-y-1 active:scale-95">
+                                <button className="w-full md:w-auto bg-[#12574c] hover:bg-[#E46B2E] text-white px-14 py-5 rounded-2xl font-black   uppercase text-sm transition-all duration-300 shadow-xl shadow-[#12574c]/20 hover:shadow-[#E46B2E]/40 hover:-translate-y-1 active:scale-95">
                                     {lang === "hi" ? "भेजें" : "Send Now"}
                                 </button>
                             </div>

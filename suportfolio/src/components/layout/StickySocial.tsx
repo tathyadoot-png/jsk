@@ -82,7 +82,7 @@
 //             />
 
 //             {/* Tooltip: Hidden on Mobile */}
-//             <div className="hidden md:block absolute right-full mr-5 px-3 py-1.5 rounded-xl bg-black text-white text-[10px] font-black uppercase tracking-[0.15em] opacity-0 group-hover:opacity-100 pointer-events-none transition-all translate-x-4 group-hover:translate-x-0 whitespace-nowrap">
+//             <div className="hidden md:block absolute right-full mr-5 px-3 py-1.5 rounded-xl bg-black text-white text-[10px] font-black uppercase   opacity-0 group-hover:opacity-100 pointer-events-none transition-all translate-x-4 group-hover:translate-x-0 whitespace-nowrap">
 //                 Follow
 //                 <div className="absolute top-1/2 -right-1 -translate-y-1/2 w-2 h-2 bg-black rotate-45" />
 //             </div>

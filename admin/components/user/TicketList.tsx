@@ -110,7 +110,7 @@ export default function TicketList({ tickets = [], title = "Tickets" }: any) {
 
   return (
     <div className="space-y-4">
-      <h2 className="text-xl font-black uppercase tracking-tighter text-gray-900 italic px-2">{title}</h2>
+      <h2 className="text-xl font-black uppercase  er text-gray-900 italic px-2">{title}</h2>
       
       <div className="flex flex-col gap-3">
         {tickets.map((t: any) => (
@@ -129,8 +129,8 @@ export default function TicketList({ tickets = [], title = "Tickets" }: any) {
                 </div>
                 <div>
                   <div className="flex items-center gap-2">
-                    <span className="text-[10px] font-black text-indigo-500 uppercase tracking-widest italic">#{t.ticketNumber}</span>
-                    <span className="px-2 py-0.5 rounded-md bg-gray-100 text-[9px] font-black text-gray-500 uppercase tracking-tighter">
+                    <span className="text-[10px] font-black text-indigo-500 uppercase   italic">#{t.ticketNumber}</span>
+                    <span className="px-2 py-0.5 rounded-md bg-gray-100 text-[9px] font-black text-gray-500 uppercase  er">
                       {t.entryType || "General"}
                     </span>
                   </div>

@@ -28,10 +28,10 @@ export default function DepartmentChart({ data = [] }: any) {
             <Building2 size={24} />
           </div>
           <div>
-            <h2 className="font-black text-gray-900 tracking-tight text-xl leading-none">
+            <h2 className="font-black text-gray-900   text-xl leading-none">
               {content.title}
             </h2>
-            <p className="text-[11px] font-bold text-gray-400 uppercase tracking-[0.2em] mt-2">
+            <p className="text-[11px] font-bold text-gray-400 uppercase   mt-2">
               {content.subtitle}
             </p>
           </div>
@@ -42,7 +42,7 @@ export default function DepartmentChart({ data = [] }: any) {
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
             <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
           </div>
-          <span className="text-[10px] font-black text-gray-600 uppercase tracking-widest">
+          <span className="text-[10px] font-black text-gray-600 uppercase  ">
             {content.live}
           </span>
           <ArrowUpRight size={14} className="text-gray-300 group-hover/status:text-green-500 transition-colors" />
@@ -103,7 +103,7 @@ export default function DepartmentChart({ data = [] }: any) {
                 if (active && payload && payload.length) {
                   return (
                     <div className="bg-[#080808] p-4 rounded-2xl shadow-2xl border border-white/10 animate-in fade-in zoom-in duration-200">
-                      <p className="text-[10px] font-black text-green-500 uppercase tracking-[0.2em] mb-1">
+                      <p className="text-[10px] font-black text-green-500 uppercase   mb-1">
                         Department Data
                       </p>
                       <p className="text-sm font-bold text-white mb-2">{payload[0].payload._id}</p>
@@ -142,7 +142,7 @@ export default function DepartmentChart({ data = [] }: any) {
       <div className="mt-8 pt-6 border-t border-gray-50 flex items-center justify-between">
         <div className="flex items-center gap-2">
           <TrendingUp size={14} className="text-green-500" />
-          <span className="text-[10px] font-black text-gray-400 uppercase tracking-[0.25em]">
+          <span className="text-[10px] font-black text-gray-400 uppercase  ">
             {content.footer}
           </span>
         </div>

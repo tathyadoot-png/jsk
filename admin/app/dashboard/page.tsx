@@ -61,7 +61,7 @@ export default function DashboardPage() {
                <LayoutDashboard size={28} />
             </div>
             <div>
-              <h1 className="text-4xl font-black tracking-tight text-gray-900">{content.title}</h1>
+              <h1 className="text-4xl font-black   text-gray-900">{content.title}</h1>
               <p className="text-sm font-medium text-gray-400 mt-1">Live analytics and visitor management system.</p>
             </div>
           </div>

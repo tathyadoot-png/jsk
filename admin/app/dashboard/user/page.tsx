@@ -242,7 +242,7 @@ export default function AdminUsersPage() {
     return (
       <div className="flex flex-col items-center justify-center py-32 text-gray-400">
         <Loader2 className="animate-spin mb-4" size={40} />
-        <p className="text-[10px] font-black uppercase tracking-[0.3em] italic text-gray-300">Scanning Database...</p>
+        <p className="text-[10px] font-black uppercase   italic text-gray-300">Scanning Database...</p>
       </div>
     );
   }
@@ -256,8 +256,8 @@ export default function AdminUsersPage() {
             <UserCircle2 size={32} strokeWidth={1.5} />
           </div>
           <div>
-            <h1 className="text-2xl font-black text-gray-900 tracking-tight italic">User Management</h1>
-            <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Administrative Control</p>
+            <h1 className="text-2xl font-black text-gray-900   italic">User Management</h1>
+            <p className="text-[10px] font-bold text-gray-400 uppercase  ">Administrative Control</p>
           </div>
         </div>
 
@@ -295,10 +295,10 @@ export default function AdminUsersPage() {
           <thead>
             <tr className="bg-gray-50/50 border-b border-gray-100">
               <th className="p-6 text-[10px] font-black uppercase text-gray-400 w-16 text-center italic">#</th>
-              <th className="p-6 text-[10px] font-black uppercase tracking-widest text-gray-500 italic">User Detail</th>
-              <th className="p-6 text-[10px] font-black uppercase tracking-widest text-gray-500 italic text-center">Join Date</th>
-              <th className="p-6 text-[10px] font-black uppercase tracking-widest text-gray-500 italic">Verification Status</th>
-              <th className="p-6 text-[10px] font-black uppercase tracking-widest text-gray-500 italic text-right">Operations</th>
+              <th className="p-6 text-[10px] font-black uppercase   text-gray-500 italic">User Detail</th>
+              <th className="p-6 text-[10px] font-black uppercase   text-gray-500 italic text-center">Join Date</th>
+              <th className="p-6 text-[10px] font-black uppercase   text-gray-500 italic">Verification Status</th>
+              <th className="p-6 text-[10px] font-black uppercase   text-gray-500 italic text-right">Operations</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-50">
@@ -315,8 +315,8 @@ export default function AdminUsersPage() {
                       <UserCircle2 size={24} strokeWidth={1} />
                     </div>
                     <div>
-                      <p className="font-black text-gray-900 text-sm tracking-tight">{user.name || "N/A"}</p>
-                      <p className="text-[10px] font-bold text-blue-500 tracking-tighter">{user.mobile}</p>
+                      <p className="font-black text-gray-900 text-sm  ">{user.name || "N/A"}</p>
+                      <p className="text-[10px] font-bold text-blue-500  er">{user.mobile}</p>
                     </div>
                   </div>
                 </td>
@@ -329,12 +329,12 @@ export default function AdminUsersPage() {
                   {user.isVerified ? (
                     <div className="flex items-center gap-2 text-emerald-500">
                       <BadgeCheck size={16} />
-                      <span className="text-[10px] font-black uppercase tracking-tighter">Identity Verified</span>
+                      <span className="text-[10px] font-black uppercase  er">Identity Verified</span>
                     </div>
                   ) : (
                     <div className="flex items-center gap-2 text-amber-500">
                       <BadgeAlert size={16} className="animate-pulse" />
-                      <span className="text-[10px] font-black uppercase tracking-tighter">Verification Pending</span>
+                      <span className="text-[10px] font-black uppercase  er">Verification Pending</span>
                     </div>
                   )}
                 </td>
@@ -370,7 +370,7 @@ export default function AdminUsersPage() {
                     <UserCircle2 size={24} />
                   </div>
                   <div>
-                    <h3 className="font-black text-gray-900 text-sm tracking-tight">{user.name || "Unnamed"}</h3>
+                    <h3 className="font-black text-gray-900 text-sm  ">{user.name || "Unnamed"}</h3>
                     <p className="text-[10px] font-bold text-gray-400 italic">Entry #{(currentPage - 1) * itemsPerPage + index + 1}</p>
                   </div>
                 </div>
@@ -396,7 +396,7 @@ export default function AdminUsersPage() {
 
       {/* --- PAGINATION --- */}
       <div className="flex flex-col sm:flex-row items-center justify-between bg-white p-5 rounded-[2rem] border border-gray-100 shadow-sm gap-4">
-        <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest italic">
+        <p className="text-[10px] font-black text-gray-400 uppercase   italic">
           Audit Log: {paginatedData.length} of {filteredUsers.length} Entries
         </p>
         <div className="flex items-center gap-2">

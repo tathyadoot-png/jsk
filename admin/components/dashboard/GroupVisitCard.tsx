@@ -18,14 +18,14 @@ export default function GroupVisitCard({ data }: any) {
             </div>
             <div className="flex items-center gap-1 text-orange-600 bg-orange-50 px-2 py-1 rounded-lg">
               <ArrowUpRight size={12} />
-              <span className="text-[10px] font-bold uppercase tracking-tighter">Bulk</span>
+              <span className="text-[10px] font-bold uppercase  er">Bulk</span>
             </div>
           </div>
           
           <div>
-            <p className="text-[11px] font-bold text-gray-400 uppercase tracking-widest mb-1">Group Visits</p>
+            <p className="text-[11px] font-bold text-gray-400 uppercase   mb-1">Group Visits</p>
             <div className="flex items-baseline gap-2">
-              <h2 className="text-4xl font-black text-gray-900 tracking-tight">
+              <h2 className="text-4xl font-black text-gray-900  ">
                 {data?.totalGroupVisits || 0}
               </h2>
               <span className="text-xs font-bold text-gray-400">entries</span>
@@ -49,14 +49,14 @@ export default function GroupVisitCard({ data }: any) {
             </div>
             <div className="flex items-center gap-1 text-green-600 bg-green-50 px-2 py-1 rounded-lg">
               <Layers size={12} />
-              <span className="text-[10px] font-bold uppercase tracking-tighter">Single</span>
+              <span className="text-[10px] font-bold uppercase  er">Single</span>
             </div>
           </div>
           
           <div>
-            <p className="text-[11px] font-bold text-gray-400 uppercase tracking-widest mb-1">Normal Visits</p>
+            <p className="text-[11px] font-bold text-gray-400 uppercase   mb-1">Normal Visits</p>
             <div className="flex items-baseline gap-2">
-              <h2 className="text-4xl font-black text-gray-900 tracking-tight">
+              <h2 className="text-4xl font-black text-gray-900  ">
                 {data?.normalVisits || 0}
               </h2>
               <span className="text-xs font-bold text-gray-400">entries</span>

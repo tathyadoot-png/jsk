@@ -37,10 +37,10 @@ export default function LoginPage({ lang = "en" as Lang }) {
               <Landmark size={24} className="text-white" />
             </div>
             <div>
-              <span className="block text-lg font-black tracking-tight leading-none">
+              <span className="block text-lg font-black   leading-none">
                 {content.brandName}
               </span>
-              <span className="text-[10px] font-bold text-[#FF9933] uppercase tracking-[0.2em]">
+              <span className="text-[10px] font-bold text-[#FF9933] uppercase  ">
                 {content.subBrand}
               </span>
             </div>
@@ -74,7 +74,7 @@ export default function LoginPage({ lang = "en" as Lang }) {
             </p>
           </div>
 
-          <div className="pt-8 border-t border-white/10 flex items-center justify-between text-[10px] font-bold text-gray-500 uppercase tracking-widest">
+          <div className="pt-8 border-t border-white/10 flex items-center justify-between text-[10px] font-bold text-gray-500 uppercase  ">
             <span>© 2026 Digital Mandla</span>
             <div className="flex gap-2">
               <div className="w-8 h-1 bg-[#FF9933]" />
@@ -87,7 +87,7 @@ export default function LoginPage({ lang = "en" as Lang }) {
         {/* RIGHT PANEL: Login Form */}
         <div className="bg-white p-8 md:p-16 flex flex-col justify-center border-l border-gray-50">
           <div className="mb-10 text-center md:text-left">
-            <h2 className="text-4xl font-black text-gray-900 tracking-tighter">
+            <h2 className="text-4xl font-black text-gray-900  er">
               {content.welcome}
             </h2>
             <p className="text-gray-400 mt-2 font-medium text-sm italic">{content.subtitle}</p>
@@ -96,7 +96,7 @@ export default function LoginPage({ lang = "en" as Lang }) {
           <div className="space-y-5">
             {/* EMAIL */}
             <div className="space-y-2">
-              <label className="text-[11px] font-black text-gray-400 uppercase tracking-[0.15em] ml-1">
+              <label className="text-[11px] font-black text-gray-400 uppercase   ml-1">
                 {content.emailLabel}
               </label>
               <div className="relative group">
@@ -114,7 +114,7 @@ export default function LoginPage({ lang = "en" as Lang }) {
 
             {/* PASSWORD */}
             <div className="space-y-2">
-              <label className="text-[11px] font-black text-gray-400 uppercase tracking-[0.15em] ml-1">
+              <label className="text-[11px] font-black text-gray-400 uppercase   ml-1">
                 {content.passwordLabel}
               </label>
               <div className="relative group">
@@ -154,7 +154,7 @@ export default function LoginPage({ lang = "en" as Lang }) {
           <div className="mt-12 pt-6 border-t border-gray-50 flex items-center justify-between">
             <div className="flex items-center gap-2">
               <ShieldCheck size={14} className="text-[#138808]" />
-              <p className="text-[9px] font-black text-gray-300 uppercase tracking-[0.2em]">
+              <p className="text-[9px] font-black text-gray-300 uppercase  ">
                 {content.secure}
               </p>
             </div>
