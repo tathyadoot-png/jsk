@@ -5,7 +5,8 @@ import { LogOut, ChevronRight, ShieldAlert } from "lucide-react";
 import sidebarContent from "./sidebar.content";
 import menuLabels from "./menu.labels";
 import { menuConfig } from "./menu.config";
-import { Lang, MenuKey } from "./types";
+import { MenuKey } from "./types";
+import { useLang } from "@/context/LanguageContext"; // ✅ IMPORTANT
 
 type SidebarProps = {
   admin?: {
@@ -13,15 +14,15 @@ type SidebarProps = {
     role?: string;
     permissions?: string[];
   };
-  lang?: Lang;
 };
 
-export default function Sidebar({ admin, lang = "en" }: SidebarProps) {
+export default function Sidebar({ admin }: SidebarProps) {
+  const { lang } = useLang(); // ✅ context से language
   const router = useRouter();
   const path = usePathname();
 
-  const content = sidebarContent[lang];
-  const labels = menuLabels[lang];
+  const content = sidebarContent[lang] || sidebarContent["en"]; // ✅ safe fallback
+  const labels = menuLabels[lang] || menuLabels["en"]; // ✅ safe fallback
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -65,9 +66,7 @@ export default function Sidebar({ admin, lang = "en" }: SidebarProps) {
             (item.path !== "/dashboard" && path.startsWith(item.path));
 
           const Icon = item.icon;
-
-          // ✅ SAFE label access
-          const label = labels[item.key as MenuKey];
+          const label = labels[item.key as MenuKey]; // ✅ safe typed access
 
           return (
             <div

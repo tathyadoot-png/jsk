@@ -1,20 +1,25 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { getMe } from "@/lib/auth";
 import Sidebar from "@/modules/dashboard/sidebar/Sidebar";
+import Header from "@/modules/dashboard/layout/Header";
 import { Toaster } from "sonner";
 import { Menu, X, ShieldCheck } from "lucide-react";
-import Header from "@/modules/dashboard/layout/Header";
 import { Lang } from "@/modules/dashboard/layout/types";
 
-export default function DashboardLayout({ children }: any) {
+type Props = {
+  children: React.ReactNode;
+};
+
+export default function DashboardLayout({ children }: Props) {
   const router = useRouter();
+
   const [loading, setLoading] = useState(true);
   const [admin, setAdmin] = useState<any>(null);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [lang, setLang] = useState<Lang>("en");
+  const [lang, setLang] = useState<Lang>("en"); // ✅ single source of truth
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -47,15 +52,18 @@ export default function DashboardLayout({ children }: any) {
     <div className="min-h-screen bg-[#f8f9fa] flex flex-col md:flex-row">
       <Toaster position="top-right" expand={false} richColors />
 
-      {/* Mobile Topbar - Only visible on small screens */}
+      {/* 🔹 MOBILE TOPBAR */}
       <div className="md:hidden flex items-center justify-between p-4 bg-white border-b border-gray-100 sticky top-0 z-50">
         <div className="flex items-center gap-2">
           <div className="w-8 h-8 bg-black rounded-lg flex items-center justify-center">
             <ShieldCheck className="text-white w-5 h-5" />
           </div>
-          <span className="font-bold text-sm tracking-tight text-gray-900 uppercase">Admin Portal</span>
+          <span className="font-bold text-sm tracking-tight text-gray-900 uppercase">
+            Admin Portal
+          </span>
         </div>
-        <button 
+
+        <button
           onClick={() => setIsSidebarOpen(!isSidebarOpen)}
           className="p-2 hover:bg-gray-100 rounded-xl transition-colors"
         >
@@ -63,53 +71,59 @@ export default function DashboardLayout({ children }: any) {
         </button>
       </div>
 
-      {/* Sidebar Wrapper - Handles Responsive Visibility */}
-      <aside 
+      {/* 🔹 SIDEBAR */}
+      <aside
         className={`
           fixed inset-y-0 left-0 z-40 w-72 bg-white transform transition-transform duration-300 ease-in-out border-r border-gray-100
           md:relative md:translate-x-0
           ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"}
         `}
       >
-        <Sidebar admin={admin} lang={lang} />
+        <Sidebar admin={admin} />
       </aside>
 
-      {/* Overlay for Mobile Sidebar */}
+      {/* 🔹 OVERLAY (mobile) */}
       {isSidebarOpen && (
-        <div 
-          className="fixed inset-0 bg-black/20 backdrop-blur-sm z-30 md:hidden transition-opacity"
+        <div
+          className="fixed inset-0 bg-black/20 backdrop-blur-sm z-30 md:hidden"
           onClick={() => setIsSidebarOpen(false)}
         />
       )}
 
-      {/* Main Content Area */}
+      {/* 🔹 MAIN */}
       <main className="flex-1 flex flex-col min-w-0">
-          {/* 🔴 NEW HEADER (desktop only) */}
-  <div className="hidden md:block">
-    <Header lang={lang} setLang={setLang} admin={admin} />
-  </div>
-        {/* Decorative Header Strip */}
+
+        {/* HEADER (desktop only) */}
+        <div className="hidden md:block">
+          <Header  admin={admin} />
+        </div>
+
+        {/* Decorative strip */}
         <div className="hidden md:block h-1.5 w-full bg-gradient-to-r from-orange-500 via-white to-green-600" />
-        
+
+        {/* CONTENT */}
         <div className="p-4 md:p-8 lg:p-10 max-w-[1600px] mx-auto w-full">
-          {/* Dashboard Body with Bento-style Entrance */}
           <div className="animate-in fade-in slide-in-from-bottom-4 duration-700">
-            {children}
+          {children}
           </div>
         </div>
 
-        {/* Footer info for system integrity */}
+        {/* FOOTER */}
         <footer className="mt-auto p-6 flex flex-col md:flex-row justify-between items-center gap-4 opacity-40">
-           <span className="text-[10px] font-bold uppercase tracking-widest text-gray-500">
-             © 2026 NIC Infrastructure • Secure Terminal
-           </span>
-           <div className="flex gap-4">
-              <div className="flex items-center gap-1.5">
-                <div className="w-1.5 h-1.5 rounded-full bg-green-500" />
-                <span className="text-[9px] font-bold uppercase text-gray-500">Node Active</span>
-              </div>
-           </div>
+          <span className="text-[10px] font-bold uppercase tracking-widest text-gray-500">
+            © 2026 NIC Infrastructure • Secure Terminal
+          </span>
+
+          <div className="flex gap-4">
+            <div className="flex items-center gap-1.5">
+              <div className="w-1.5 h-1.5 rounded-full bg-green-500" />
+              <span className="text-[9px] font-bold uppercase text-gray-500">
+                Node Active
+              </span>
+            </div>
+          </div>
         </footer>
+
       </main>
     </div>
   );
