@@ -5,11 +5,14 @@ import NodalForm from "@/components/admin/nodal/NodalForm";
 import { adminService } from "@/services/admin.service";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useLang } from "@/context/LanguageContext";
+import { nodalCreateContent } from "@/modules/pages/nodal/nodalCreate.content";
 
 export default function CreatePage() {
   const router = useRouter();
   const searchParams = useSearchParams();
-
+  const { lang } = useLang();
+  const t = nodalCreateContent[lang];
   const id = searchParams.get("id"); // 🔥 get id from query
   const isEdit = !!id;
 
@@ -43,7 +46,7 @@ export default function CreatePage() {
 
   return (
     <div>
-      <h1>{isEdit ? "Edit Nodal" : "Create Nodal"}</h1>
+      <h1>{isEdit ? t.header.edit : t.header.create}</h1>
 
       <NodalForm
         initialData={data}

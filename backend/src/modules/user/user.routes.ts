@@ -4,6 +4,7 @@ import { protectUser } from "../../middlewares/userAuth.middleware";
 import { protectAdmin } from "../../middlewares/adminAuth.middleware";
 import { allowPermissions } from "../../middlewares/permission.middleware";
 import { userEntryByNodal } from "./user.controller";
+import { PERMISSIONS } from "../../utils/permissions";
 
 
 const router = express.Router();
@@ -16,26 +17,31 @@ router.get("/me", protectUser  , getUser);
 router.post(
   "/entry",
   protectAdmin,
-  allowPermissions("visit_create"),
+  allowPermissions(PERMISSIONS.VISIT_CREATE),
   userEntryByNodal
 );
 
+// 🔍 SEARCH USER
 router.get(
   "/search",
-  protectAdmin, 
+  protectAdmin,
+  allowPermissions(PERMISSIONS.VISIT_CREATE), // nodal allowed
   searchUserByMobile
 );
 
-
+// 👤 FULL PROFILE
 router.get(
   "/profile/:id",
   protectAdmin,
+  allowPermissions(PERMISSIONS.VISIT_VIEW), // view access
   getFullUserProfile
 );
 
+// ✏️ UPDATE USER (ADMIN ONLY)
 router.put(
   "/:id",
   protectAdmin,
+  allowPermissions(PERMISSIONS.ADMIN_PANEL), // only admin
   updateUserByAdmin
 );
 

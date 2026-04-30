@@ -25,10 +25,41 @@ const router = express.Router();
    🔹 USER MANAGEMENT
 ========================= */
 
-router.get("/users", protectAdmin, getAllUsers);
-router.get("/users/:id", protectAdmin, getSingleUser);
-router.put("/users/:id", protectAdmin, updateUserByAdmin);
-router.delete("/users/:id", protectAdmin, deleteUser);
+/* =========================
+   🔹 USER MANAGEMENT
+========================= */
+
+// 👁️ VIEW USERS
+router.get(
+  "/users",
+  protectAdmin,
+  allowPermissions(PERMISSIONS.ADMIN_PANEL),
+  getAllUsers
+);
+
+// 👁️ SINGLE USER
+router.get(
+  "/users/:id",
+  protectAdmin,
+  allowPermissions(PERMISSIONS.ADMIN_PANEL),
+  getSingleUser
+);
+
+// ✏️ UPDATE USER
+router.put(
+  "/users/:id",
+  protectAdmin,
+  allowPermissions(PERMISSIONS.ADMIN_PANEL),
+  updateUserByAdmin
+);
+
+// ❌ DELETE USER
+router.delete(
+  "/users/:id",
+  protectAdmin,
+  allowPermissions(PERMISSIONS.ADMIN_PANEL),
+  deleteUser
+);
 
 /* =========================
    🔹 NODAL / ADMIN MANAGEMENT

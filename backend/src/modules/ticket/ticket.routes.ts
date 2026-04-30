@@ -11,6 +11,7 @@ import {
 import upload from "../../middlewares/upload.middleware";
 import { protectAdmin } from "../../middlewares/adminAuth.middleware";
 import { allowPermissions } from "../../middlewares/permission.middleware";
+import { PERMISSIONS } from "../../utils/permissions";
 
 const router = express.Router();
 
@@ -18,7 +19,7 @@ const router = express.Router();
 router.post(
   "/create",
   protectAdmin,
-  allowPermissions("ticket_create"),
+  allowPermissions(PERMISSIONS.TICKET_CREATE),
   upload.array("images", 5),
   createTicket
 );
@@ -27,7 +28,7 @@ router.post(
 router.get(
   "/list",
   protectAdmin,
-  allowPermissions("ticket_view"),
+  allowPermissions(PERMISSIONS.TICKET_VIEW),
   getTickets
 );
 
@@ -35,7 +36,7 @@ router.get(
 router.get(
   "/:id",
   protectAdmin,
-  allowPermissions("ticket_view"),
+  allowPermissions(PERMISSIONS.TICKET_VIEW),
   getTicketById
 );
 
@@ -43,12 +44,32 @@ router.get(
 router.put(
   "/status/:id",
   protectAdmin,
-  allowPermissions("ticket_update"),
+  allowPermissions(PERMISSIONS.TICKET_UPDATE),
   updateTicketStatus
 );
 
-router.get("/representative/:userId", getTicketsByRepresentative);
-router.get("/user/:userId", getTicketsByUser);
-router.get("/representatives/top", protectAdmin, getTopRepresentatives);
+// 🔐 Representative tickets
+router.get(
+  "/representative/:userId",
+  protectAdmin,
+  allowPermissions(PERMISSIONS.TICKET_VIEW),
+  getTicketsByRepresentative
+);
+
+// 🔐 User tickets
+router.get(
+  "/user/:userId",
+  protectAdmin,
+  allowPermissions(PERMISSIONS.TICKET_VIEW),
+  getTicketsByUser
+);
+
+// 🔐 Top representatives (analytics type)
+router.get(
+  "/representatives/top",
+  protectAdmin,
+  allowPermissions(PERMISSIONS.TICKET_VIEW),
+  getTopRepresentatives
+);
 
 export default router;

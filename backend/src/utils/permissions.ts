@@ -9,4 +9,7 @@ export const PERMISSIONS = {
   TICKET_CREATE: "ticket_create",
   TICKET_VIEW: "ticket_view",
   TICKET_UPDATE: "ticket_update",
+
+  ADVANCED_VIEW: "advanced_view", 
+  VISIT_UPDATE: "visit_update"
 };

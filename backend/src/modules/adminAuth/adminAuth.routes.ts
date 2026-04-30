@@ -4,7 +4,7 @@ import {
   getMeAdmin,
   logoutAdmin,
 } from "./admin.controller";
-
+import { PERMISSIONS } from "../../utils/permissions";
 import { protectAdmin } from "../../middlewares/adminAuth.middleware";
 import { allowPermissions  } from "../../middlewares/adminRole.middleware";
 
@@ -15,13 +15,12 @@ router.post("/login", loginAdmin);
 router.get("/me", protectAdmin, getMeAdmin);
 router.post("/logout", protectAdmin, logoutAdmin);
 
-// 🔥 Example protected routes
 
 // Only ADMIN (full access)
 router.get(
   "/all-users",
   protectAdmin,
-  allowPermissions("admin_panel"),
+  allowPermissions(PERMISSIONS.ADMIN_PANEL),
   (req, res) => {
     res.send("Only admin with permission");
   }
@@ -31,7 +30,7 @@ router.get(
 router.get(
   "/dashboard",
   protectAdmin,
-  allowPermissions("visit_view"),
+  allowPermissions(PERMISSIONS.VISIT_VIEW),
   (req, res) => {
     res.send("Visit dashboard");
   }
