@@ -3,12 +3,18 @@
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import { getUserFullProfile } from "@/services/user.service";
-import UserProfile from "@/components/user/UserProfile";
-import VisitList from "@/components/user/VisitList";
-import TicketList from "@/components/user/TicketList";
-import Timeline from "@/components/user/Timeline";
+import { useLang } from "@/context/LanguageContext";
+import { userProfileContent } from "@/modules/pages/profile/userProfile.content";
+
+import UserProfile from "@/modules/pages/profile/UserProfile";
+import VisitList from "@/modules/pages/profile/VisitList";
+import TicketList from "@/modules/pages/profile/TicketList";
+import Timeline from "@/modules/pages/profile/Timeline";
 
 export default function UserPage() {
+  const { lang } = useLang();
+  const t = userProfileContent[lang];
+
   const params = useParams();
   const id = params?.id as string;
 
@@ -18,22 +24,21 @@ export default function UserPage() {
     if (!id) return;
 
     getUserFullProfile(id).then((res) => {
-      console.log("API RESPONSE:", res);
-      setData(res); // ✅ FIX
+      setData(res);
     });
   }, [id]);
 
-  if (!data) return <p>Loading...</p>;
+  if (!data) return <p>{t.loading}</p>;
 
   return (
     <div className="space-y-6">
-      <UserProfile user={data.user} />
-      <VisitList visits={data.visits} />
-      <TicketList tickets={data.tickets} />
-      <Timeline timeline={data.timeline} />
+      <UserProfile user={data.user} title={t.sections.profile} />
+      <VisitList visits={data.visits} title={t.sections.visits} />
+      <TicketList tickets={data.tickets} title={t.sections.tickets} />
+      <Timeline timeline={data.timeline} title={t.sections.timeline} />
       <TicketList
         tickets={data.raisedTickets}
-        title="Raised Tickets for other Users"
+        title={t.sections.raisedTickets}
       />
     </div>
   );

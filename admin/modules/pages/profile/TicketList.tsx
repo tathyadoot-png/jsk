@@ -103,76 +103,122 @@
 "use client";
 
 import React, { useState } from "react";
-import { Ticket, Download, Eye, EyeOff, Phone, Building, ChevronDown } from "lucide-react";
+import {
+  Ticket,
+  Eye,
+  EyeOff,
+  Building,
+} from "lucide-react";
+import { useLang } from "@/context/LanguageContext";
+import { ticketListContent } from "./ticketList.content";
 
-export default function TicketList({ tickets = [], title = "Tickets" }: any) {
+export default function TicketList({ tickets = [], title }: any) {
+  const { lang } = useLang();
+  const t = ticketListContent[lang];
+
   const [openId, setOpenId] = useState<string | null>(null);
 
   return (
     <div className="space-y-4">
-      <h2 className="text-xl font-black uppercase  er text-gray-900 italic px-2">{title}</h2>
       
+      {/* Title */}
+      <h2 className="text-xl font-black uppercase text-gray-900 italic px-2">
+        {title || t.title}
+      </h2>
+
       <div className="flex flex-col gap-3">
-        {tickets.map((t: any) => (
-          <div 
-            key={t._id}
+        {tickets.map((ticket: any) => (
+          <div
+            key={ticket._id}
             className={`transition-all duration-500 rounded-[2rem] border ${
-              openId === t._id ? "bg-indigo-50/30 border-indigo-200 shadow-lg" : "bg-white border-gray-100 shadow-sm"
+              openId === ticket._id
+                ? "bg-indigo-50/30 border-indigo-200 shadow-lg"
+                : "bg-white border-gray-100 shadow-sm"
             }`}
           >
             <div className="p-4 sm:p-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
+              
+              {/* Left */}
               <div className="flex items-center gap-4">
-                <div className={`w-12 h-12 flex items-center justify-center rounded-2xl transition-colors ${
-                  openId === t._id ? "bg-indigo-600 text-white" : "bg-gray-100 text-gray-400"
-                }`}>
-                  <Ticket size={24} />
-                </div>
-                <div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-[10px] font-black text-indigo-500 uppercase   italic">#{t.ticketNumber}</span>
-                    <span className="px-2 py-0.5 rounded-md bg-gray-100 text-[9px] font-black text-gray-500 uppercase  er">
-                      {t.entryType || "General"}
-                    </span>
-                  </div>
-                  <h3 className="text-md font-black text-gray-800 uppercase italic">{t.userId?.name || "N/A"}</h3>
-                </div>
-              </div>
-
-              <div className="grid grid-cols-2 md:flex items-center gap-6">
-                <div>
-                  <p className="text-[9px] font-black text-gray-400 uppercase italic">Department</p>
-                  <div className="flex items-center gap-1.5 text-xs font-bold text-gray-600 italic">
-                    <Building size={12} /> {t.department}
-                  </div>
-                </div>
-                <div className="text-right md:text-left">
-                  <p className="text-[9px] font-black text-gray-400 uppercase italic">Status</p>
-                  <p className="text-xs font-black text-indigo-600 uppercase italic">{t.status}</p>
-                </div>
-              </div>
-
-              <div className="flex items-center justify-end gap-2 border-t md:border-none pt-4 md:pt-0">
-                <button
-                  onClick={() => setOpenId(openId === t._id ? null : t._id)}
-                  className={`flex items-center gap-2 px-4 py-2 rounded-xl text-[10px] font-black uppercase transition-all ${
-                    openId === t._id ? "bg-indigo-600 text-white" : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+                <div
+                  className={`w-12 h-12 flex items-center justify-center rounded-2xl ${
+                    openId === ticket._id
+                      ? "bg-indigo-600 text-white"
+                      : "bg-gray-100 text-gray-400"
                   }`}
                 >
-                  {openId === t._id ? <EyeOff size={14} /> : <Eye size={14} />}
-                  {openId === t._id ? "Close" : "View Details"}
+                  <Ticket size={24} />
+                </div>
+
+                <div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-[10px] font-black text-indigo-500 uppercase italic">
+                      #{ticket.ticketNumber}
+                    </span>
+
+                    <span className="px-2 py-0.5 rounded-md bg-gray-100 text-[9px] font-black text-gray-500 uppercase">
+                      {ticket.entryType || t.entryType}
+                    </span>
+                  </div>
+
+                  <h3 className="text-md font-black text-gray-800 uppercase italic">
+                    {ticket.userId?.name || t.na}
+                  </h3>
+                </div>
+              </div>
+
+              {/* Middle */}
+              <div className="grid grid-cols-2 md:flex items-center gap-6">
+                <div>
+                  <p className="text-[9px] font-black text-gray-400 uppercase italic">
+                    {t.department}
+                  </p>
+
+                  <div className="flex items-center gap-1.5 text-xs font-bold text-gray-600 italic">
+                    <Building size={12} /> {ticket.department}
+                  </div>
+                </div>
+
+                <div className="text-right md:text-left">
+                  <p className="text-[9px] font-black text-gray-400 uppercase italic">
+                    {t.status}
+                  </p>
+
+                  <p className="text-xs font-black text-indigo-600 uppercase italic">
+                    {ticket.status}
+                  </p>
+                </div>
+              </div>
+
+              {/* Button */}
+              <div className="flex items-center justify-end gap-2 border-t md:border-none pt-4 md:pt-0">
+                <button
+                  onClick={() =>
+                    setOpenId(openId === ticket._id ? null : ticket._id)
+                  }
+                  className={`flex items-center gap-2 px-4 py-2 rounded-xl text-[10px] font-black uppercase ${
+                    openId === ticket._id
+                      ? "bg-indigo-600 text-white"
+                      : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+                  }`}
+                >
+                  {openId === ticket._id ? <EyeOff size={14} /> : <Eye size={14} />}
+                  {openId === ticket._id ? t.close : t.view}
                 </button>
               </div>
             </div>
 
-            {/* Letter Body Expansion */}
-            {openId === t._id && (
+            {/* Expanded */}
+            {openId === ticket._id && (
               <div className="px-4 pb-6 animate-in slide-in-from-top-2 duration-300">
                 <div className="bg-white/60 backdrop-blur-md rounded-2xl p-6 border border-indigo-100 shadow-inner">
-                  <p className="text-[10px] font-black text-indigo-400 uppercase italic mb-3 flex items-center gap-2">
-                    Message Content
+                  
+                  <p className="text-[10px] font-black text-indigo-400 uppercase italic mb-3">
+                    {t.messageTitle}
                   </p>
+
                   <div className="text-sm text-gray-700 italic leading-relaxed whitespace-pre-wrap font-medium">
-                    {t.letterBody || "No message attached."}
+                    {ticket.letterBody || t.noMessage}
                   </div>
                 </div>
               </div>
